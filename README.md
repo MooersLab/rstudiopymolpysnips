@@ -142,9 +142,12 @@ mv python.snippets ../.
 ```
 
 When you open **RStudiob**, you will find that the snippets have replaced the default Python snippets.
-These are found under Preferences/Code/Edit Snippets/Python.
+These are found under Preferences/Code/Edit Snippets/Python (see animation below).
 You can edit the snippets and add new ones.
 The format is self-explanatory.
+
+
+<p align="center"><img src="gifs/accessingSnippets.gif"></p>
 
 
 [Return to Table of Contents](#table-of-contents)
@@ -166,7 +169,7 @@ The animation at the top of the page conveys the essential knowledge for usage.
 
 <a id="testing"><h2>Testing</h2></a>
 
-Try the **ao.py** snippet in Python code cell.
+Try the **ao** snippet in Python code cell.
 Run the code cell by clicking on the green button.
 You should get a result similar to the one shown in the animation above.
 
