@@ -28,14 +28,18 @@ For a list of the snippets and their descriptions, also go to the [GitHub Page](
 ### Use rstudiopymolpysnips to be more productive while running PyMOL in RStudio
 
 
-<p>The animation below demonstrates the use of the <b>ao</b> snippet in <em>RStudio</em> to insert 17 lines of code for generating the ambient occlusion effect. The snippet will appear in a list of autosuggestions after entering the first several letters of its tab trigger.</p>
+<p>The animation below demonstrates the use of the <b>ao</b> snippet in <em>RStudio</em> to insert 17 lines of code for generating the ambient occlusion effect. The snippet will appear in a list of autosuggestions after entering the first several letters of its tab trigger. Note that entering <b>ao</b> was not sufficient to bring up the ao snippet. I had to enter <b>aod</p> to bring up the ao snippet in the list.</p>
 
-<p align="center"><img src="gifs/aoUbuntu.gif"></p>
+<p align="center"><img src="gifs/aoSnippetHairpin.gif"></p>
+
+<p>The animation below shows the use of Knitr to convert the Rmarkdown document into a PDF file.</p>
+
+<p align="center"><img src="gifs/knitrHairpin.gif"></p>
 
 
 The result of applying a variant of the above code to a 27-nucleotide RNA hairpin is shown below.
 
-<p align="center"><img src="./images/5d99AOD.png" alt="HTML5 Icon" style="width:364px;height:630px;"></p>
+<p align="center"><img src="./images/ao5d99.png" alt="HTML5 Icon" style="width:364px;height:630px;"></p>
 
 There is no option in a pulldown menu in **PyMOL** to make such an image. 
 A script file with 17 commands is required.
