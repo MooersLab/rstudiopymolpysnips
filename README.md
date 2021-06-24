@@ -4,7 +4,7 @@
 ![Version](https://img.shields.io/static/v1?label=rstudiopymolpysnips&message=0.1&color=brightcolor)
 
 For details on installing the pymolpysnips library for **JupyterLab**, go to the [GitHub Page](https://mooerslab.github.io/jupyterlabpymolpysnips/) associated with this project.
-For a list of the snippets and their descriptions, also go to the [GitHub Page](https://mooerslab.github.io/rstudiopysnips/) associated with this project.
+For a list of the snippets and their descriptions, also go to the [GitHub Page](https://mooerslab.github.io/rstudiopymolpysnips/) associated with this project.
 
 <a id="table-of-contents"><h2>Table of Contents</h2></a>
 
