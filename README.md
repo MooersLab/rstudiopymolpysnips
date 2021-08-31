@@ -28,7 +28,7 @@ For a list of the snippets and their descriptions, also go to the [GitHub Page](
 ### Use rstudiopymolpysnips to be more productive while running PyMOL in RStudio
 
 
-<p>The animation below demonstrates the use of the <b>ao</b> snippet in <em>RStudio</em> to insert 17 lines of code for generating the ambient occlusion effect. The snippet will appear in a list of autosuggestions after entering the first several letters of its tab trigger. Note that entering <b>ao</b> was not sufficient to bring up the ao snippet. I had to enter <b>aod</p> to bring up the ao snippet in the list.</p>
+<p>The animation below demonstrates the use of the <b>ao</b> snippet in <em>RStudio</em> to insert 17 lines of code for generating the ambient occlusion effect. The snippet will appear in a list of autosuggestions after entering the first several letters of its tab trigger. Note that entering <b>ao</b> was not sufficient to bring up the ao snippet. I had to enter <b>aod</b> to bring up the ao snippet in the list.</p>
 
 <p align="center"><img src="gifs/aoSnippetHairpin.gif"></p>
 
