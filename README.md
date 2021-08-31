@@ -131,8 +131,8 @@ PyMOL must be installed in this env.
 | Python from Anaconda                                                                       | 3.6-3.9  | Programming language                                                                               |
 | conda from Anaconda                                                                        | 4.10.1   | Program used to create Python environments.                                                        |
 | R                                                                                          | 4.0.5    | R is required to host Rstudio.                                                                     |
-| Rstudio                                                                                    | 1.4.1103 | The Integrated Development Environment for R.                                                      |
-| Reticulate                                                                                 | 1.20     | Provides the interface between Python and R.                                                       |
+| RStudio                                                                                    | 1.4.1717 | The Integrated Development Environment for R.                                                      |
+| [reticulate](https://github.com/rstudio/reticulate/)                                       | 1.20     | Provides the interface between Python and R.                                                       |
 | git                                                                                        | 2.25.1   | Eases the downloading and updating of the libraries.                                               |
 
 
