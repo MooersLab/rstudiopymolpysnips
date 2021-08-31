@@ -41,7 +41,7 @@ The result of applying a variant of the above code to a 27-nucleotide RNA hairpi
 
 <p align="center"><img src="./images/ao5d99.png" alt="HTML5 Icon" style="width:364px;height:630px;"></p>
 
-There is no option in a pulldown menu in **PyMOL** to make such an image. 
+There is no option in a pulldown menu in **PyMOL** to apply the ambient occlussion effect. 
 A script file with 17 commands is required.
 This code can be applied to any molecular object that has been loaded into **PyMOL**.
 
@@ -52,14 +52,14 @@ This code can be applied to any molecular object that has been loaded into **PyM
 
 #### Illustrate Rmarkdown with molecular images
 
-You can illustrate your Rmarkdown literate programming documents with images created in PyMOL.
+You can illustrate your R Markdown literate programming documents with images created in PyMOL.
 You can also adjust molecular images from within Rstudio without having to open PyMOL thereby saving time.
 
 
 #### Rmarkdown are easy to  edit in RStudio
 
 The Rmarkdown documents have a gentle learning curve because they are very easy to edit.
-The code blocks can be run individually during the developement of the code or the entire document can be compiled by using knitr.
+The code blocks can be run individually during the developement of the code or the entire document can be compiled in one go by using knitr.
 
 
 
@@ -95,7 +95,8 @@ This can improve the reproducibility of the computational aspects of your resear
 ### But I will miss the interactive viewport in PyMOL!
 
 1. There is nothing stopping you from running the PyMOL GUI next to your **RStudio** session. You can adjust the molecule's orientation manually, run the **get_view** command, and copy the output in the command history window from PyMOL and paste it into a cell in the **RStudio**. The one line of settings return by the **rv** shortcut are much easier to work with. 
-2. You really do not need the viewport. With 10-15 minutes of practice, you can master the rapid iterating of rotate and translate commands to adjust the molecule's orientation with greater precision than via manipulation of the mouse.
+
+2. You do not need the viewport. With 10-15 minutes of practice, you can master the rapid iterating of rotate and translate commands to adjust the molecule's orientation with greater precision than via manipulation of the mouse.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -119,7 +120,7 @@ PyMOL must be installed in this env.
 
 | Technology                                                                                 | Version  | Description                                                                                        |
 |--------------------------------------------------------------------------------------------|----------|----------------------------------------------------------------------------------------------------|
-| [PyMOL](https://pymol.org/2/)                                                              | 2.4.0    | Molecular graphics program                                                                         |
+| [PyMOL](https://pymol.org/2/)                                                              | 2.5.1    | Molecular graphics program                                                                         |
 | Python from Anaconda                                                                       | 3.6-3.9  | Programming language                                                                               |
 | conda from Anaconda                                                                        | 4.10.1   | Program used to create Python environments.                                                        |
 | R                                                                                          | 4.0.5    | R is required to host Rstudio.                                                                     |
