@@ -149,12 +149,12 @@ Note that multiple versions of PyMOL can operate side-by-side on a computer, so 
 mkdir ~/.config/rstudio/snippets
 cd ~/.config/rstudio/snippets
 git clone https://github.com/MooersLab/rstudiopymolpysnips.git rstudiopymolpysnips
-cd rstudiopymolpysnips.
+cd rstudiopymolpysnips
 mv python.snippets ../.
 ```
 
-When you open **RStudiob**, you will find that the snippets have replaced the default Python snippets.
-These are found under Preferences/Code/Edit Snippets/Python (see animation below).
+When you open **RStudio**, you will find that the new file python.snippets from rstudiopymolpysnips has replaced the default Python snippets.
+These are found under *Preferences/Code/Edit Snippets/Python* (see animation below).
 You can edit the snippets and add new ones.
 The format is self-explanatory.
 
