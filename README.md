@@ -39,7 +39,7 @@ For a list of the snippets and their descriptions, also go to the [GitHub Page](
 
 The result of applying a variant of the above code to a 27-nucleotide RNA hairpin is shown below.
 
-<p align="center"><img src="./images/ao5d99.png" alt="HTML5 Icon" style="width:364px;height:630px;"></p>
+<p align="center"><img src="./images/ao5d99.png" alt="HTML5 Icon" style="width:640px;height:480px;"></p>
 
 There is no option in a pulldown menu in **PyMOL** to apply the ambient occlussion effect. 
 A script file with 17 commands is required.
