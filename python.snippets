@@ -1,0 +1,3178 @@
+# reticulate
+snippet reticulate
+	```{r}
+	library(reticulate)
+	use_condaenv("r-reticulate")
+	```${0}
+# python code block
+snippet pythonCodeBlock
+	```{python}
+	${1:enter code here}
+	 ```
+# Apply the ambient occlussion effect to get the photorealistic effect.
+snippet ao
+	cmd.do("set_color oxygen, [1.0,0.4,0.4];")
+	cmd.do("set_color nitrogen, [0.5,0.5,1.0];")
+	cmd.do("remove solvent;")
+	cmd.do("as spheres;")
+	cmd.do("# the \"as\" command is a shortcut for show_as")
+	cmd.do("util.cbaw;")
+	cmd.do("# \"cba\" represents \"color by atom\". ")
+	cmd.do("# The last letter represents the colore of the carbon atom.")
+	cmd.do("bg white;")
+	cmd.do("# bg is an alias for bg_color or background color.")
+	cmd.do("set light_count,10;")
+	cmd.do("# light_count is the number of light sources. ")
+	cmd.do("# The max is 10. The defualt is 10.")
+	cmd.do("set spec_count,1;")
+	cmd.do("# Not documented on Wiki.")
+	cmd.do("set shininess, 10;")
+	cmd.do("# sets the shininess of the object.")
+	cmd.do("set specular,0.25;")
+	cmd.do("# Controls the amount of directly reflected light and not the shininess of the reflection.")
+	cmd.do("set ambient,0;")
+	cmd.do("# Controls the amount of ambient light. Default is 0. Ranges from -1 to 1.")
+	cmd.do("set direct,0;  ")
+	cmd.do("# Not documented on Wiki.")
+	cmd.do("set reflect,1.5;")
+	cmd.do("# Controls the amount of light reflection and the effect that directional light has on shadows ")
+	cmd.do("# and the general lighting of the scene. Default value is 0.5.")
+	cmd.do("set ray_shadow_decay_factor, 0.1;")
+	cmd.do("set ray_shadow_decay_range, 2;")
+	cmd.do("set depth_cue, 0;")
+	cmd.do("ray;")
+	${0}
+# Show the solvent excluded surface.
+snippet sas
+	cmd.do("set surface_solvent, ${1:on}")
+	${0}
+# Set color of thernal ellipsoids. The PDB must have anisotopic temperature factors. See https://pymolwiki.org/index.php/Color_Values for the PyMOL colors.
+snippet ellipcol
+	cmd.do("set ellipsoid_color, ${1:red};")
+	${0}
+# Set distance labels to display 2 decimals.
+snippet sigdist
+	cmd.do("set label_distance_digits, ${1:2};")
+	${0}
+# Set angle labels to display 2 decimals places.
+snippet sigang
+	cmd.do("set label_angle_digits, ${1:2};")
+	${0}
+# Ball and stick representation.
+snippet bs
+	cmd.do("show sticks;")
+	cmd.do("set stick_radius, 0.12;")
+	cmd.do("set stick_ball, on;")
+	cmd.do("set stick_ball_ratio, 1.9;")
+	cmd.do("show nb_spheres;")
+	cmd.do("set nb_spheres_size=0.33;")
+	${0}
+# Base-stacking figure.
+snippet stack
+	cmd.do("delete all;")
+	cmd.do("fetch ${1:4PCO}, type=pdb,async=0;")
+	cmd.do("select ${2:G2G3}, ( ((resi ${3:2} or resi ${4:3}) and chain A) or ((resi ${5:8} or resi ${6:9}) and chain B) );")
+	cmd.do("hide everything, element h; ")
+	cmd.do("remove not ${2:G2G3};")
+	cmd.do("bg_color white;")
+	cmd.do("show sticks;")
+	cmd.do("set stick_radius=0.14;")
+	cmd.do("set stick_ball, on; ")
+	cmd.do("set stick_ball_ratio,1.9;")
+	cmd.do("set_view (-0.75,0.09,0.66,-0.2,0.92,-0.35,-0.64,-0.39,-0.67,-0.0,-0.0,-43.7,7. 24,9.55,11.78,29.46,57.91,-20.0);")
+	cmd.do("hide everything, element H;")
+	cmd.do("select carbon1, element C and (resi ${4:3} or resi ${5:8}); ")
+	cmd.do("# select lower base pair;")
+	cmd.do("select carbon2, element C and (resi ${3:2} or resi ${6:9});")
+	cmd.do("#select upper base pair;")
+	cmd.do("color gray70,carbon1;")
+	cmd.do("color gray10,carbon2;")
+	cmd.do("space cmyk;")
+	cmd.do("distance hbond1,/${1:4PCO}//B/U`9/N3,/${1:4PCO}//A/G`2/O6;")
+	cmd.do("distance hbond2,/${1:4PCO}//B/U`9/O2,/${1:4PCO}//A/G`2/N1;")
+	cmd.do("distance hbond3,/${1:4PCO}//A/U`3/N3,/${1:4PCO}//B/G`8/O6;")
+	cmd.do("distance hbond4,/${1:4PCO}//A/U`3/O2,/${1:4PCO}//B/G`8/N1;")
+	cmd.do("color black, hbond1;")
+	cmd.do("color black, hbond2;")
+	cmd.do("color gray70, hbond3;")
+	cmd.do("color gray70, hbond4;")
+	cmd.do("show nb_spheres;")
+	cmd.do("set nb_spheres_size, 0.35;")
+	cmd.do("hide labels;")
+	cmd.do("ray 1600,1000;")
+	cmd.do("png ${1:4PCO}.png")
+	${0}
+# Generate the biological unit using the quat.py script. Edit the path to the file quat.py. You may have to download it from the PyMOL Wiki page.
+snippet bu
+	cmd.do("run ~/${1:Scripts/PyMOLScripts}/quat.py;")
+	cmd.do("quat;")
+	${0}
+# Valence bond.
+snippet doubleBond
+	cmd.do("set valence, 1; ")
+	cmd.do("set valence_mode, 1;")
+	${0}
+# Apply color blind friendly to ribbon diagrams. Edit the path to the Pymol-script-repo in your computer account. See PyMOL wiki for more information about the Pymol-script-reo.
+snippet cblind
+	cmd.do("run ~/${1:Pymol-script-repo}/colorblindfriendly.py;")
+	cmd.do("as cartoon;")
+	cmd.do("color cb_red, ss H;")
+	cmd.do("color cb_yellow,ss S;")
+	cmd.do("color cb_green, ss L+;")
+	${0}
+# Center pi. Edit the atoms selected for positioning the pseudoatom.
+snippet centerpi
+	cmd.do("pseudoatom pi_cent,/${1:3nd3}/${2:A}/${3:U`15}/cg+cz;")
+	cmd.do("dist pi_cent////ps1, b/${4:U`15}/${5:aaa};")
+	${0}
+# Color ribbon H red, strand yellow, loop green.
+snippet cribbon
+	cmd.do("as cartoon;")
+	cmd.do("color red, ss H;")
+	cmd.do("color yellow,ss S;")
+	cmd.do("color green, ss L+;")
+	${0}
+# Colored spheres.
+snippet cspheres
+	cmd.do("as spheres;")
+	cmd.do("color gray30, chain ${1:A};")
+	cmd.do("color white, chain ${2:B};")
+	cmd.do("color green, name CL;")
+	cmd.do("color brown, resn NAG;")
+	cmd.do("color red, resi 381;")
+	cmd.do("remove solvent;")
+	cmd.do("set specular, 0;")
+	cmd.do("set ray_trace_gain, 0;")
+	cmd.do("set ray_trace_mode, 3;")
+	cmd.do("bg_color white;")
+	cmd.do("set ray_trace_color, black;")
+	cmd.do("set depth_cue,0;")
+	${0}
+# Coordinate covalent bonds to metals and H-bonds from RNA.
+snippet coordinate
+	cmd.do("viewport 900,600;")
+	cmd.do("fetch 3nd4, type=pdb, async=0;")
+	cmd.do("run ~/Scripts/PyMOLScripts/quat.py;")
+	cmd.do("quat 3nd4;")
+	cmd.do("show sticks;")
+	cmd.do("set stick_radius=0.125;")
+	cmd.do("hide everything, name H*;")
+	cmd.do("bg_color white;")
+	cmd.do("create coorCov, (3nd4_1 and (resi 19 or resi 119 or resi 219 or resi 319 or resi 419 or resi 519 or (resi 3 and name N7)));")
+	cmd.do("bond (coorCov//A/NA`19/NA),(coorCov//A/A`3/N7);")
+	cmd.do("bond (coorCov//A/NA`19/NA),(coorCov//A/HOH`119/O);")
+	cmd.do("bond (coorCov//A/NA`19/NA),(coorCov//A/HOH`219/O);")
+	cmd.do("bond (coorCov//A/NA`19/NA),(coorCov//A/HOH`319/O);")
+	cmd.do("bond (coorCov//A/NA`19/NA),(coorCov//A/HOH`519/O);")
+	cmd.do("distance (3nd4_1 and chain Aand resi 19 and name NA), (3nd4_1 and chain A and resi 519);")
+	cmd.do("distance (3nd4_1 and chain A and resi 19 and name NA), (3nd4_1 and chain A and resi 419);")
+	cmd.do("distance (3nd4_1 and chain A and resi 19 and name NA), (3nd4_1 and chain A and resi 319);")
+	cmd.do("distance (3nd4_1 and chain A and resi 19 and name NA), (3nd4_1 and chain A and resi 219);")
+	cmd.do("show nb_spheres; ")
+	cmd.do("set nb_spheres_size, .35;")
+	cmd.do("distance hbond1,/3nd4_1/1/A/HOH`119/O, /3nd4_1/1/A/A`3/OP2;")
+	cmd.do("distance hbond2,/3nd4_1/1/A/HOH`319/O, /3nd4_1/1/A/A`3/OP2;")
+	cmd.do("distance hbond3,/3nd4_1/1/A/HOH`91/O,/3nd4_1/1/A/HOH`119/O;")
+	cmd.do("distance hbond4,/3nd4_1/1/A/G`4/N7,/3nd4_1/1/A/HOH`91/O;")
+	cmd.do("distance hbond5,/3nd4_1/1/A/G`4/O6, /3nd4_1/1/A/HOH`419/O;")
+	cmd.do("distance hbond6,/3nd4_1/1/A/HOH`91/O,/3nd4_1/1/A/G`4/OP2;")
+	cmd.do("distance hbond7,/3nd4_1/1/A/HOH`319/O,/3nd4_1/1/A/G`2/OP2;")
+	cmd.do("distance  hbond9,/3nd4_1/1/A/HOH`419/O,/3nd4_2/2/A/HOH`74/O;")
+	cmd.do("distance hbond10,/3nd4_2/2/A/C`15/O2,/3nd4_1/1/A/G`2/N2;")
+	cmd.do("distance hbond11, /3nd4_2/2/A/C`15/N3,/3nd4_1/1/A/G`2/N1;")
+	cmd.do("distance hbond12,/3nd4_2/2/A/C`15/N4,/3nd4_1/1/A/G`2/O6;")
+	cmd.do("distance hbond13, /3nd4_2/2/A/U`14/N3,/3nd4_1/1/A/A`3/N1;")
+	cmd.do("distance hbond14,3nd4_2/2/A/U`14/O4,/3nd4_1/1/A/A`3/N6;")
+	cmd.do("distance hbond15, /3nd4_2/2/A/C`13/N4,/3nd4_1/1/A/G`4/O6;")
+	cmd.do(" distance hbond16,/3nd4_2/2/A/C`13/N3, /3nd4_1/1/A/G`4/N1;")
+	cmd.do("distance hbond17, /3nd4_1/1/A/G`4/N2,/3nd4_2/2/A/C`13/O2;")
+	cmd.do("distance hbond18,/3nd4_1/1/A/G`2/N2,/3nd4_2/2/A/C`15/O2;")
+	cmd.do("distance hbond19,/3nd4_1/1/A/HOH`91/O,/3nd4_1/1/A/G`4/OP2;    ")
+	cmd.do("set depth_cue=0;")
+	cmd.do("set ray_trace_fog=0;")
+	cmd.do("set dash_color, black;")
+	cmd.do("set label_font_id, 5;")
+	cmd.do("set label_size, 36;")
+	cmd.do("set label_position, (0.5, 1.0, 2.0);")
+	cmd.do("set label_color, black;")
+	cmd.do("set dash_gap, 0.2;")
+	cmd.do("set dash_width, 2.0;")
+	cmd.do("set dash_length, 0.2;")
+	cmd.do("set label_color, black;")
+	cmd.do("set dash_gap, 0.2;")
+	cmd.do("set dash_width, 2.0;")
+	cmd.do("set dash_length, 0.2;")
+	cmd.do("select carbon, element C;")
+	cmd.do("color yellow, carbon;")
+	cmd.do("disable carbon;")
+	cmd.do("set_view(-0.9,0.34,-0.26,0.33,0.18,-0.93,-0.27,-0.92,-0.28,-0.07,-0.23,-27.83,8.63,19.85,13.2,16.0,31.63,-20.0)")
+	${0}
+# H-bond distance between a H-bond donor and acceptor. Edit the name for the ditance, the selection criteria for atom 1, and the selection criteria for atom 2.
+snippet distance
+	cmd.do("# Edit the name for the ditance, the selection criteria for atom 1, and the selection criteria for atom 2.;")
+	cmd.do("distance ${1:dist3}, ${2:/rcsb074137//B/IOD`605/I`B}, ${3:/rcsb074137//B/IOD`605/I`A};")
+	${0}
+# Display H-bonds as dashes colored black.
+snippet drawHbonds
+	cmd.do("hide everything, hydrogens;")
+	cmd.do("hide labels;")
+	cmd.do("# set the color of the dashed lines representing the H-bond.;")
+	cmd.do("set dash_color, ${1:black};")
+	cmd.do("set dash_gap, 0.4;")
+	cmd.do("set dash_radius, 0.08;")
+	${0}
+# Carved isomesh representation of electron density.
+snippet carvedIsomesh
+	cmd.do("delete all;")
+	cmd.do("# Fetch the coordinates. Need internet connection.")
+	cmd.do("fetch ${1:4dgr}, async=0;")
+	cmd.do("# Fetch the electron density map.")
+	cmd.do("fetch ${1:4dgr}, type=2fofc,async=0;")
+	cmd.do("# create a selection out of the glycan")
+	cmd.do("select ${2:LongGlycan}, resi ${3:469:477};")
+	cmd.do("orient ${2:LongGlycan};")
+	cmd.do("remove not ${2:LongGlycan};")
+	cmd.do("remove name H*;")
+	cmd.do("isomesh 2fofcmap, ${1:4dgr}_2fofc, 1, ${2:LongGlycan}, carve = 1.8;")
+	cmd.do("color density, 2fofcmap; ")
+	cmd.do("show sticks;")
+	cmd.do("show spheres;")
+	cmd.do("set stick_radius, .07;")
+	cmd.do("set sphere_scale, .19;")
+	cmd.do("set sphere_scale, .13, elem H;")
+	cmd.do("set bg_rgb=[1, 1, 1];")
+	cmd.do("set stick_quality, 50;")
+	cmd.do("set sphere_quality, 4;")
+	cmd.do("color gray85, elem C;")
+	cmd.do("color red, elem O;")
+	cmd.do("color slate, elem N;")
+	cmd.do("color gray98, elem H;")
+	cmd.do("set stick_color, gray50;")
+	cmd.do("set ray_trace_mode, 1;")
+	cmd.do("set ray_texture, 2;")
+	cmd.do("set antialias, 3;")
+	cmd.do("set ambient, 0.5;")
+	cmd.do("set spec_count, 5;")
+	cmd.do("set shininess, 50;")
+	cmd.do("set specular, 1;")
+	cmd.do("set reflect, .1;")
+	cmd.do("set dash_gap, 0;")
+	cmd.do("set dash_color, black;")
+	cmd.do("set dash_gap, .15;")
+	cmd.do("set dash_length, .05;")
+	cmd.do("set dash_round_ends, 0;")
+	cmd.do("set dash_radius, .05;")
+	cmd.do("set_view (0.34,-0.72,0.61,0.8,0.56,0.22,-0.51,0.4,0.77,0.0,0.0,-81.31,44.64,-9.02,58.62,65.34,97.28,-20.0);")
+	cmd.do("preset.ball_and_stick(\"all\",mode=1);")
+	cmd.do("draw;")
+	${0}
+# Fetch 2FoFc map as an isomesh.
+snippet fetch2FoFcIsomesh
+	cmd.do("fetch ${1:3nd4}, ${1:3nd4}_2fofc, type=2fofc, async=0;")
+	cmd.do("isomesh 2fofcmap, ${1:3nd4}_2fofc, 1, ${1:3nd4}, carve = 1.8;")
+	${0}
+# Fetch the atomic coordinates as a cif file from the PDB.
+snippet fetchCIF
+	cmd.do("fetch ${1:3nd4}, type=cif, async=0;")
+	${0}
+# Fetch fofc map from the PDB.
+snippet fetchFoFc
+	cmd.do("fetch ${1:3nd4},  ${1:3nd4}_fofc, type=fofc, async=0;")
+	${0}
+# Filled rings in nucleic acids.
+snippet filledRing
+	cmd.do("show sticks;set cartoon_ring_mode, 3;")
+	cmd.do("set cartoon_ring_finder, 1;")
+	cmd.do("set cartoon_ladder_mode, 1;")
+	cmd.do("set cartoon_nucleic_acid_mode, 4;")
+	cmd.do("set cartoon_ring_transparency, 0.5;")
+	cmd.do("as cartoon;")
+	${0}
+# Get coordinates.
+snippet getCoordinates
+	cmd.do("print cmd.get_atom_coords(\\\"${1:/4PCO//B/G`8/OP2}\\\");")
+	${0}
+# Set up H-bond dashes.
+snippet hbonddash
+	cmd.do("hide everything, hydrogens;")
+	cmd.do("hide labels;")
+	cmd.do("set dash_color, black; ")
+	cmd.do("set dash_gap, 0.4;")
+	cmd.do("set dash_radius, 0.08;")
+	${0}
+# Hide the partially occupied atoms with the part b alternate locator.
+snippet hidealtloc
+	cmd.do("select altconf, alt ${1:b}  # select B alternative locators;")
+	cmd.do("hide everything, altconf  # hide alt B locators;")
+	${0}
+# Label CA atom with single-letter residue name and residue number.
+snippet labelResnResi
+	cmd.do("label name ca, \"%s%s\" %(one_letter[${1:resn}],${2:resi});")
+	${0}
+# Label SS.
+snippet labelSS
+	cmd.do("alter ${1:chain A}, ss=\"${2:helix}\";")
+	cmd.do("label (%2),\"%3\";")
+	${0}
+# Load PDB ball-and-stick.
+snippet loadPDBbs
+	cmd.do("fetch ${1:3nd3},name=${1:3nd3}, type=pdb, async=0;")
+	cmd.do("hide (name H*);")
+	cmd.do("hide lines;")
+	cmd.do("show sticks;")
+	cmd.do("set stick_radius, ${2:1.2};")
+	cmd.do("set nb_sphere_radius, ${3:0.35};")
+	cmd.do("orient;")
+	${0}
+# Load PDB nb spheres.
+snippet loadPDBnb
+	cmd.do("fetch ${1:3nd3}, name=${1:3nd3}, type=pdb, async=0;")
+	cmd.do("orient;")
+	cmd.do("set stick_radius, ${2:1.2};")
+	cmd.do("hide (name H*);")
+	cmd.do("set nb_sphere_size, ${3:0.35};")
+	cmd.do("set nb_spheres_quality, ${4:1};")
+	cmd.do("show nb_spheres;")
+	${0}
+# Measure surface area of the selection with the msms_pymol.py script.
+snippet ms
+	cmd.do("fetch ${1:3nd3}, name=${1:3nd3}, type=pdb, async=0;")
+	cmd.do("select ${2:temp}, ${1:3nd3} and chain ${4:A};")
+	cmd.do("run ${5:/Users/blaine-mooers/Scripts/PyMOLScripts/msms_pymol.py};")
+	cmd.do("calc_msms_area ${2:temp};")
+	${0}
+# Show cartoon in the style of Molscript ribbons.
+snippet molscriptRibbon
+	cmd.do("set cartoon_highlight_color, grey;")
+	cmd.do("show cartoon;")
+	cmd.do("set cartoon_flat_sheets, 0;")
+	cmd.do("set cartoon_smooth_loops, 0;")
+	cmd.do("set cartoon_fancy_helices, 1;")
+	${0}
+# Switch from three letter code to one-letter code for amino acids.
+snippet oneLetter
+	cmd.do("one_leVer%={\"VAL\":\"V\",%\"ILE\":\"I\",%\"LEU\":\"L\",%\"GLU\":\"E\",%\"GLN\":\"Q\",\"ASP\":\"D\",%\"ASN\":\"N\",%\"HIS\":\"H\",%\"TRP\":\"W\",%\"PHE\":\"F\",%\"TYR\":\"Y\",%\"ARG\":\"R\",%\"LYS\":\"K\",%\"SER\":\"S\",%\"THR\":\"T\",%\"MET\":\"M\",%\"ALA\":\"A\",%\"GLY\":\"G\",%\"PRO\":\"P\",%\"CYS\":\"C\"}%")
+	${0}
+# Print Fasta from PDB file.
+snippet fasta
+	cmd.do("print cmd.get_fastastr(\"all\")")
+	${0}
+# Position label with pseudoatom.
+snippet pseudolabel
+	cmd.do("pseudoatom ${1:forLabel};")
+	cmd.do("label ${1:forLabel}, \"%0\";")
+	cmd.do("set label_color, ${2:red};")
+	${0}
+# Rotate a selection about and axis by a given angle.
+snippet rotate
+	cmd.do("rotate ${1:x}, ${2:45}, ${3:pept};")
+	${0}
+# Stereo draw.
+snippet stereoDraw
+	cmd.do("stereo walleye; ")
+	cmd.do("set ray_shadow, off; ")
+	cmd.do("#draw 3200,2000;")
+	cmd.do("draw ${1:1600,1000}; ")
+	cmd.do("png ${2:aaa}.png;")
+	${0}
+# Stereo ray.
+snippet stereoRay
+	cmd.do("stereo; ")
+	cmd.do("set ray_shadow, off;")
+	cmd.do("ray ${1:2400,1200};")
+	cmd.do("png ${2:aaa}.png;")
+	${0}
+# Three electron density as Isomesh.
+snippet loadThreeMaps
+	cmd.do("load ${1:4dgr}.pdb;")
+	cmd.do("# Make sure to rename map file so that;")
+	cmd.do("# the root filename differs from pdb root filename;")
+	cmd.do("load ${1:4dgr}_2fofc.ccp4, 2fofc;")
+	cmd.do("load ${1:4dgr}_fofc.ccp4, fofc;")
+	cmd.do("select  ${2:glycan}, resid 200 or (resid 469:477);")
+	cmd.do("isomesh ${3:mesh1}, 2fofc, 1.0, ${2:glycan};")
+	cmd.do("color density, ${3:mesh1};")
+	cmd.do("isomesh ${4:mesh2}, fofc, 3.0, ${2:glycan};")
+	cmd.do("color green, ${4:mesh2};")
+	cmd.do("isomesh ${5:mesh3}, fofc, -3.0, ${2:glycan};")
+	cmd.do("color red, ${5:mesh3};")
+	${0}
+# Turn about axis.
+snippet turnAboutAxis
+	cmd.do("turn ${1:x},${2:90};")
+	${0}
+# Volume ramp.
+snippet volumeRamp
+	cmd.volume_ramp_new(\"ramp_magenta\", [0.01, 1.00, 0.00, 1.00, 0.00, 4.01, 1.00, 0.00, 1.00, 0.10, 4.99, 1.00, 0.00, 1.00, 0.50,])"
+# Set radius of ball used to make solvent accessible surface.
+snippet solventRadius
+	cmd.do("set solvent_radius, ${1:1.55};")
+	${0}
+# Scale the radius and color of atoms as spheres by property in the B-value column.
+snippet scaleRadiusColor
+	cmd.do("bg_color white;")
+	cmd.do("hide everything;")
+	cmd.do("show spheres;")
+	cmd.do("set  stick_radius = 0.1;")
+	cmd.do("hide everything, HET;")
+	cmd.do("show spheres, HET;")
+	cmd.do("set sphere_quality=3;")
+	cmd.do("show sticks, resi ${1:1102};")
+	cmd.do("from pymol import stored;")
+	cmd.do("# set the stored array equal to the b−values or use your own values; ")
+	cmd.do("stored.bb = [ ];")
+	cmd.do("iterate all, stored.bb.append(b);")
+	cmd.do("# execute a python−block;")
+	cmd.do("python;")
+	cmd.do("# scale the b−values;")
+	cmd.do("M = max(stored.bb);")
+	cmd.do("scaledBB = map(lambda x: float (x/M), stored.bb);")
+	cmd.do("count = 0;")
+	cmd.do("# set the sphere radii independently;")
+	cmd.do("#[(cmd.set(\"sphere_scale\", x ,\"ID %s\"%count); count = count + 1) for x in scaledBB];")
+	cmd.do("for x in scaledBB:")
+	cmd.do("  cmd.set(\"sphere_scale\", x ,\"ID %s\"%count)")
+	cmd.do("  count = count + 1")
+	cmd.do("python end;")
+	cmd.do("spectrum b, selection=${2:4gdx};")
+	cmd.do("space cmyk;")
+	cmd.do("set specular_intensity , 0.25;")
+	${0}
+# Return settings in rounded format.
+snippet rv
+	cmd.do("run roundview.py;")
+	${0}
+# Save png flle with timestamp.
+snippet spng
+	cmd.do("python;")
+	cmd.do("import datetime;")
+	cmd.do("from pymol import cmd; ")
+	cmd.do("DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");")
+	cmd.do("s = str(DT); ")
+	cmd.do("cmd.save(stemName+s+\".png\"); ")
+	cmd.do("python end;")
+	${0}
+# Save pse flle with timestamp
+snippet spse
+	cmd.do("python;")
+	cmd.do("import datetime;")
+	cmd.do("from pymol import cmd; ")
+	cmd.do("DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");")
+	cmd.do("s = str(DT); ")
+	cmd.do("cmd.save(stemName+s+\".pse\"); ")
+	cmd.do("python end;")
+	${0}
+# Run supercell script to generate three cells in all directions. This script was written by Thomas Holder.
+snippet sc222
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 2, 2, 2, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# The pearl effect is made with two spheres with the outer sphere being transparent.
+snippet pearl
+	cmd.do("create ${1:sodium2}, ${2:sodium1};")
+	cmd.do("set sphere_transparency, 0.4, ${1:sodium2};")
+	cmd.do("set sphere_scale, 1.05, ${1:sodium2};")
+	cmd.do("ray;")
+	${0}
+# Blur the background atoms.
+snippet fog
+	cmd.do("set fog, 0;")
+	${0}
+# Remove waters from molecular object.
+snippet rmwater
+	cmd.do("remove resn HOH;")
+	${0}
+# Set color name to a RGB code.
+snippet setcolor
+	cmd.do("set_color ${1:bark}, [${2:0.1, ${3:0.1}, ${4:0.1}];")
+	cmd.do("color ${1:bark}, ${5:protein};")
+	${0}
+# Duplicate object. Create an object with the first argument using the selection, which is the second argument.
+snippet duplicateObject
+	cmd.do("create ${1:t4l}, ${2:1lw9};")
+	${0}
+# Select a chain.
+snippet selectChain
+	cmd.do("select ${1:rna}, ${2:chain B};")
+	${0}
+# Select residues by name.
+snippet selectResidues
+	cmd.do("select aromatic, resn phe+tyr+trp;")
+	${0}
+# Select residues by a range of numbers.
+snippet selectResi
+	cmd.do("select ${!:se}; resi ${2: 1:100};")
+	${0}
+# Select atoms by element.
+snippet selectElement
+	cmd.do("select ${1:oxygen}, elem ${2:O};")
+	${0}
+# Select atoms by name.
+snippet selectName
+	cmd.do("select ${1:oxygen2}, name ${2:O2};")
+	${0}
+# Select atoms by alpha helices.
+snippet selectHelices
+	cmd.do("select ${1:helices}, ss h; ")
+	${0}
+# Select atoms by beta strands.
+snippet selectStrands
+	cmd.do("select ${1:strands}, ss s; ")
+	${0}
+# Select atoms by beta loops.
+snippet selectLoops
+	cmd.do("select ${1:loops}, ss l;")
+	${0}
+# Select all nitrogen atom in a selelction except from lysine.
+snippet selectAllBut
+	cmd.do("select ${1:select1}, elem ${2:N} and chain ${3:A} and not resn ${4:LYS};")
+	${0}
+# Select atoms within a radius around a ligand.
+snippet selectAtomsAround
+	cmd.do("select ${1:nearby}, resn ${2:drug} around ${3:5};")
+	${0}
+# Select residues within a radius around a ligand.
+snippet selectResiduesAround
+	cmd.do("select ${1:nearby}, br. resn ${2:drug} around ${3:5};")
+	${0}
+# Undo a selection.
+snippet undoSelection
+	cmd.do("disable ${1:sele}; ")
+	${0}
+# Load a pdb file in the current directory.
+snippet loadPDBfile
+	cmd.do("load ${1:my}.pdb;")
+	${0}
+# Save a png file of current scene to the current directory. PyMOL writes out only png files. This file may need to be converted to a tiff file. See the png2tiff snippet for a bash script that converts all png files in a folder into tiff files. 1: png filename. 2: x-dimension in pixels. 3: y-dimension in pixels, 1600 x 1000 approximates the golden ratio. Usually want a square for multipanel figures..4: dots per inch. 5: ray tracing off, 0; ray tracing on, 1 should also consider image without ray tracing shadows. 
+snippet savePNG
+	cmd.do("png ${1:saveMe}.png, ${2:1920}, ${3:1920}, ${4:600}, ${5:1};")
+	${0}
+# Set the ring mode to a value between 0  and 6 in cartoons of nucleic acids.
+snippet ringMode
+	cmd.do("show cartoon, ${1:rna}; set cartoon_ring_mode, ${2:3};")
+	${0}
+# In cartoons, hide the backbone atoms of selected residues when showing then as sticks.
+snippet sidehChainHelper
+	cmd.do("set cartoon_side_chain_helper, on;")
+	${0}
+# Create a new object from part of an existing object.
+snippet extractPartObj
+	cmd.do("extract new_obj, chain A;")
+	${0}
+# Create a putty cartoon. The command may be needed if the above setting does not work. This can happen if using the presets. The command below may be needed if the above setting does not work.This can happen if using the presets. The command below may be needed if the above setting does not work. This can happen if using the presets.
+snippet puttyCartoon
+	cmd.do("show cartoon;")
+	cmd.do("cartoon putty;")
+	cmd.do("set cartoon_smooth_loops, 0;")
+	cmd.do("set cartoon_flat_sheets, 0;")
+	cmd.do("set cartoon_smooth_loops,0;")
+	cmd.do("## unset cartoon_smooth_loops;")
+	${0}
+# Turn off magenta squares on current selection.
+snippet hideSelection
+	cmd.do("indicate none")
+	${0}
+# Turn on discrete colors between secondary structure elements.
+snippet discreteCartoonColoring
+	cmd.do("set cartoon_discrete_colors, on;")
+	${0}
+# Display all symmetry mates in one unit cell. Uses supercell.py in $HOME/Scripts/PyMOLscripts/. Change to your path to supercell.py.
+snippet sc111
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 1, 1, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display SAXS envelope. Edit to enter the name of the bead model object.
+snippet saxsEnvelope
+	cmd.do("alter ${1:refine_A_Ave_SM_015_0_370-374-0r}, vdw=3.0;")
+	cmd.do("set solvent_radius = 3.0;")
+	${0}
+# Set additional path for PyMOL to search on startup.
+snippet setpath
+	os.environ[\"PATH\"] += os.pathsep +${1: \"~/ATSAS-3.0.3-1/bin\"};"
+# Set path for location to save fetched pdb files.
+snippet fetchPath
+	cmd.do("set fetch_path, ${1:/Users/blaine/pdbFiles};")
+	${0}
+# Set antialias to on to get smoother edges.
+snippet antialias
+	cmd.do("set antialias, 1;")
+	${0}
+# Print list of active pymolrc files.
+snippet lspymolrc
+	cmd.do("print invocation.options.deferred;")
+	${0}
+# Set number of decimals places to show in distance labels.
+snippet sigDigits
+	cmd.do("set label_distance_digits, ${1:2};")
+	cmd.do("set label_angle_digits, ${2:2};")
+	${0}
+# Label the CA atoms with the Ala333 style format.
+snippet labelCAs
+	cmd.do("label name CA,\"%s%s\" % (resn,resi);")
+	${0}
+# Label waters with HOH and their residue number.
+snippet labelWatersHOH
+	cmd.do("label resn HOH ,\"%s%s\" % (resn,resi);")
+	${0}
+# Label waters with W and their reisude number.
+snippet labelWatersW
+	cmd.do("label resn HOH ,\"W%s\" % (resi);")
+	${0}
+# Find H-bonds around a residue.
+snippet findHbonds
+	cmd.do("remove element h; distance hbonds, all, all, 3.2, mode=2;")
+	${0}
+# Print the B-factors of a residue.
+snippet printBs
+	cmd.do("remove element h; iterate resi ${1: 1:13}, print(resi, name,b);")
+	${0}
+# Label the main chain atoms with the following: resn,resi,atom name.
+snippet labelMainChain
+	cmd.do("label name n+c+o+ca,\"%s%s%s\" % (resn,resi,name);")
+	${0}
+# Print B factors of part B of a residue.
+snippet printBspartB
+	cmd.do("iterate resi ${1:38} and altloc ${2:B}, print resi, name, alt, b;")
+	${0}
+# Print B--factors for a residue with the B-factors rounded off to two decimal places.
+snippet printBs2digits
+	cmd.do("iterate (resi ${1:133}), print(name + \" %.2f\" % b);")
+	${0}
+# Write the command reference to html file in the present working directory. 
+snippet writeCommandReference2HTML
+	cmd.write_html_ref(\"pymol-command-ref.html\");"
+# Average the B-factors by using a regular list as opposed to a stored list in PyMOL. Edit the selection as needed. 
+snippet averageB
+	cmd.do("Bfactors = []; ")
+	cmd.do("#  >>> edit the selection below, which is a range of residue numbers here.;")
+	cmd.do("iterate (resi ${1:133}), Bfactors.append(b);")
+	cmd.do("print(\"Sum = \", \"%.2f\" % (sum(Bfactors)));")
+	cmd.do("print(\"Number of atoms = \", len(Bfactors));")
+	cmd.do("print( \"Average B =\" , \"%.2f\" % ( sum(Bfactors)/float(len(Bfactors))));")
+	${0}
+# Prints the residue number and the average bfactor. Uses reduce and lambda, builtin Python functional porgramming functions. Note that you need to convert the length of the list of Bfactors from an integer to a float before division into the sum.
+snippet aveB4resiX
+	cmd.do("Bfactors = [];")
+	cmd.do("iterate (resi ${1:133}), Bfactors.append(b);")
+	cmd.do("print( \"Average B-factor of residue \", %{1:133} , \"   = \", \"%.2f\" %(reduce(lambda x, y: x + y, Bfactors) / float(len(Bfactors))) );")
+	${0}
+# Print name and b-factor for a residue.
+snippet printNameB4ResiX
+	Bfac_dict = { \"Bfactors3\" : [] };
+	"cmd.iterate(\"(${1:resi 133})\",\"Bfactors3.append((name, b))\", space=Bfac_dict); 
+	"[print(\"%s %.2f\" % (i,j)) for i,j in Bfac_dict[\"Bfactors3\"];"
+# Print resn, resi, atom name, and b-factor. 
+snippet printResiResnNameB4ResiX
+	Bfac_dict = { \"Bfactors3\" : [] };
+	"cmd.iterate(\"(${1:resi 133})\",\"Bfactors3.append((resn,resi,name, b))\", space=Bfac_dict);
+	"[print(\"%s %s %s %.2f\" % (i,j,k,l)) for i,j,k,l in Bfac_dict[\"Bfactors3\"]]"
+# Print name and b-factor for a residue or residue range (e.g. 81:120). The noH variant.
+snippet printResiResnNameB4ResiXNoH
+	Bfac_dict = { \"Bfactors3\" : [] };
+	"cmd.iterate(\"(${1:resi 133} and not elem H)\",\"Bfactors3.append((resn,resi,name, b))\", space=Bfac_dict); 
+	"[print(\"%s %s %s %.2f\" % (i,j,k,l))for i,j,k,l in Bfac_dict[\"Bfactors3\"]];"
+# Make the background of the internal gui transparent to expand viewport.
+snippet internalGUImode2
+	cmd.do("internal_gui_mode=2;")
+	${0}
+# Set the width of the internal gui. Set to 0 to make the internal gui vanish.
+snippet internalGUIwidth
+	cmd.do("set internal_gui_width=${1:0};")
+	${0}
+# Print document string of a function.
+snippet printDoc
+	print(${1:my_func}.__doc__);"
+# List all snips by tab trigger and description.
+snippet lsSnips
+	cmd.do("\"\"\"Name                                      Description                                                                                                                   ,")
+	cmd.do("------------------------------------------------------------------------------------------------------------------------------------------------------------------------,")
+	cmd.do("AO                                        Run the AO function from the pymolshortcuts.py file to generate the photorealistic effect.")
+	cmd.do("AOBW                                      Run the AOBW function from the pymolshortcuts.py file to generate photorealistic effect in grayscale.")
+	cmd.do("AOD                                       Run the AOD function from the pymolshortcuts.py file to generate photorealistic effect with carbons colored black.")
+	cmd.do("AODBW                                     Run the AODBW function from the pymolshortcuts.py file to generate photorealistic effect with carbons colored black and all other atoms colored in grayscale.")
+	cmd.do("PE125                                     Run the PE125 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.125 of the van der Waals surface.")
+	cmd.do("PE25                                      Run the PE25 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.25 of the van der Waals surface.")
+	cmd.do("PE33                                      Run the PE33 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.33 of the van der Waals surface.")
+	cmd.do("PE50                                      Run the PE50 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.50 of the van der Waals surface.")
+	cmd.do("PE66                                      Run the PE66 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.66 of the van der Waals surface.")
+	cmd.do("PE75                                      Run the PE75 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.75 of the van der Waals surface.")
+	cmd.do("PE85                                      Run the PE85 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.85 of the van der Waals surface.")
+	cmd.do("addAxis                                   Adds the function draw_axis(). Used to draw a symmetry axis, a ncs axis, or scale bar to a scene.")
+	cmd.do("addAxispy                                 Adds the function draw_axis(). Could be useful for the adding a symmery axis, a ncs axis, or scale bar to a scene.")
+	cmd.do("allPairs                                  This is a two-fold nested list comprehension for any all-parwise operation on the currently loaded objects. Replace optAlginRNA with object from any other function that operations on a pair of structrures.")
+	cmd.do("antialias                                 Set antialias to on to get smoother edges.")
+	cmd.do("ao                                        Apply the ambient occlussion effect to get the photorealistic effect.")
+	cmd.do("ao                                        Apply the ambient occlussion effect to get the photorealistic effect.")
+	cmd.do("aobw                                      Ambient occlussion in grayscale.")
+	cmd.do("aod                                       Ambient occlussion with carbon atoms colored black.")
+	cmd.do("aodbw                                     Ambient occlussion in grayscale with carbon atoms colored black. Note: requires the gscale() function from pymolshortcuts.py. Download this script from http://GitHub.com/MooersLab/pymolshortcuts. Load the functions from this script with the following command:  cmd.do('run pymolshortcuts.py').")
+	cmd.do("aveB4resiX                                Prints the residue number and the average bfactor. Uses reduce and lambda, builtin Python functional porgramming functions. Note that you need to convert the length of the list of Bfactors from an integer to a float before division into the sum.")
+	cmd.do("aveB4resiXpy                              AveBResiX, prints the residue number and the average bfactor. Uses reduce and lambda, builtin Python functional porgramming functions. Note that you need to convert the length of the list of Bfactors from an integer.")
+	cmd.do("averageB                                  Average the B-factors by using a regular list as opposed to a stored list in PyMOL. Edit the selection as needed. ")
+	cmd.do("basePairStacking                          This code make as standard base stacking diagram with ball and stick representation.")
+	cmd.do("brokenNucleicBackbone                     Create bonds between phosphorous and O3* atoms in a low-resolution DNA structure that is 80 base pairs long. Edit the selections below, which are ranges of residue numbers and edit the molecular object name (5fur).")
+	cmd.do("bs                                        Ball and stick representation.")
+	cmd.do("bsfr                                      Ball-and-stick plus filled ring representation for ligands.")
+	cmd.do("bu                                        Generate the biological unit using the quat.py script. Edit the path to the file quat.py. You may have to download it from the PyMOL Wiki page.")
+	cmd.do("carvedIsomesh                             Carved isomesh representation of electron density.")
+	cmd.do("carvedIsosurface                          Carved isosurface representation of electron density.")
+	cmd.do("carvedVolume                              Carved volume representation of electron density.")
+	cmd.do("cav                                       Run the cav function from the pymolshortcuts.py file to show buried cavities and pockets as molecular surfaces.")
+	cmd.do("cblind                                    Apply color blind friendly to ribbon diagrams. Edit the path to the Pymol-script-repo in your computer account. See PyMOL wiki for more information about the Pymol-script-reo.")
+	cmd.do("cblindCartoon                             Color cartoon with colorblind friendly colors. Requires that the pymolshortcuts.py file is loaded. This has been applied to PDB-ID 7JU6. The protein is human RET kinase, and the drug is selpercatinib, a FDA approved drug for treating several cancers.")
+	cmd.do("centerpi                                  Center pi. Edit the atoms selected for positioning the pseudoatom.")
+	cmd.do("cmddocs                                   Print in the command history window the docstrings of all of the functions in the cmd module.")
+	cmd.do("cntccp4emaps                              Count number of *.ccp4 (electron density map) files in current directory.")
+	cmd.do("cntfiles                                  Count number of files in current directory.")
+	cmd.do("cntlogs                                   Count number of *.log files in current directory.")
+	cmd.do("cntmtzs                                   Count number of *.mtz files in current directory.")
+	cmd.do("cntpdbs                                   Count number of *.pdb files in current directory.")
+	cmd.do("cntpmls                                   Count number of *.pml files in current directory.")
+	cmd.do("cntpngs                                   Count number of *.png files in current directory.")
+	cmd.do("cntpses                                   Count number of *.pse files in current directory.")
+	cmd.do("colorh1                                   Run the colorh1 function from the pymolshortcuts.py file to color protein molecules according to the Eisenberg hydrophobicity scale, scheme 1.")
+	cmd.do("colorh2                                   Run the colorh2 function from the pymolshortcuts.py file to color protein molecules according to the Eisenberg hydrophobicity scale, scheme 2.")
+	cmd.do("coordinate                                Coordinate covalent bonds to metals and H-bonds from RNA.")
+	cmd.do("cribbon                                   Color ribbon H red, strand yellow, loop green.")
+	cmd.do("cring                                     Colored ring.")
+	cmd.do("cspheres                                  Colored spheres.")
+	cmd.do("discreteCartoonColoring                   Turn on discrete colors between secondary structure elements.")
+	cmd.do("displayFonts                              Print to the screen as labels the 21 font ids in their corresponding fonts in a grid. Each label is an object and appears in the internal gui. You can turn on and off the display of specific fonts.")
+	cmd.do("displayFontspy                            Print to the screen as labels the 21 font ids in their corresponding fonts in a grid. Each label is an object and appears in the internal gui. You can turn on and off the display of specific fonts.")
+	cmd.do("distance                                  H-bond distance between a H-bond donor and acceptor. Edit the name for the ditance, the selection criteria for atom 1, and the selection criteria for atom 2.")
+	cmd.do("doubleBond                                Valence bond.")
+	cmd.do("drawHbonds                                Display H-bonds as dashes colored black.")
+	cmd.do("drawLinks                                 Connect the alpha carbons of residue 1 with 10, 6 with 16, 7  with 17 and 8 with 18. Note that this example requires the draw_links.py [http://pldserver1.biochem.queensu.ca/~rlc/work/pymol/draw_links.py] by Robert Campbell.")
+	cmd.do("dssrBlock1                                Combining DSSR block representation with regular PyMOL cartoons after loading the dssr_block.py script by Thomas Holder.")
+	cmd.do("dssrBlock2                                DSSR block representation with fused blocks after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH.")
+	cmd.do("dssrBlock3                                DSSR block representation for a multi-state example after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH. Edit the path to Thomas Holder's block script.")
+	cmd.do("dssrBlock4                                DSSR block representation with custom coloring after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH.")
+	cmd.do("duplicateObject                           Duplicate object. Create an object with the first argument using the selection, which is the second argument.")
+	cmd.do("ellipcol                                  Set color of thernal ellipsoids. The PDB must have anisotopic temperature factors. See https://pymolwiki.org/index.php/Color_Values for the PyMOL colors.")
+	cmd.do("emacsjupyterSourceBlock                   Source block template in org-mode with emacs-jupyter package.")
+	cmd.do("extractPartObj                            Create a new object from part of an existing object.")
+	cmd.do("fasta                                     Print Fasta from PDB file.")
+	cmd.do("fastapy                                   Python version of the command to print the sequence from a PDB file in the fasta format.")
+	cmd.do("fetch2FoFcIsomesh                         Fetch 2FoFc map as an isomesh.")
+	cmd.do("fetch2FoFcIsosurface                      Fetch 2FoFc map as an isosurface. Edit the PDB-ID code. Use lowercase letter for the fifth character to select a single chain. Render and display a contour of this map as a chicken wire representation.")
+	cmd.do("fetch2FoFcVolume                          Fetch 2FoFc map as a volume.")
+	cmd.do("fetchCIF                                  Fetch the atomic coordinates as a cif file from the PDB.")
+	cmd.do("fetchFoFc                                 Fetch fofc map from the PDB.")
+	cmd.do("fetchPath                                 Set path for location to save fetched pdb files.")
+	cmd.do("fetchThreeMaps                            Display three electron density maps as isomesh.")
+	cmd.do("filledRing                                Filled rings in nucleic acids.")
+	cmd.do("findHbonds                                Find H-bonds around a residue.")
+	cmd.do("fog                                       Blur the background atoms.")
+	cmd.do("getCoordinates                            Get coordinates.")
+	cmd.do("getCoordinatespy                          Python version of getCoordinates snippets. Note that the python2 print statement stills works  in pml scripts.")
+	cmd.do("github                                    Print url of README.md file of the pymolsnips repository.")
+	cmd.do("grayscale                                 Apply grayscale coloring using a grayscale version of the PyMOL colors for the elements. This is a Python function. It is invoked in a script file via grayscale(). There is a corresponding gscale shortcut in pymolshortcuts.py that is invoked in a pml script by entering gsale if the functions in pymolshortcuts.py have been loaded with the run pymolshortcuts.py command.")
+	cmd.do("grayscalepy                               Apply grayscale coloring using a grayscale version of the PyMOL colors for the elements. This is a Python function. It is invoked in a script file via gscale(). There is a corresponding gscale shortcut in pymolshortcuts.py that is invoked in a pml script by entering gsale if the functions in pymolshortcuts.py have been loaded with the run pymolshortcuts.py command.")
+	cmd.do("hb                                        Creates an object of all H-bonds found by PyMOL.")
+	cmd.do("hbonddash                                 Set up H-bond dashes.")
+	cmd.do("helpDocs                                  Return the docstring for the help submodule. This command is more concise:  help help.")
+	cmd.do("hideSelection                             Turn off magenta squares on current selection.")
+	cmd.do("hidealtloc                                Hide the partially occupied atoms with the part b alternate locator.")
+	cmd.do("his31asp70                                Display the famous Asp70-His31 salt-bridge from T4 lysozyme that contributes3-5 kcal/mol to protein stability. ")
+	cmd.do("importIPythonDisplay                      Imports for using IPython to display images loaded from disk in notebook cells.")
+	cmd.do("importPyMOLandShortcuts                   Imports needed for most users of PyMOL in Jupyter. Combination of importPyMOL and importPythonDisplay.")
+	cmd.do("importPyMOLcmd                            Import the cmd class from the pymol api.")
+	cmd.do("importShortcuts                           Import for loading the functions in the pymolshortcuts.py file. These functions can be run inside cmd.do() without the trailing (). For example, cmd.do('rv').")
+	cmd.do("imports4PyMOLjupyter                      Imports needed for most uses of pymol in Jupyter. Combination of importPyMOL and importPythonDisplay.")
+	cmd.do("internalGUImode2                          Make the background of the internal gui transparent to expand viewport.")
+	cmd.do("internalGUIwidth                          Set the width of the internal gui. Set to 0 to make the internal gui vanish.")
+	cmd.do("ipymolProtein                             Demo of the use of the RPC server with a protein via ipymol. Create a kernel for python interpreter from PyMOL inside Jupyter. See the kernel snippet for an example. See the README.md file on pymolsnips GItHub website or more details https://github.com/MooersLab/pymilsnips. Start pymol in terminal with pymol -R. Select pymol.python as kernel in Juptyer. The double parentheses are required when set_view is run this way.;")
+	cmd.do("ipymolStart                               Code to start the RPC server with ipymol. Start pymol in terminal with pymol -R; select pymol.python as the kernel in juptyer. You may have to create this kernel for the Python interpreter that is inside PyMOL.")
+	cmd.do("kernel                                    A kernel.json file for runnig PyMOL python interpreter in the Jupyter notebook. This code should reside in a folder named pymol.python in the ~/Library/Jupyter/kernels.")
+	cmd.do("labelCAs                                  Label the CA atoms with the Ala333 style format.")
+	cmd.do("labelMainChain                            Label the main chain atoms with the following: resn,resi,atom name.")
+	cmd.do("labelResnResi                             Label CA atom with single-letter residue name and residue number.")
+	cmd.do("labelSS                                   Label SS.")
+	cmd.do("labelWatersHOH                            Label waters with HOH and their residue number.")
+	cmd.do("labelWatersW                              Label waters with W and their reisude number.")
+	cmd.do("ligandSelect                              Make selection of ligand atoms.")
+	cmd.do("listLigandProteinDistances                Print a list of protein--ligand distances. Code by Dan Kulp. Updated for Python3.")
+	cmd.do("listObjects                               Create a list of objects in the internal gui and print this list to the screen.")
+	cmd.do("listSettings                              Print to the screen the settings and their current parameter values. This is the more compact version.")
+	cmd.do("listSettings2                             Print to the screen the settings and their current parameter values.")
+	cmd.do("loadAmberTrajs                            The amber trajectories have to be loaded into the same object.")
+	cmd.do("loadAndAlignManyFiles1                    These are the instructions for loading and aligning multiple files. To save multiple models in a file to separate pdb files.")
+	cmd.do("loadAndAlignManyFiles2                    To align all of the loaded RNA structures in all possible combinations by their C1' carbon atoms. Yes, this construct is a list comprehension inside a list comprehension!")
+	cmd.do("loadAndAlignManyFiles3                    These are the instructions for loading and aligning multiple files.")
+	cmd.do("loadImage                                 Load image.")
+	cmd.do("loadManyFiles                             Load into PyMOL multiple files with a common file stem. The is a script by Robert Campbell that has been updated for Python3.")
+	cmd.do("loadPDBbs                                 Load PDB ball-and-stick.")
+	cmd.do("loadPDBfile                               Load a pdb file in the current directory.")
+	cmd.do("loadPDBnb                                 Load PDB nb spheres.")
+	cmd.do("loadThreeMaps                             Three electron density as Isomesh.")
+	cmd.do("lsSnips                                   List all snips by tab trigger and description.")
+	cmd.do("lsSnipsPy                                 List all snips by tab trigger and description.")
+	cmd.do("lspymolrc                                 Print list of active pymolrc files.")
+	cmd.do("lspymolrcpy                               Print list of active pymolrc files.")
+	cmd.do("molscriptRibbon                           Show cartoon in the style of Molscript ribbons.")
+	cmd.do("ms                                        Measure surface area of the selection with the msms_pymol.py script.")
+	cmd.do("nmr                                       Show all models in a nmr structure.")
+	cmd.do("nmroff                                    Hide all but first model in a nmr structure.")
+	cmd.do("nmroffpy                                  Hide all but the first model in a nmr structure.")
+	cmd.do("nmrpy                                     Show all models in a nmr structure.")
+	cmd.do("nucleicAcidBackboneTubesSticks            This code shows the cartoon backbone tube as 65% transparent. It hides the rungs of the cartoon. It shows all of the non-H atoms are sticks. The motivation is to have the cartoon highlight the backbone without dominanting the scene.")
+	cmd.do("nucleicAcidCartoon                        Settings for nucliec acid cartoon. The dark blue used for electron density maps is called `density`. The cartoon_ladder_radius should be renamed the cartoon_rung_radius. The dimensions are in Angstroms.")
+	cmd.do("nucleicAcidCartoon2Strands                Coloring two strand differently of a double helix makes it easier to for the viewer to distinguish the two strands. The set command has the syntax of setting_name [, setting_value [, selection [,state ]]] . In this case, the selection has to be global, object, object-state, or per-atom settings. It cannot be a named selection. This is a weak spot in PyMOL. Coloring two strand differently of a double helix makes it easier to for the viewer to distinguish the two strands. Many double-stranded helices have one strand in the asymmetric unit. The second strand is in the biological unit. The coordinates for the second strand are in the pdb1 file type at the PDB. The second strand is in the second state, which is equivalent to the second model in the pdb file. The strands are labeled chain A and B (via the cartoon_nucliec_acid_color setting). The bases are colored differently too (via the cartoon_ladder_color setting).")
+	cmd.do("nucleicAcidCartoonFilledRings             The code provides a cartoon of the loaded nucleic acid that has the ladder rungs replaced by filled rings that are colored by atom type. The code can be applied to any nucleic acid. It is derived from the FR shortuct in pymolshortcuts.py.")
+	cmd.do("nucleicAcidColorbySequence                This code colors the nucleotides by base seqence. It can be applied to any nucleic acid.")
+	cmd.do("nucleicAcidDumbellCartoonColorbySequence  This code colors by the nucleotides by base seqence. The backcone is shown as a flatten ribbon with rolled edges that give the dumbell effect. The code can be applied to any nucleic acid. The code is dervied from the CR and DU shortcuts.")
+	cmd.do("nucleicAcidFlatRibbonColorbySequence      This code colors the nucleotides by base seqence. It can be applied to any nucleic acid. It is dervied from the CR shortcut. The backcone is shown as a flatten ribbon.")
+	cmd.do("numResiNucleic                            Print the number of residues in a nulceic acid (all chains).")
+	cmd.do("numResiNucleicChainA                      Print the number of residues in a nulceic acid chain.")
+	cmd.do("numResiProtein                            Print the number of residues in a protein.")
+	cmd.do("numResiProteinChainA                      Print the number of residues in chain A of a protein.")
+	cmd.do("obipythonSourceBlock                      Source block template in org-mode with the ob-ipython package.")
+	cmd.do("oneBondThicknessColor                     To change stick color and radius for the bond between atom 2 and 3, use the set_bond command.")
+	cmd.do("oneLetter                                 Switch from three letter code to one-letter code for amino acids.")
+	cmd.do("optAlignRNA                               OptiAlign.py by Jason Vertree modified for aligning multiple RNA structures.")
+	cmd.do("pearl                                     The pearl effect is made with two spheres with the outer sphere being transparent.")
+	cmd.do("presetDocs                                Return the docstring for the preset submodule. The command help preset fails to return anything. The command help(pymol.preset) has the same effect as help(preset).")
+	cmd.do("printAtomNames                            Print the atom names of a residue.")
+	cmd.do("printAtomNumbers                          Print the atom name and number of a residue.")
+	cmd.do("printBfactors                             Print the bfactors of a residue.")
+	cmd.do("printBs                                   Print the B-factors of a residue.")
+	cmd.do("printBs2digits                            Print B--factors for a residue with the B-factors rounded off to two decimal places.")
+	cmd.do("printBspartB                              Print B factors of part B of a residue.")
+	cmd.do("printColorByAtomCodes                     Print the codes for color-by-atom (util.cba*) alternates.")
+	cmd.do("printCoordinates                          Print the coordinates of the atoms in a residue.")
+	cmd.do("printDoc                                  Print document string of a function.")
+	cmd.do("printDocpy                                Print document string of a function.")
+	cmd.do("printNameB4ResiX                          Print name and b-factor for a residue.")
+	cmd.do("printNamesCoordinates                     Print the atom names and coordinates of the atoms in a residue.")
+	cmd.do("printNamesCoordinates                     Print the atom names as tuples and coordinates of the atoms in a residue as a list.")
+	cmd.do("printPath                                 Print the path to the currently used PyMOL binary.")
+	cmd.do("printPathpy                               Print the path to the currently used PyMOL binary.")
+	cmd.do("printResiResnNameB4ResiX                  Print resn, resi, atom name, and b-factor. ")
+	cmd.do("printResiResnNameB4ResiXNoH               Print name and b-factor for a residue or residue range (e.g. 81:120). The noH variant.")
+	cmd.do("printVDWradii                             Print the van der Waals radii of the atoms in of a residue.")
+	cmd.do("pseudolabel                               Position label with pseudoatom.")
+	cmd.do("puttyCartoon                              Create a putty cartoon. The command may be needed if the above setting does not work. This can happen if using the presets. The command below may be needed if the above setting does not work.This can happen if using the presets. The command below may be needed if the above setting does not work. This can happen if using the presets.")
+	cmd.do("pymoldocs                                 Return to the command history window the docstrings for all of the functions in a module.")
+	cmd.do("pymoldocspy                               Return to the command history window the docstrings for all of the functions in a module.")
+	cmd.do("rdkrpcChem                                Demo of the use of the RPC server with a drug compound via the rdkit python module.")
+	cmd.do("rdkrpcProtein                             Demo of the use of the RPC server with a protein via rdkit.")
+	cmd.do("renameChain                               Rename a chain. ")
+	cmd.do("renumAtoms                                Add or substract a atom number offset.")
+	cmd.do("renumResi                                 Add or substract a residue number offset.")
+	cmd.do("ringMode                                  Set the ring mode to a value between 0  and 6 in cartoons of nucleic acids.")
+	cmd.do("rmd                                       Remove all measurement objects in the interal GUI.")
+	cmd.do("rmhb                                      Delete all H-bonds in the selection, which is all by default.")
+	cmd.do("rmwater                                   Remove waters from molecular object.")
+	cmd.do("rotate                                    Rotate a selection about and axis by a given angle.")
+	cmd.do("rv                                        Return settings in rounded format.")
+	cmd.do("rvi                                       Return settings in rounded format while running PyMOL via the RCP server ipymol in a jupyter notebook. This is a modified version of the roundview.py script.")
+	cmd.do("rvr                                       Return settings in rounded format while running PyMOL via the RCP server rdkit in a jupyter notebook. This is a modified version of the roundview.py script.")
+	cmd.do("saln                                      Save an aln flle with a timestamp.")
+	cmd.do("salnpy                                    Save an aln flle with a timestamp. Python version.")
+	cmd.do("sas                                       Show the solvent excluded surface.")
+	cmd.do("savePNG                                   Save a png file of current scene to the current directory. PyMOL writes out only png files. This file may need to be converted to a tiff file. See the png2tiff snippet for a bash script that converts all png files in a folder into tiff files. 1: png filename. 2: x-dimension in pixels. 3: y-dimension in pixels, 1600 x 1000 approximates the golden ratio. Usually want a square for multipanel figures..4: dots per inch. 5: ray tracing off, 0; ray tracing on, 1 should also consider image without ray tracing shadows. ")
+	cmd.do("saveSeppy                                 Saves multiple objects into multiple files using an optional prefix name.")
+	cmd.do("saxsEnvelope                              Display SAXS envelope. Edit to enter the name of the bead model object.")
+	cmd.do("sc111                                     Display all symmetry mates in one unit cell. Uses supercell.py in $HOME/Scripts/PyMOLscripts/. Change to your path to supercell.py.")
+	cmd.do("sc112                                     Display all symmetry mates in two unit cells along the c axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc113                                     Display all symmetry mates in three unit cels along c. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc114                                     Display all symmetry mates in four unit cells stacked long c-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc121                                     Display all symmetry mates in two unit cells along the b axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc122                                     Display all symmetry mates in a 1 x 2 x 2 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc131                                     Display all symmetry mates in three unit cells along b. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc133                                     Display all symmetry mates in 1 x 3 x 3 array of unit cell. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc141                                     Display all symmetry mates in four unit cells stacked long b-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc144                                     Display all symmetry mates in in a 1 x 4 x 4 array. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc211                                     Display all symmetry mates in two unit cell along a. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc212                                     Display all symmetry mates in a 2 x 1 x 2 arrays of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc221                                     Display all symmetry mates in 2 x 2 x 1 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc222                                     Run supercell script to generate three cells in all directions. This script was written by Thomas Holder.")
+	cmd.do("sc233                                     Display all symmetry mates in a 2 x 3 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc311                                     Display all symmetry mates three three unit cells along a. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc313                                     Display all symmetry mates in a 3 x 1 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc323                                     Display all symmetry mates in a 3 x 2 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc331                                     Display all symmetry mates in 3 x 3 x 1 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc332                                     Display all symmetry mates in 3 x 3 x 2 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc333                                     Display all symmetry mates in 3 x 3 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc411                                     Display all symmetry mates in four unit cells stacked long a-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc414                                     Display all symmetry mates in a 4 x 1 x 4 array. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc441                                     Display all symmetry mates in four unit cells stacked long a-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc444                                     Display all symmetry mates in a 4 x 4 x4 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("sc444                                     Display all symmetry mates in a 4 x 4 x4 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.")
+	cmd.do("scaleRadiusColor                          Scale the radius and color of atoms as spheres by property in the B-value column.")
+	cmd.do("scaleRadiusColorPythonInsertpy            Python block insert for scaleRadiusColorpy.")
+	cmd.do("scaleRadiusColorpy                        Scale the radius and color of atoms as spheres by property in the B-value column.")
+	cmd.do("sccp4                                     Save electron density map flle with timestamp.")
+	cmd.do("sccp4py                                   Save electron density map flle with timestamp.")
+	cmd.do("sdae                                      Save dae flle with timestamp.")
+	cmd.do("sdaepy                                    Save dae flle with timestamp.")
+	cmd.do("selectAllBut                              Select all nitrogen atom in a selelction except from lysine.")
+	cmd.do("selectAtomsAround                         Select atoms within a radius around a ligand.")
+	cmd.do("selectChain                               Select a chain.")
+	cmd.do("selectElement                             Select atoms by element.")
+	cmd.do("selectHelices                             Select atoms by alpha helices.")
+	cmd.do("selectLoops                               Select atoms by beta loops.")
+	cmd.do("selectName                                Select atoms by name.")
+	cmd.do("selectResi                                Select residues by a range of numbers.")
+	cmd.do("selectResidues                            Select residues by name.")
+	cmd.do("selectResiduesAround                      Select residues within a radius around a ligand.")
+	cmd.do("selectStrands                             Select atoms by beta strands.")
+	cmd.do("setLigandValenceOn                        Display the bond valence of ligands only.")
+	cmd.do("setcolor                                  Set color name to a RGB code.")
+	cmd.do("setpath                                   Set additional path for PyMOL to search on startup.")
+	cmd.do("sidehChainHelper                          In cartoons, hide the backbone atoms of selected residues when showing then as sticks.")
+	cmd.do("sigDigits                                 Set number of decimals places to show in distance labels.")
+	cmd.do("sigang                                    Set angle labels to display 2 decimals places.")
+	cmd.do("sigdihedral                               Set dihedral labels to display 2 decimals places to the right of the decimal point.")
+	cmd.do("sigdist                                   Set distance labels to display 2 decimals.")
+	cmd.do("solventRadius                             Set radius of ball used to make solvent accessible surface.")
+	cmd.do("spng                                      Save png flle with timestamp.")
+	cmd.do("spngpy                                    Save png flle with timestamp.")
+	cmd.do("spse                                      Save pse flle with timestamp")
+	cmd.do("stack                                     Base-stacking figure.")
+	cmd.do("stateOne                                  Select state 1 from a model with multiple states.")
+	cmd.do("stereoDraw                                Stereo draw.")
+	cmd.do("stereoRay                                 Stereo ray.")
+	cmd.do("stereokb                                  Set keyboard shortcut by mapping F1 to stereo.")
+	cmd.do("symexp                                    The code expands the asymmetric unit. It like the generate symmetry mates command but it provides more control over the prefix name of the symmetry mates and the addition of unique segment identifiers for each symmetry mate. The usage: symexp prefix, object, (selection), cutoff, segidFlag. The cutoff is in Angstroms. The segidFlag set to 1 will add unique segids. For related functions, see SC***.")
+	cmd.do("synch                                     Wait until all current commands have been executed. A timeout ensures that that command ecentually returns.")
+	cmd.do("threeMapsIsosurface                       Display three electron density maps as isosurfaces.")
+	cmd.do("threeMapsVolume                           Three electron density as volumes. Make sure to rename map file so that the root filename differs from pdb root filename.")
+	cmd.do("timcolor                                  Run the timcolor function from the pymolshortcuts.py file to color atoms accordings to Tim Mather's biophysical coloring scheme for proteins.")
+	cmd.do("turnAboutAxis                             Turn about axis.")
+	cmd.do("undoSelection                             Undo a selection.")
+	cmd.do("unitCellEdgesColorBlack                   Color unit cell edges black. The settings for controlling the unit cell color are hard to find.")
+	cmd.do("volumeRamp                                Volume ramp.")
+	cmd.do("wallart                                   Reset hash_max from 100 to 2000 to enable the saving of 28 inches by 28 inches.")
+	cmd.do("wallartpy                                 Reset hash_max from 100 to 2000 to enable the saving of 28 inches by 28 inches.")
+	cmd.do("waterTriple                               Examples of a triple water pentagon. Zoom in on the selection. Edit by changing the residue number.")
+	cmd.do("writeCommandReference2HTML                Write the command reference to html file in the present working directory. ")
+	cmd.do("yrb                                       Run the yrb function from the pymolshortcuts.py file. ")
+	cmd.do("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\"\"\"")
+	${0}
+# Display the famous Asp70-His31 salt-bridge from T4 lysozyme that contributes3-5 kcal/mol to protein stability. 
+snippet his31asp70
+	cmd.do("fetch ${1:1lw9}, async=0; ")
+	cmd.do("zoom (${2:resi 31 or resi 70}); ")
+	cmd.do("preset.technical(selection=\"all\"); ")
+	cmd.do("bg_color ${3:gray70}; ")
+	cmd.do("clip slab, 7,(${4:resi 31 or resi 70});")
+	cmd.do("rock;")
+	${0}
+# Examples of a triple water pentagon. Zoom in on the selection. Edit by changing the residue number.
+snippet waterTriple
+	cmd.do("fetch ${1:lw9}, async=0; ")
+	cmd.do("zoom resi ${2:313}; ")
+	cmd.do("preset.technical(selection=\"all\", mode=1);")
+	${0}
+# Make selection of ligand atoms.
+snippet ligandSelect
+	cmd.do("select ${1:ligand}, organic;")
+	${0}
+# Print url of README.md file of the pymolsnips repository.
+snippet github
+	cmd.do("https://github.com/MooersLab/pymolsnips/blob/master/README.md")
+	${0}
+# Set dihedral labels to display 2 decimals places to the right of the decimal point.
+snippet sigdihedral
+	cmd.do("set label_dihedral_digits, ${1:2};")
+	${0}
+# Select state 1 from a model with multiple states.
+snippet stateOne
+	cmd.create(\"newobject\", \"oldobject\", \"1\", \"1\");"
+# Display all symmetry mates in two unit cells along the c axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc112
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 1, 2, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in three unit cels along c. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc113
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 1, 3, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates three three unit cells along a. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc311
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 3, 1, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in three unit cells along b. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc131
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 3, 1, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in two unit cell along a. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc211
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 2, 1, 1, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in two unit cells along the b axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc121
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 2, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 1 x 2 x 2 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc122
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 2, 2, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in 2 x 2 x 1 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc221
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 2, 2, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 2 x 1 x 2 arrays of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc212
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 2, 1, 2, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in 1 x 3 x 3 array of unit cell. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc133
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 3, 3, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 3 x 1 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc313
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 3, 1, 3, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in 3 x 3 x 1 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc331
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 3, 3, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 2 x 3 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc233
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 2, 3, 3, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 3 x 2 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc323
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 1, 1, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in 3 x 3 x 2 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc332
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 3, 3, 2, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in 3 x 3 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc333
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 3, 3, 3, , ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in four unit cells stacked long c-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc114
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 1, 4, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in four unit cells stacked long b-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc141
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 4, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in four unit cells stacked long a-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc411
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 4, 1, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Save an aln flle with a timestamp.
+snippet saln
+	cmd.do("python;")
+	cmd.do("import datetime;")
+	cmd.do("from pymol import cmd;")
+	cmd.do("DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");")
+	cmd.do("s = str(DT);")
+	cmd.do("cmd.save(stemName+s+\".aln\");")
+	cmd.do("python end;")
+	${0}
+# Save electron density map flle with timestamp.
+snippet sccp4
+	cmd.do("python;")
+	cmd.do("import datetime;")
+	cmd.do("from pymol import cmd; ")
+	cmd.do("DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");")
+	cmd.do("s = str(DT); ")
+	cmd.do("cmd.save(stemName+s+\".ccp4\"); ")
+	cmd.do("python end;")
+	${0}
+# Save dae flle with timestamp.
+snippet sdae
+	import datetime;
+	"DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");
+	"s = str(DT); 
+	"cmd.save(stemName+s+\".dae\");"
+# Carved isosurface representation of electron density.
+snippet carvedIsosurface
+	cmd.do("delete all;")
+	cmd.do("# Fetch the coordinates. Need internet connection.;")
+	cmd.do("fetch ${1:4dgr}, async=0;")
+	cmd.do("# Fetch the electron density map.;")
+	cmd.do("fetch ${1:4dgr}, type=2fofc,async=0;")
+	cmd.do("# create a selection out of the glycan;")
+	cmd.do("select ${2:LongGlycan}, resi ${3:469:477};")
+	cmd.do("orient ${2:LongGlycan};")
+	cmd.do("remove not ${2:LongGlycan};")
+	cmd.do("remove name H*;")
+	cmd.do("isosurface 2fofcmap, ${1:4dgr}_2fofc, 1, ${2:LongGlycan}, carve = 1.8;")
+	cmd.do("color density, 2fofcmap; ")
+	cmd.do("show sticks;")
+	cmd.do("show spheres;")
+	cmd.do("set stick_radius, .07;")
+	cmd.do("set sphere_scale, .19;")
+	cmd.do("set sphere_scale, .13, elem H;")
+	cmd.do("set bg_rgb=[1, 1, 1];")
+	cmd.do("set stick_quality, 50;")
+	cmd.do("set sphere_quality, 4;")
+	cmd.do("color gray85, elem C;")
+	cmd.do("color red, elem O;")
+	cmd.do("color slate, elem N;")
+	cmd.do("color gray98, elem H;")
+	cmd.do("set stick_color, gray50;")
+	cmd.do("set ray_trace_mode, 1;")
+	cmd.do("set ray_texture, 2;")
+	cmd.do("set antialias, 3;")
+	cmd.do("set ambient, 0.5;")
+	cmd.do("set spec_count, 5;")
+	cmd.do("set shininess, 50;")
+	cmd.do("set specular, 1;")
+	cmd.do("set reflect, .1;")
+	cmd.do("set dash_gap, 0;")
+	cmd.do("set dash_color, black;")
+	cmd.do("set dash_gap, .15;")
+	cmd.do("set dash_length, .05;")
+	cmd.do("set dash_round_ends, 0;")
+	cmd.do("set dash_radius, .05;")
+	cmd.do("set_view (0.34,-0.72,0.61,0.8,0.56,0.22,-0.51,0.4,0.77,0.0,0.0,-81.31,44.64,-9.02,58.62,65.34,97.28,-20.0);")
+	cmd.do("preset.ball_and_stick(\"all\",mode=1);")
+	cmd.do("draw;")
+	${0}
+# Fetch 2FoFc map as an isosurface. Edit the PDB-ID code. Use lowercase letter for the fifth character to select a single chain. Render and display a contour of this map as a chicken wire representation.
+snippet fetch2FoFcIsosurface
+	cmd.do("fetch ${1:3nd4}, ${1:3nd4}_2fofc, type=2fofc, async=0;")
+	cmd.do("isosurface 2fofcmap, ${1:3nd4}_2fofc, 1, ${1:3nd4}, carve = 1.8;")
+	${0}
+# Display three electron density maps as isosurfaces.
+snippet threeMapsIsosurface
+	cmd.do("load ${1:4dgr}.pdb;")
+	cmd.do("# Make sure to rename map file so that ;")
+	cmd.do("# the root filename differs from pdb root filename;")
+	cmd.do("load ${1:4dgr}_2fofc.ccp4, 2fofc;")
+	cmd.do("load ${1:4dgr}_fofc.ccp4, fofc;")
+	cmd.do("select  ${2:glycan}, ${3:resid 200 or (resid 469:477)};")
+	cmd.do("isosurface ${4:mesh1}, 2fofc, 1.0, ${2:glycan};")
+	cmd.do("color density, ${4:mesh1};")
+	cmd.do("isosurface  ${5:mesh2}, fofc, 3.0, ${2:glycan};")
+	cmd.do("color green, ${5:mesh2};")
+	cmd.do("isosurface  ${6:mesh3}, fofc, -3.0, ${2:glycan};")
+	cmd.do("color red, ${6:mesh3};")
+	${0}
+# Carved volume representation of electron density.
+snippet carvedVolume
+	cmd.do("delete all;")
+	cmd.do("# Fetch the coordinates. Need internet connection.;")
+	cmd.do("fetch ${1:4dgr}, async=0;")
+	cmd.do("# Fetch the electron density map.;")
+	cmd.do("fetch ${1:4dgr}, type=2fofc,async=0;")
+	cmd.do("# create a selection out of the glycan;")
+	cmd.do("select ${2:LongGlycan}, resi ${3:469:477};")
+	cmd.do("# oreint the long axes of the object along the x-axis;")
+	cmd.do("orient ${2:LongGlycan};")
+	cmd.do("# remove everything except the glycan;")
+	cmd.do("remove not ${2:LongGlycan};")
+	cmd.do("# remove the remaining hydrogen atoms;")
+	cmd.do("remove name H*;")
+	cmd.do("# show the electron density map as a surface.")
+	cmd.do("surface 2fofcmap, ${1:4dgr}_2fofc, 1, ${2:LongGlycan}, carve = 1.8;")
+	cmd.do("color density, 2fofcmap; ")
+	cmd.do("show sticks;")
+	cmd.do("show spheres;")
+	cmd.do("set stick_radius, .07;")
+	cmd.do("set sphere_scale, .19;")
+	cmd.do("set sphere_scale, .13, elem H;")
+	cmd.do("set bg_rgb=[1, 1, 1];")
+	cmd.do("set stick_quality, 50;")
+	cmd.do("# make the spheres smooth with larger settings.;")
+	cmd.do("set sphere_quality, 4;")
+	cmd.do("# gray85 is off-white, gray0 is black;")
+	cmd.do("color gray85, elem C;")
+	cmd.do("color red, elem O;")
+	cmd.do("color slate, elem N;")
+	cmd.do("color gray98, elem H;")
+	cmd.do("set stick_color, gray50;")
+	cmd.do("set ray_trace_mode, 1;")
+	cmd.do("set ray_texture, 2;")
+	cmd.do("set antialias, 3;")
+	cmd.do("set ambient, 0.5;")
+	cmd.do("set spec_count, 5;")
+	cmd.do("set shininess, 50;")
+	cmd.do("set specular, 1;")
+	cmd.do("set reflect, .1;")
+	cmd.do("set dash_gap, 0;")
+	cmd.do("set dash_color, black;")
+	cmd.do("set dash_gap, .15;")
+	cmd.do("set dash_length, .05;")
+	cmd.do("set dash_round_ends, 0;")
+	cmd.do("set dash_radius, .05;")
+	cmd.do("set_view (0.34,-0.72,0.61,0.8,0.56,0.22,-0.51,0.4,0.77,0.0,0.0,-81.31,44.64,-9.02,58.62,65.34,97.28,-20.0);")
+	cmd.do("preset.ball_and_stick(\"all\",mode=1);")
+	cmd.do("draw;")
+	${0}
+# Fetch 2FoFc map as a volume.
+snippet fetch2FoFcVolume
+	cmd.do("fetch ${1:3nd4}, type=cif, async=0;")
+	cmd.do("fetch ${1:3nd4}, {1:3nd4}_2fofc, type=2fofc, async=0;")
+	cmd.do("# Render and display a contour of this map as a volume around a selection called LongGlycan.;")
+	cmd.do("volume 2fofcmap, ${1:3nd4}_2fofc, 1, ${2:LongGlycan}, carve = 1.8;")
+	${0}
+# Three electron density as volumes. Make sure to rename map file so that the root filename differs from pdb root filename.
+snippet threeMapsVolume
+	cmd.do("load ${1:4dgr}.pdb;")
+	cmd.do("load ${1:4dgr}_2fofc.ccp4, 2fofc;")
+	cmd.do("load ${1:4dgr}_fofc.ccp4, fofc;")
+	cmd.do("select  ${2:glycan}, ${3:resid 200 or (resid 469:477)};")
+	cmd.do("volume ${4:mesh1}, 2fofc, 1.0, ${2:glycan};")
+	cmd.do("color density, ${4:mesh1};")
+	cmd.do("volume ${5:mesh2}, fofc, 3.0, ${2:glycan};")
+	cmd.do("color green, ${5:mesh2};")
+	cmd.do("volume ${6:mesh3}, fofc, -3.0, ${2:glycan};")
+	cmd.do("color red, ${6:mesh3};")
+	${0}
+# Return settings in rounded format while running PyMOL via the RCP server ipymol in a jupyter notebook. This is a modified version of the roundview.py script.
+snippet rvi
+	def rvj(StoredView=0, decimal_places=2, outname=\"roundedview.txt\"):
+	"    \"\"\"
+	"    rvj() is a modification of the the rv() function (aka the roundview.py) 
+	"    so that it can run in Jupyter notebooks with the ipymol.viewer. 
+	"    A set_view string is printed to the noteobook in a format that is ready 
+	"    for reuse. 
+	"    
+	"    The ipymol module was developed by Carlos Hernandez:
+	"    
+	"    https://github.com/cxhernandez/ipymol
+	"    
+	"    The pre-requisites for installing ipymol are as follows:
+	"    
+	"    1. Make a jupyter notebook kernel for Python interpreter inside of 
+	"       the Schrodinger PyMOL. See the PyMOL Snippets GitHub Page for 
+	"       a description of how to make one.
+	"    2. Install the following build of ipymol at the PyMOL prompt.
+	"       You need to log into your GitHub account first.
+	"    
+	"    pip install git+pip install git+https://github.com/cxhernandez/ipymol.git@2a30d6ec1588434e6f0f72a1d572444f89ff535b
+	"    
+	"    3. Make a bash alias to this PyMOL app file.
+	"    
+	"    4. Launch the jupyter notebook and select the pymol.python kernel.
+	"    
+	"    5. Open a terminal instance from the File pulldown in jupyter notebook.
+	"    
+	"    6. Enter `pymol -Rq` to launch an interactive instance of PyMOL.
+	"    
+	"    7. Enter the following code to load ipymol and conmect to PyMOL
+	"    
+	"    from ipymol import viewer as ipv
+	"    ipv.start()   # Start PyMOL RPC server
+	"    
+	"    Now you can change the scene manually and send the display as static 
+	"    image to a cell in the jupyter notebook.
+	"    
+	"    It is assumed that the viewer class of the ipymol moduel has been 
+	"    imported as ipv. 
+	"    
+	"    I made the following modifications of roundview.py.
+	"    The cmd.get_view was replaced with ipv.get_view.
+	"    The cmd.extend was replaced with ipv.extend.
+	"    The myRoundedList was returned for further processing.
+	"    
+	"    MIT License
+	"    
+	"    Copyright:
+	"    Blaine Mooers and the OU Board of Regents
+	"    University of Oklahoma Health Sciences Center
+	"    Oklahoma City, OK 73104
+	"    
+	"    29 April 2020
+	"    
+	"    \"\"\"
+	"    
+	" 
+	"    StoredView = int(StoredView)
+	"    decimal_places = int(decimal_places)
+	" 
+	"    #call the get_view function
+	" 
+	"    m = ipv.get_view(StoredView)
+	" 
+	" 
+	"    #Make a list of the elements in the orientation matrix.
+	" 
+	"    myList = [m[0], m[1], m[2], m[3], m[4], m[5], m[6],m[7], m[8], m[9],
+	"              m[10], m[11], m[12], m[13], m[14],m[15], m[16], m[17]]
+	" 
+	"    #Round off the matrix elements to two decimal places (two fractional places)
+	"    #This rounding approach solved the problem of unwanted
+	"    #whitespaces when I tried to use a string format statement
+	" 
+	"    myRoundedList = [round(elem, decimal_places) for elem in myList]
+	"    
+	"    #x is the string template for the output. The whitespace is required
+	"    #between the \"set_view\" and \"(\"
+	" 
+	"    x = \"set_view ({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17});\"
+	" 
+	"    # Print to the command history window.
+	"    print(x.format(*myRoundedList))
+	" 
+	"    #Write to a text file.
+	"    myFile = open(\"roundedview.txt\", \"a\")
+	"    myFile.write(x.format(*myRoundedList) + \"\")
+	"    myFile.close()
+	"    return myRoundedList"
+# Demo of the use of the RPC server with a drug compound via the rdkit python module.
+snippet rdkrpcChem
+	import os;
+	"import rdkit;
+	"from rdkit import Chem;
+	"from rdkit.Chem import AllChem;
+	"from rdkit.Chem import PyMol;
+	"
+	"s = PyMOL.MolViewer();
+	"mol = Chem.MolFromSmiles(\"${1:CCOCCn1c(C2CC[NH+](CCc3ccc(C(C)(C)C(=O)[O-])cc3)CC2)nc2ccccc21}\");
+	"mol = AllChem.AddHs(mol);
+	"AllChem.EmbedMolecule(mol);
+	"AllChem.MMFFOptimizeMolecule(mol);
+	"s.ShowMol(mol, name = \"${2:bilastine}\", showOnly = False);
+	"s.Zoom(\"${2:bilastine}\");
+	"s.SetDisplayStyle(\"${2:bilastine}\", \"sticks\");
+	"s.GetPNG(preDelay=5);"
+# A kernel.json file for runnig PyMOL python interpreter in the Jupyter notebook. This code should reside in a folder named pymol.python in the ~/Library/Jupyter/kernels.
+snippet kernel
+	{
+	" \"argv\": [
+	"  \"/Applications/PyMOL.app/Contents/bin/python\",
+	"  \"-m\",
+	"  \"ipykernel_launcher\",
+	"  \"-f\",
+	"  \"{connection_file}\"
+	" ],
+	" \"display_name\": \"pymol.python\",
+	" \"language\": \"python\"
+	"}"
+# Demo of the use of the RPC server with a protein via rdkit.
+snippet rdkrpcProtein
+	from rdkit.Chem import PyMol;
+	"
+	"Usage=\"\"\"\"Start pymol from command line with -R flag.
+	"Select the pymol.python kernel in Jupyter notebook. \"\"\";
+	"
+	"s = PyMol.MolViewer();
+	"du = s.server.do;
+	"du(\"rein; bg_color white; fetch ${1:1lw9}, type=pdb, async=0, show;nb_spheres;set_view (${2:0.46,-0.28,-0.84,0.74,-0.41,0.54,-0.49,-0.87,0.02,0.0,0.0,-155.16,35.13,11.48,9.72,122.33,187.99,-20.0});\");
+	"s.GetPNG(preDelay=3);
+	"du(\"png ${3:T4L600dpi}.png, dpi=600\");"
+# Code to start the RPC server with ipymol. Start pymol in terminal with pymol -R; select pymol.python as the kernel in juptyer. You may have to create this kernel for the Python interpreter that is inside PyMOL.
+snippet ipymolStart
+	from ipymol import viewer as ipv;
+	"ipv.start() # Start PyMOL RPC server;"
+# Demo of the use of the RPC server with a protein via ipymol. Create a kernel for python interpreter from PyMOL inside Jupyter. See the kernel snippet for an example. See the README.md file on pymolsnips GItHub website or more details https://github.com/MooersLab/pymilsnips. Start pymol in terminal with pymol -R. Select pymol.python as kernel in Juptyer. The double parentheses are required when set_view is run this way.;
+snippet ipymolProtein
+	from ipymol import viewer as ipv;
+	"# Start PyMOL RPC server;
+	"ipv.start(); 
+	"ipv.do(\"fetch ${1:1lw9}\");
+	"ipv.do(\"rv\");
+	"ipv.set_view((-0.13,-0.4,-0.91,0.89,-0.45,0.07,-0.44,-0.8,0.41,0.0,0.0,-182.47,35.13,11.48,9.72,149.64,215.3,-20.0));
+	"ipv.do(\"AOD\");
+	"ipv.png(\"${2:testipymolT4L}.png\");"
+# Return settings in rounded format while running PyMOL via the RCP server rdkit in a jupyter notebook. This is a modified version of the roundview.py script.
+snippet rvr
+	def rvr(StoredView=0, decimal_places=2, outname=\"roundedview.txt\"):
+	"   \"\"\"MIT License
+	"    Copyright:
+	"    Blaine Mooers and the OU Board of Regents
+	"    University of Oklahoma Health Sciences Center
+	"    Oklahoma City, OK 73104
+	"    30 April 2020
+	"    
+	"    First run the following:
+	"    
+	"    from rdkit.Chem import PyMol
+	"    s = PyMol.MolViewer()
+	"    du = s.server.do
+	"
+	"    \"\"\"
+	"    StoredView = int(StoredView) decimal_places = int(decimal_places)
+	"    #call the get_view function
+	"    m = s.get_view(StoredView)
+	"    #Make a list of the elements in the orientation matrix.
+	"    myList = [m[0], m[1], m[2], m[3], m[4], m[5], m[6],m[7], m[8], m[9], 
+	"              m[10], m[11], m[12], m[13], m[14],m[15], m[16], m[17]]
+	"    #Round off the matrix elements to two decimal places (two fractional places)
+	"    #This rounding approach solved the problem of unwanted
+	"    #whitespaces when I tried to use a string format statement
+	"    myRoundedList = [round(elem, decimal_places) for elem in myList]
+	"    #x is the string template for the output. The whitespace is required
+	"    #between the \"set_view\" and \"(\"
+	"    x = \"set_view ({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17});\"
+	"    # Print to the command history window.
+	"    print(x.format(*myRoundedList))
+	"    #Write to a text file.
+	"    myFile = open(\"roundedview.txt\", \"a\") myFile.write(x.format(*myRoundedList) + \"\") myFile.close()
+	"    return myRoundedList"
+# Print in the command history window the docstrings of all of the functions in the cmd module.
+snippet cmddocs
+	[help(i) for i in dir(cmd)];"
+# Return to the command history window the docstrings for all of the functions in a module.
+snippet pymoldocs
+	[help(i) for i in dir(pymol)];"
+# Print the number of residues in a protein.
+snippet numResiProtein
+	sel = \"polymer.protein\"; print(len(set([(i.chain, i.resi, i.resn) for i in cmd.get_model(sel).atom])));"
+# Print the number of residues in chain A of a protein.
+snippet numResiProteinChainA
+	sel = \"${1:chain A} and polymer.protein\"; print(len(set([(i.chain, i.resi, i.resn) for i in cmd.get_model(sel).atom])));"
+# Print the number of residues in a nulceic acid (all chains).
+snippet numResiNucleic
+	sel = \"polymer.nucleic\";
+	"[print(len(set([(i.resi, i.resn) for i in cmd.get_model(sel).atom])))];"
+# Print the number of residues in a nulceic acid chain.
+snippet numResiNucleicChainA
+	sel = \"${1:chain A} and polymer.nucleic\"; 
+	"[print(len(set([(i.resi, i.resn) for i in cmd.get_model(sel).atom])))];"
+# Create bonds between phosphorous and O3* atoms in a low-resolution DNA structure that is 80 base pairs long. Edit the selections below, which are ranges of residue numbers and edit the molecular object name (5fur).
+snippet brokenNucleicBackbone
+	[cmd.bond(f\"/${1:5fur}//${2:E}/{i}/O3\"\", f\"/${1:5fur}//${2:E}/{i+1}/P\") for i in range(${5:1}, ${6:80})]; 
+	"[cmd.bond(f\"/${1:5fur}//${2:F}/{i}/O3\"\", f\"/${1:5fur}//${2:F}/{i+1}/P\") for i in range(${7:81}, ${8:160})];"
+# To change stick color and radius for the bond between atom 2 and 3, use the set_bond command.
+snippet oneBondThicknessColor
+	cmd.do("set_bond stick_color, ${1:yellow}, index 2, index 3;")
+	cmd.do("set_bond stick_radius, ${2:0.2}, index 2, index 3;")
+	${0}
+# Connect the alpha carbons of residue 1 with 10, 6 with 16, 7  with 17 and 8 with 18. Note that this example requires the draw_links.py [http://pldserver1.biochem.queensu.ca/~rlc/work/pymol/draw_links.py] by Robert Campbell.
+snippet drawLinks
+	cmd.do("draw_links ${1:mol1} & chain ${2:A} & name  ${3:CA} & resi ${4:1+6+7+8}, ${5:mol1} & chain ${6:A}& name ${7:CA} & resi ${8:10+16+17+18};")
+	${0}
+# Print the path to the currently used PyMOL binary.
+snippet printPath
+	print(pymol.__path__)"
+# Display the bond valence of ligands only.
+snippet setLigandValenceOn
+	cmd.do("set valence, on, resn ${1:RZS}; set valence, off, not resn ${2:RZS};")
+	${0}
+# Return the docstring for the preset submodule. The command help preset fails to return anything. The command help(pymol.preset) has the same effect as help(preset).
+snippet presetDocs
+	help(preset)"
+# Return the docstring for the help submodule. This command is more concise:  help help.
+snippet helpDocs
+	cmd.do("help(help)")
+	${0}
+# The amber trajectories have to be loaded into the same object.
+snippet loadAmberTrajs
+	cmd.do("load ${1:file}.top, ${2:protein};")
+	cmd.do("load ${1:file}.rst, ${2:protein};")
+	${0}
+# Saves multiple objects into multiple files using an optional prefix name.
+snippet saveSeppy
+	from pymol import cmd
+	"import glob
+	"import re
+	"
+	"def saveSep(prefix=\"\"):
+	"  \"\"\"
+	"  save_sep <prefix>
+	"
+	"  saves multiple objects into multiple files using an optional prefix name.
+	"
+	"  e.g. save_sep prefix
+	"  \"\"\"
+	"  obj_list = cmd.get_names(\"all\")
+	"
+	"  if obj_list:
+	"    for i in range(len(obj_list)):
+	"      obj_name = \"%s%s.pdb\" % (prefix, obj_list[i])
+	"      cmd.save(obj_name, obj_list[i])
+	"      print(\"Saving %s\" %  obj_name)
+	"  else:
+	"    print(\"No objects found\")"
+# OptiAlign.py by Jason Vertree modified for aligning multiple RNA structures.
+snippet optAlignRNA
+	#!python
+	" 
+	"##############################################################################
+	"#
+	"# @SUMMARY: -- QKabsch.py.  A python implementation of the optimal superposition
+	"#     of two sets of vectors as proposed by Kabsch 1976 & 1978.
+	"#
+	"# @AUTHOR: Jason Vertrees
+	"# @COPYRIGHT: Jason Vertrees (C), 2005-2007
+	"# @LICENSE: Released under GPL:
+	"# This program is free software; you can redistribute it and/or modify
+	"#    it under the terms of the GNU General Public License as published by
+	"#    the Free Software Foundation; either version 2 of the License, or
+	"#    (at your option) any later version.
+	"# This program is distributed in the hope that it will be useful, but WITHOUT
+	"# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	"# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	"#
+	"# You should have received a copy of the GNU General Public License along with
+	"# this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
+	"# Street, Fifth Floor, Boston, MA 02110-1301, USA 
+	"#
+	"# DATE  : 2007-01-01
+	"# REV   : 2
+	"# REQUIREMENTS: numpy
+	"#
+	"#
+	"# Modified optAlign.py to use C1 prime carbon atoms of RNA for alignment.
+	"# Jan. 29, 2020 
+	"# Blaine Mooers, PhD
+	"# Univ. of Oklahoma Health Sciences Center
+	"#
+	"#############################################################################
+	"from array import *
+	" 
+	"# system stuff
+	"import os
+	"import copy
+	" 
+	"# pretty printing
+	"import pprint
+	" 
+	"# for importing as a plugin into PyMol
+	"from pymol import cmd
+	"from pymol import stored
+	"from pymol import selector
+	" 
+	"# using numpy for linear algebra
+	"import numpy
+	" 
+	"def optAlignRNA( sel1, sel2 ):
+	"    \"\"\"
+	"    optAlignRNA performs the Kabsch alignment algorithm upon the C1\" carbons of two selections.
+	"    Example: optAlignRNA 1JU7 and i. 1-16 and n. C1\", 1CLL and i. 4-146 and n. C1\"
+	" 
+	"    Two RMSDs are returned.  One comes from the Kabsch algorithm and the other from
+	"    PyMOL based upon your selections.
+	"    
+	"    This function can be run in a for loop to fit multiple structures  with a common prefix name:
+	"    
+	"    for x in cmd.get_names(): optAlignRNA(x, \"1JU7_0001\")
+	"     
+	"    or get the rmsds for all combinations, do the following:
+	"     
+	"    [[optAlignRNA(x, y) for x in cmd.get_names()] for y in cmd.get_names()]
+	"
+	"    \"\"\"
+	"    cmd.reset()
+	" 
+	"    # make the lists for holding coordinates
+	"    # partial lists
+	"    stored.sel1 = []
+	"    stored.sel2 = []
+	"    # full lists
+	"    stored.mol1 = []
+	"    stored.mol2 = []
+	" 
+	"    # -- CUT HERE
+	"    sel1 += \" and N. C1\"\"
+	"    sel2 += \" and N. C1\"\"
+	"    # -- CUT HERE
+	" 
+	"    # Get the selected coordinates.  We
+	"    # align these coords.
+	"    cmd.iterate_state(1, selector.process(sel1), \"stored.sel1.append([x,y,z])\")
+	"    cmd.iterate_state(1, selector.process(sel2), \"stored.sel2.append([x,y,z])\")
+	" 
+	"    # get molecule name
+	"    mol1 = cmd.identify(sel1,1)[0][0]
+	"    mol2 = cmd.identify(sel2,1)[0][0]
+	" 
+	"    # Get all molecule coords.  We do this because
+	"    # we have to rotate the whole molcule, not just
+	"    # the aligned selection
+	"    cmd.iterate_state(1, mol1, \"stored.mol1.append([x,y,z])\")
+	"    cmd.iterate_state(1, mol2, \"stored.mol2.append([x,y,z])\")
+	" 
+	"    # check for consistency
+	"    assert len(stored.sel1) == len(stored.sel2)
+	"    L = len(stored.sel1)
+	"    assert L > 0
+	" 
+	"    # must alway center the two proteins to avoid
+	"    # affine transformations.  Center the two proteins
+	"    # to their selections.
+	"    COM1 = numpy.sum(stored.sel1,axis=0) / float(L)
+	"    COM2 = numpy.sum(stored.sel2,axis=0) / float(L)
+	"    stored.sel1 -= COM1
+	"    stored.sel2 -= COM2
+	" 
+	"    # Initial residual, see Kabsch.
+	"    E0 = numpy.sum( numpy.sum(stored.sel1 * stored.sel1,axis=0),axis=0) + numpy.sum( numpy.sum(stored.sel2 * stored.sel2,axis=0),axis=0)
+	" 
+	"    #
+	"    # This beautiful step provides the answer.  V and Wt are the orthonormal
+	"    # bases that when multiplied by each other give us the rotation matrix, U.
+	"    # S, (Sigma, from SVD) provides us with the error!  Isn\"t SVD great!
+	"    V, S, Wt = numpy.linalg.svd( numpy.dot( numpy.transpose(stored.sel2), stored.sel1))
+	" 
+	"    # we already have our solution, in the results from SVD.
+	"    # we just need to check for reflections and then produce
+	"    # the rotation.  V and Wt are orthonormal, so their det\"s
+	"    # are +/-1.
+	"    reflect = float(str(float(numpy.linalg.det(V) * numpy.linalg.det(Wt))))
+	" 
+	"    if reflect == -1.0:
+	"        S[-1] = -S[-1]
+	"        V[:,-1] = -V[:,-1]
+	" 
+	"    RMSD = E0 - (2.0 * sum(S))
+	"    RMSD = numpy.sqrt(abs(RMSD / L))
+	" 
+	"    #U is simply V*Wt
+	"    U = numpy.dot(V, Wt)
+	" 
+	"    # rotate and translate the molecule
+	"    stored.sel2 = numpy.dot((stored.mol2 - COM2), U)
+	"    stored.sel2 = stored.sel2.tolist()
+	"    # center the molecule
+	"    stored.sel1 = stored.mol1 - COM1
+	"    stored.sel1 = stored.sel1.tolist()
+	" 
+	"    # let PyMol know about the changes to the coordinates
+	"    cmd.alter_state(1,mol1,\"(x,y,z)=stored.sel1.pop(0)\")
+	"    cmd.alter_state(1,mol2,\"(x,y,z)=stored.sel2.pop(0)\")
+	" 
+	"    #print(\"Moved: %s Reference: %s RMSD = %f\" % mol1, mol2, RMSD)
+	"    print(\"% s, % s,% 5.3f\" % (mol1, mol2, RMSD))
+	" 
+	"    # make the alignment OBVIOUS
+	"    cmd.hide(\"everything\")
+	"    cmd.show(\"ribbon\", sel1 + \" or \" + sel2)
+	"    cmd.color(\"gray70\", mol1 )
+	"    cmd.color(\"magenta\", mol2 )
+	"    cmd.color(\"red\", \"visible\")
+	"    cmd.show(\"ribbon\", \"not visible\")
+	"    cmd.center(\"visible\")
+	"    cmd.orient()
+	"    cmd.zoom(\"visible\")"
+# Load into PyMOL multiple files with a common file stem. The is a script by Robert Campbell that has been updated for Python3.
+snippet loadManyFiles
+	# Copyright (c) 2004 Robert L. Campbell
+	"#
+	"# Modified for use with Python3.
+	"# Jan. 29, 2020 
+	"# Blaine Mooers, PhD
+	"# Univ. of Oklahoma Health Sciences Center
+	"#
+	"#
+	"from pymol import cmd
+	"import glob
+	"
+	"def loadFiles(files):
+	"  \"\"\"
+	"  load_files <files>
+	"
+	"  loads multiple files (using filename globbing)
+	"  into a multiple objects named as the files are (e.g. collection of
+	"  downloaded PDB files).
+	"
+	"  e.g. load_files prot_*.pdb
+	"  \"\"\"
+	"  file_list = glob.glob(files)
+	"  if file_list:
+	"    file_list.sort()
+	"    for i in file_list:
+	"      #obj_name = i.replace(\".pdb\",\"\")
+	"      #cmd.load(file_list[i],obj_name)
+	"      cmd.load(i)
+	"  else:
+	"    print(\"No files found for pattern %s\" % files)"
+# These are the instructions for loading and aligning multiple files.
+snippet loadAndAlignManyFiles3
+	from pymol import cmd
+	"import glob
+	"import re
+	"
+	"
+	"def saveSep(prefix=\"\"):
+	"    \"\"\"
+	"    Saves multiple objects into multiple files using an optional prefix name.
+	"    This function is can save time.
+	"
+	"    Usage in PyMOL:
+	"
+	"    saveSep <prefix>
+	"    
+	"    Usage in pymol\"s Python API:
+	"
+	"    cmd.do(\"saveSep <prefix>\")
+	" 
+	"    e.g. saveSep prefix
+	"    \"\"\"
+	"    obj_list = cmd.get_names(\"all\")
+	"
+	"    if obj_list:
+	"        for i in range(len(obj_list)):
+	"            obj_name = \"%s%s.pdb\" % (prefix, obj_list[i])
+	"            cmd.save(obj_name, obj_list[i])
+	"            print(\"Saving %s\" % obj_name)
+	"    else:
+	"        print(\"No objects found\")
+	"
+	"
+	"cmd.extend(\"saveSep\", saveSep)"
+# This is a two-fold nested list comprehension for any all-parwise operation on the currently loaded objects. Replace optAlginRNA with object from any other function that operations on a pair of structrures.
+snippet allPairs
+	[[${1:optAlignRNA}(x, y) for x in cmd.get_names()] for y in cmd.get_names()];"
+# Combining DSSR block representation with regular PyMOL cartoons after loading the dssr_block.py script by Thomas Holder.
+snippet dssrBlock1
+	cmd.do("reinitialize;")
+	cmd.do("run /Users/blaine/.pymol/startup/dssr_block.py;")
+	cmd.do("fetch 1ehz, async=0;")
+	cmd.do("as cartoon;")
+	cmd.do("set cartoon_ladder_radius, 0.1;")
+	cmd.do("set cartoon_ladder_color, gray;")
+	cmd.do("set cartoon_nucleic_acid_mode, 1;")
+	cmd.do("set cartoon_nucleic_acid_color, orange;")
+	cmd.do("orient;turn z,30; translate [0,5,0]")
+	cmd.do("dssr_block;")
+	cmd.do("png ~/dssrBlock1.png 1600,1600")
+	${0}
+# DSSR block representation with fused blocks after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH.
+snippet dssrBlock2
+	cmd.do("reinitialize;")
+	cmd.do("run /Users/blaine/.pymol/startup/dssr_block.py;")
+	cmd.do("set cartoon_nucleic_acid_color, orange;")
+	cmd.do("fetch 1ehz, async=0;")
+	cmd.do("dssr_block block_file=wc")
+	${0}
+# DSSR block representation for a multi-state example after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH. Edit the path to Thomas Holder's block script.
+snippet dssrBlock3
+	cmd.do("reinitialize;")
+	cmd.do("run ${1:\"/Users/blaine/.pymol/startup/dssr_block.py\"};")
+	cmd.do("fetch ${2:2n2d}, async=0;")
+	cmd.do("dssr_block  ${2:2n2d}, 0;")
+	cmd.do("set all_states;")
+	${0}
+# DSSR block representation with custom coloring after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH.
+snippet dssrBlock4
+	cmd.do("reinitialize;")
+	cmd.do("${1:run /Users/blaine/.pymol/startup/dssr_block.py};")
+	cmd.do("fetch ${2:1msy}, async=0;")
+	cmd.do("set cartoon_nucleic_acid_color, ${3:orange};")
+	cmd.do("dssr_block block_color=N red | minor 0.9 | major yellow;")
+	${0}
+# Settings for nucliec acid cartoon. The dark blue used for electron density maps is called `density`. The cartoon_ladder_radius should be renamed the cartoon_rung_radius. The dimensions are in Angstroms.
+snippet nucleicAcidCartoon
+	cmd.do("set cartoon_ladder_radius, ${2:0.2};")
+	cmd.do("set cartoon_nucleic_acid_color, ${3:red};")
+	cmd.do("# The cartoon ring modes range from 0 to 4.;")
+	cmd.do("set cartoon_ring_mode, ${4:2};")
+	${0}
+# Coloring two strand differently of a double helix makes it easier to for the viewer to distinguish the two strands. The set command has the syntax of setting_name [, setting_value [, selection [,state ]]] . In this case, the selection has to be global, object, object-state, or per-atom settings. It cannot be a named selection. This is a weak spot in PyMOL. Coloring two strand differently of a double helix makes it easier to for the viewer to distinguish the two strands. Many double-stranded helices have one strand in the asymmetric unit. The second strand is in the biological unit. The coordinates for the second strand are in the pdb1 file type at the PDB. The second strand is in the second state, which is equivalent to the second model in the pdb file. The strands are labeled chain A and B (via the cartoon_nucliec_acid_color setting). The bases are colored differently too (via the cartoon_ladder_color setting).
+snippet nucleicAcidCartoon2Strands
+	cmd.do("fetch ${1:3nd3}, ${2:3nd3}, type=${3:pdb1};")
+	cmd.do("set all_states, on;")
+	cmd.do("create chA, ${2:3nd3}, 1, 1;")
+	cmd.do("create chB, ${2:3nd3}, 2, 1;")
+	cmd.do("# colors only the backbone;")
+	cmd.do("set cartoon_nucleic_acid_color, ${4:magenta}, chA;")
+	cmd.do("set cartoon_nucleic_acid_color, ${5:orange}, chB;")
+	cmd.do("# color the bases;")
+	cmd.do("set cartoon_ladder_color,  ${6:density}, chA;")
+	cmd.do("set cartoon_ladder_color,  ${7:yellow}, chB;")
+	${0}
+# This code colors the nucleotides by base seqence. It can be applied to any nucleic acid.
+snippet nucleicAcidColorbySequence
+	cmd.do("select rna_A, resn A;")
+	cmd.do("select rna_C, resn C;")
+	cmd.do("select rna_G, resn G;")
+	cmd.do("select rna_U, resn U;")
+	cmd.do("select dna_T, resn T;")
+	cmd.do("color ${1:yellow}, rna_A;")
+	cmd.do("color ${2:red}, rna_C; ")
+	cmd.do("color ${3:gray40}, rna_G;")
+	cmd.do("color ${4:palecyan}, rna_U;")
+	cmd.do("color ${5:brown}, dna_T;")
+	${0}
+# This code colors the nucleotides by base seqence. It can be applied to any nucleic acid. It is dervied from the CR shortcut. The backcone is shown as a flatten ribbon.
+snippet nucleicAcidFlatRibbonColorbySequence
+	cmd.do("bg_color white;")
+	cmd.do("set cartoon_oval_length, ${1:1.85};")
+	cmd.do("set cartoon_oval_width, ${2:0.5};")
+	cmd.do("cartoon oval;")
+	cmd.do("set cartoon_ring_mode, ${3:3};")
+	cmd.do("# set the color of the backbone oval;")
+	cmd.do("set cartoon_nucleic_acid_color, ${4:blue};")
+	cmd.do("select rna_A, resn A;")
+	cmd.do("select rna_C, resn C;")
+	cmd.do("select rna_G, resn G;")
+	cmd.do("select rna_U, resn U;")
+	cmd.do("select dna_T, resn T;")
+	cmd.do("color ${5:yellow}, rna_A;")
+	cmd.do("color ${6:red}, rna_C; ")
+	cmd.do("color ${7:gray40}, rna_G;")
+	cmd.do("color ${8:palecyan}, rna_U;")
+	cmd.do("color ${9:brown}, dna_T;")
+	cmd.do("as cartoon;")
+	${0}
+# The code provides a cartoon of the loaded nucleic acid that has the ladder rungs replaced by filled rings that are colored by atom type. The code can be applied to any nucleic acid. It is derived from the FR shortuct in pymolshortcuts.py.
+snippet nucleicAcidCartoonFilledRings
+	cmd.do("bg_color white;")
+	cmd.do("show sticks;")
+	cmd.do("set cartoon_ring_mode, 3;")
+	cmd.do("set cartoon_ring_finder, 1;")
+	cmd.do("set cartoon_ladder_mode, 1;")
+	cmd.do("set cartoon_nucleic_acid_mode, 4;")
+	cmd.do("set cartoon_ring_transparency, 0.5;")
+	cmd.do("as cartoon;")
+	${0}
+# This code make as standard base stacking diagram with ball and stick representation.
+snippet basePairStacking
+	cmd.do("delete all;")
+	cmd.do("fetch 4PCO, type=pdb, async=0;")
+	cmd.do("select G2G3, ( ((resi 2 or resi 3) and chain A) or ((resi 8 or resi 9) and chain B));")
+	cmd.do("remove not G2G3;")
+	cmd.do("bg_color white;")
+	cmd.do("show sticks;")
+	cmd.do("set stick_radius=0.14;")
+	cmd.do("set stick_ball, on; ")
+	cmd.do("set stick_ball_ratio,1.9;")
+	cmd.do("set_view (-0.75,0.09,0.66,-0.2,0.92,-0.35,-0.64,-0.39,-0.67,-0.0,-0.0,-43.7,7.24,9.55,11.78,29.46,57.91,-20.0);")
+	cmd.do("remove name H*;")
+	cmd.do("select carbon1, element C and (resi 3 or resi 8) ")
+	cmd.do("# select lower base pair;")
+	cmd.do("select carbon2, element C and (resi 2 or resi 9) ")
+	cmd.do("#select upper base pair;")
+	cmd.do("color gray70, carbon1;")
+	cmd.do("color gray10, carbon2;")
+	cmd.do("show sticks;")
+	cmd.do("space cmyk;")
+	cmd.do("distance hbond1, /4PCO//B/U`9/N3,/4PCO//A/G`2/O6;")
+	cmd.do("distance hbond2, /4PCO//B/U`9/O2,/4PCO//A/G`2/N1;")
+	cmd.do("distance hbond3, /4PCO//A/U`3/N3,/4PCO//B/G`8/O6;")
+	cmd.do("distance hbond4, /4PCO//A/U`3/O2,/4PCO//B/G`8/N1;")
+	cmd.do("color black, hbond1;")
+	cmd.do("color black, hbond2;")
+	cmd.do("color gray70, hbond3;")
+	cmd.do("color gray70, hbond4;")
+	cmd.do("show nb_spheres;")
+	cmd.do("set nb_spheres_size, 0.35;")
+	cmd.do("hide labels;")
+	cmd.do("ray 1600,1000;")
+	cmd.do("png 4PCO.png;")
+	${0}
+# This code colors by the nucleotides by base seqence. The backcone is shown as a flatten ribbon with rolled edges that give the dumbell effect. The code can be applied to any nucleic acid. The code is dervied from the CR and DU shortcuts.
+snippet nucleicAcidDumbellCartoonColorbySequence
+	cmd.do("bg_color white;")
+	cmd.do("set cartoon_oval_length, ${1:1.85}")
+	cmd.do("set cartoon_oval_width, ${2:0.5}")
+	cmd.do("cartoon oval;")
+	cmd.do("cartoon dumbbell;")
+	cmd.do("set cartoon_dumbbell_width, 0.2;")
+	cmd.do("set cartoon_dumbbell_radius, 0.4;")
+	cmd.do("set cartoon_ring_mode, ${3:3};")
+	cmd.do("# set the color of the backbone oval")
+	cmd.do("set cartoon_nucleic_acid_color, ${4:blue};")
+	cmd.do("select rna_A, resn A;")
+	cmd.do("select rna_C, resn C;")
+	cmd.do("select rna_G, resn G;")
+	cmd.do("select rna_U, resn U;")
+	cmd.do("select dna_T, resn T;")
+	cmd.do("color ${5:yellow}, rna_A;")
+	cmd.do("color ${6:red}, rna_C; ")
+	cmd.do("color ${7:gray40}, rna_G;")
+	cmd.do("color ${8:palecyan}, rna_U;")
+	cmd.do("color ${9:brown}, dna_T;")
+	cmd.do("as cartoon;")
+	${0}
+# Set keyboard shortcut by mapping F1 to stereo.
+snippet stereokb
+	cmd.set_key(\"F1\",lambda:cmd.stereo({\"on\":0,\"off\":1}[cmd.get(\"stereo\")]));"
+# Print to the screen the settings and their current parameter values.
+snippet listSettings2
+	list = setting.get_name_list();[print(\"%s => %s\" % (name, setting.get_setting_text(name))) for name in list];"
+# Print to the screen the settings and their current parameter values. This is the more compact version.
+snippet listSettings
+	[print(\"%s => %s\" % (name, setting.get_setting_text(name))) for name in setting.get_name_list()];"
+# Print to the screen as labels the 21 font ids in their corresponding fonts in a grid. Each label is an object and appears in the internal gui. You can turn on and off the display of specific fonts.
+snippet displayFonts
+	cmd.do("python;")
+	cmd.do("for i in range(1,21):")
+	cmd.do("     name = \"label%d\" % i;")
+	cmd.do("     cmd.pseudoatom(name, label=\"label font id %d\" % i, pos=(0,0,0));")
+	cmd.do("     cmd.set(\"label_font_id\", i, name);")
+	cmd.do("python end;")
+	cmd.do("cmd.set(\"label_size\", 50);")
+	cmd.do("cmd.set(\"grid_mode\");")
+	${0}
+# Create a list of objects in the internal gui and print this list to the screen.
+snippet listObjects
+	cmd.do("objList = cmd.get_names(\"objects\");print(objList);")
+	${0}
+# Print a list of protein--ligand distances. Code by Dan Kulp. Updated for Python3.
+snippet listLigandProteinDistances
+	from pymol import cmd
+	"\"\"\"
+	"Find all distances betwen all ligand atoms and all protein atoms. 
+	"
+	"Adapted and updated from script by Dan Kulp posted here
+	"https://sourceforge.net/p/pymol/mailman/message/10097804/
+	"
+	"There are probably better solutions like finding just the 
+	"distances to proein atoms within a certain distance from 
+	"the ligand.
+	"
+	"Due to the nested for loops, this script is takes several second
+	"to run on a medium-sized human protein. This script is a 
+	"good candidate for vectorization. 
+	"
+	"It is also a good candiate for becoming a function and a shortcut. 
+	"
+	"\"\"\"
+	"
+	"# customize these lines to your protein.
+	"cmd.fetch(\"6NEC\")
+	"cmd.select(\"prot\",\"not resn XIN and not resn HOH and not chain C\")
+	"cmd.select(\"lig\", \"resn XIN and not chain C\")
+	"
+	"dist_list = {}
+	"pro_atoms = cmd.get_model(\"prot\")
+	"lig_atoms = cmd.get_model(\"lig\")
+	"
+	"for l_at in lig_atoms.atom:
+	"    for p_at in pro_atoms.atom:
+	"        dist_list[str(l_at.resn) +
+	"                     \":\" +
+	"                      str(l_at.resi) +
+	"                      \" \" +
+	"                      l_at.name +
+	"                      \" ---- \" + 
+	"                      str(p_at.resn) +
+	"                      \":\" +
+	"                      str(p_at.resi) +
+	"                      \" \" +
+	"                      p_at.name] = cmd.dist(\"foo\", 
+	"                                            \"index \" +
+	"                                            str(l_at.index),\"index \" + str(p_at.index))
+	"        cmd.delete(\"foo\")
+	"print(\"List of all pairwise ligand--protein atom-atom distances:\")
+	"# [print(\"Distance of \" + d + \" is \" + str(dist_list[d])) for d in dist_list.keys()]
+	"
+	"# More compact print statement. Need an f-string format statement.
+	"[print( d + \" \" + str(dist_list[d])) for d in dist_list.keys()]"
+# This code shows the cartoon backbone tube as 65% transparent. It hides the rungs of the cartoon. It shows all of the non-H atoms are sticks. The motivation is to have the cartoon highlight the backbone without dominanting the scene.
+snippet nucleicAcidBackboneTubesSticks
+	cmd.do("set bg_rgb, white;")
+	cmd.do("hide everything, all;")
+	cmd.do("# Change to the name of your molecular object.;")
+	cmd.do("show cartoon, ${1:3nd3};")
+	cmd.do("set cartoon_sampling,1;")
+	cmd.do("set cartoon_tube_radius, 0.5;")
+	cmd.do("set cartoon_ladder_mode, 0;")
+	cmd.do("# Set to 0.0 to turn off transparency;")
+	cmd.do("set cartoon_transparency, ${2:0.65};")
+	cmd.do("# The default strick radisu is 0.25. I think it is too thick.;")
+	cmd.do("set stick_radius ${3:0.12};")
+	cmd.do("show sticks;")
+	cmd.do("hide sticks, element H;")
+	${0}
+# The code expands the asymmetric unit. It like the generate symmetry mates command but it provides more control over the prefix name of the symmetry mates and the addition of unique segment identifiers for each symmetry mate. The usage: symexp prefix, object, (selection), cutoff, segidFlag. The cutoff is in Angstroms. The segidFlag set to 1 will add unique segids. For related functions, see SC***.
+snippet symexp
+	cmd.do("symexp ${1:symm}, ${2:3fa0}, (${2:3fa0}), ${3:20},${4:1};")
+	${0}
+# Adds the function draw_axis(). Used to draw a symmetry axis, a ncs axis, or scale bar to a scene.
+snippet addAxis
+	python
+	"from pymol.cgo import *    # get constants
+	"from pymol import cmd
+	"
+	"import math
+	"
+	"class Counter:
+	"    \"\"\"
+	"    draw_line
+	"    source https://www.pymolwiki.org/index.php/Symmetry_Axis
+	"    
+	"    Pymol script copyright Matthew O\"Meara and Xavier Ambroggio 2007
+	"    
+	"    Under  GNU Free Documentation License 1.2
+	"    
+	"    Example:
+	"    
+	"    draw_axis(x=18.232, y=17.150, z=9.488,i=-.226639, j=0.708772, k=-.668039, r=1, b=0, g=0, width=1, length=100)
+	"    
+	"    Updated 15 June 2020 
+	"    Blaine Mooers
+	"    
+	"    Notes:
+	"    1) Could be useful for the adding a symmery axis, a ncs axis, or scale bar to a scene.
+	"    2) The postion (xyz) is the middle of the line, not one end as expected for a vector.
+	"    3) Another example: draw_axis(x=0, y=0, z=0,i=0, j=0, k=1, r=1, b=0, g=0, width=300, length=96) 
+	"    4) Changed print statement to Python3 print function.
+	"    5) Replaced cmd.extend() with function generator.
+	"    \"\"\"
+	"   def __init__(self):
+	"       self.state = 1
+	"counter = Counter()
+	"
+	"@cmd.extend
+	"def draw_axis(x=None, y=None, z=None, i=None, j=None, k=None, length=20.0, r=1.0, g=1.0, b=1.0, width=1.0 ):
+	"   if x == None or y == None or z == None or i == None or j == None or k== None :
+	"       print(\"Usage: draw_axis x,y,z, i,k,j, length, r,g,b, width\")
+	"       print(\"draw a line centered at (x,y,z) with the direction vector (i,j,k)\")
+	"       print(\"length, color (r,g,b), and width arguments are optional\")
+	"#        print \"For a fun example of the command, run draw_axis_example\"
+	"   else :
+	"       x,y,z = float(x), float(y), float(z)
+	"       i,j,k = float(i), float(j), float(k)
+	"       r,g,b = float(r), float(g), float(b)
+	"       width = float(width)
+	"       length = float(length) / 2.0
+	"
+	"       x1,y1,z1 = (x+i*length,y+j*length,z+k*length)
+	"       x2,y2,z2 = (x-i*length,y-j*length,z-k*length)
+	"
+	"       obj = [
+	"           LINEWIDTH, width,
+	"           BEGIN, LINES,
+	"
+	"           COLOR,   r,  g,  b,
+	"           VERTEX, x1, y1, z1,
+	"           VERTEX, x2, y2, z2,
+	"
+	"           END
+	"           ]
+	"
+	"       cmd.load_cgo(obj,\"axis\"+str(counter.state))
+	"       counter.state += 1
+	"python end"
+# Wait until all current commands have been executed. A timeout ensures that that command ecentually returns.
+snippet synch
+	cmd.sync(timeout=${1:1.0},poll=${2:0.05});"
+# Add or substract a residue number offset.
+snippet renumResi
+	cmd.do("alter ${1:3fa0}, resi=str(int(resi)+${2:100});sort;")
+	${0}
+# Add or substract a atom number offset.
+snippet renumAtoms
+	cmd.do("alter {$1:3fa0}, ID=ID+${2:100};")
+	cmd.do("sort;")
+	${0}
+# Rename a chain. 
+snippet renameChain
+	cmd.do("alter ${1:3fa0} and chain ${2:A}, chain=${3:\"C\"};")
+	cmd.do("sort;")
+	${0}
+# Print the atom name and number of a residue.
+snippet printAtomNumbers
+	cmd.do("iterate (resi ${1:1}), print(name + \" %i${1:5}\" % ID);")
+	${0}
+# Print the atom names of a residue.
+snippet printAtomNames
+	cmd.do("iterate (resi ${1:101}), print(name);")
+	${0}
+# Print the bfactors of a residue.
+snippet printBfactors
+	cmd.do("iterate (resi ${1:101}), print(name + \" %.2f\" % b);")
+	${0}
+# Print the van der Waals radii of the atoms in of a residue.
+snippet printVDWradii
+	cmd.do("iterate (resi ${1:101}), print(name + \" %.2f\" % vdw);")
+	${0}
+# Print the coordinates of the atoms in a residue.
+snippet printCoordinates
+	stored.coords = [];
+	"iterate_state 1, (resi ${1:101}), stored.coords.append([x,y,z]);
+	"[print(i) for i in stored.coords];"
+# Print the atom names and coordinates of the atoms in a residue.
+snippet printNamesCoordinates
+	cmd.do("stored.names = [];  iterate_state 1, (resi ${1:101}), stored.names.append([name]); ")
+	cmd.do("stored.coords = []; iterate_state 1, (resi ${1:101})), stored.coords.append([x,y,z]); ")
+	cmd.do("[print(i,j) for i,j in zip(stored.names, stored.coords)];")
+	${0}
+# Print the atom names as tuples and coordinates of the atoms in a residue as a list.
+snippet printNamesCoordinates
+	cmd.do("stored.coords = []; iterate_state 1, (resi ${1:101}), stored.coords.append([x,y,z]); ")
+	cmd.do("stored.names = [];  iterate_state 1, (resi ${1:101}), stored.names.append([name]);")
+	cmd.do("stored.names3 = [tuple(i) for i in stored.names];")
+	cmd.do("[print(i,j) for i,j in(zip(stored.names3, stored.coords)];")
+	${0}
+# Source block template in org-mode with emacs-jupyter package.
+snippet emacsjupyterSourceBlock
+	#+BEGIN_SRC jupyter-python :session py :kernel pymol.python :exports both :results raw drawer 
+	"from pymol import cmd
+	"cmd.do(\"reinitialize\")
+	"cmd.bg_color(\"white\")
+	"cmd.do(\"fetch 6VXX\")
+	"cmd.do(\"zoom (resi 614 and chain A)\")
+	"cmd.label(selection=\"chain A and resi 614 and name CB\", expression=\"\"%s-%s\" % (resn,resi)\")
+	"cmd.do(\"set label_color, black; set label_size, 48\")
+	"cmd.do(\"set stick_radius, 0.12\")
+	"cmd.do(\"hide cartoon; show sticks\")
+	"cmd.do(\"set ray_shadows, 0\")
+	"cmd.do(\"draw\")
+	"cmd.do(\"png /Users/blaine/D614Gipython3.png, 600, 360, dpi=600\")
+	"from IPython.display import Image
+	"from IPython.core.display import HTML
+	"PATH = \"/Users/blaine/\"
+	"Image(filename = PATH + \"D614Gipython3.png\", width=600, unconfined=True)
+	"#+END_SRC
+	"
+	"#+RESULTS:"
+# Source block template in org-mode with the ob-ipython package.
+snippet obipythonSourceBlock
+	#+BEGIN_SRC ipython :session py :kernel pymol.python :exports both :results raw drawer 
+	"from pymol import cmd
+	"cmd.do(\"reinitialize\")
+	"cmd.bg_color(\"white\")
+	"cmd.do(\"fetch 6VXX\")
+	"cmd.do(\"zoom (resi 614 and chain A)\")
+	"cmd.label(selection=\"chain A and resi 614 and name CB\", expression=\"\"%s-%s\" % (resn,resi)\")
+	"cmd.do(\"set label_color, black; set label_size, 48\")
+	"cmd.do(\"set stick_radius, 0.12\")
+	"cmd.do(\"hide cartoon; show sticks\")
+	"cmd.do(\"set ray_shadows, 0\")
+	"cmd.do(\"draw\")
+	"cmd.do(\"png /Users/blaine/D614Gipython3.png, 600, 360, dpi=600\")
+	"from IPython.display import Image
+	"from IPython.core.display import HTML
+	"PATH = \"/Users/blaine/\"
+	"Image(filename = PATH + \"D614Gipython3.png\", width=600, unconfined=True)
+	"#+END_SRC
+	"
+	"#+RESULTS:"
+# Import the cmd class from the pymol api.
+snippet importPyMOLcmd
+	from pymol import cmd"
+# Imports for using IPython to display images loaded from disk in notebook cells.
+snippet importIPythonDisplay
+	from IPython.display import Image
+	"from IPython.core.display import HTML
+	"PATH = \"/Users/blaine/\""
+# Load image.
+snippet loadImage
+	Image(filename = PATH +\"${1:5da6orient}.png\", width=${2:600}, height=${3:1000}, unconfined=True);"
+# Imports needed for most uses of pymol in Jupyter. Combination of importPyMOL and importPythonDisplay.
+snippet imports4PyMOLjupyter
+	from pymol import cmd
+	"from IPython.display import Image
+	"from IPython.core.display import HTML"
+# Python version of getCoordinates snippets. Note that the python2 print statement stills works  in pml scripts.
+snippet getCoordinatespy
+	print(cmd.get_atom_coords(${1:\\\"/4PCO//B/G`8/OP2\\\"}));"
+# Python version of the command to print the sequence from a PDB file in the fasta format.
+snippet fastapy
+	# Get the sequences of all molecular objects.;
+	"print(cmd.get_fastastr(\"${1:all}\"));"
+# Display three electron density maps as isomesh.
+snippet fetchThreeMaps
+	cmd.do("fetch ${1:4dgr}, type=pdb;")
+	cmd.do("# Make sure to rename map file so that ;")
+	cmd.do("# the root filename differs from pdb root filename;")
+	cmd.do("fetch ${1:4dgr},  ${1:4dgr}_2fofc, type=2fofc;")
+	cmd.do("fetch ${1:4dgr}, ${1:4dgr}_fofc, type=fofc;")
+	cmd.do("select  ${2:glycan}, ${3:resid 200 or resid 469:477};")
+	cmd.do("isomesh ${4:mesh1}, 2fofc, 1.0, ${2:glycan};")
+	cmd.do("color density, ${4:mesh1};")
+	cmd.do("isomesh ${5:mesh2}, fofc, 3.0, ${2:glycan};")
+	cmd.do("color green, ${5:mesh2};")
+	cmd.do("isomesh ${6:mesh3}, fofc, -3.0, ${2:glycan};")
+	cmd.do("color red, ${6:mesh3};")
+	${0}
+# Scale the radius and color of atoms as spheres by property in the B-value column.
+snippet scaleRadiusColorpy
+	cmd.do(\"bg_color white;\")
+	"cmd.do(\"hide everything;\")
+	"cmd.do(\"show spheres;\")
+	"cmd.do(\"set  stick_radius = 0.1;\")
+	"cmd.do(\"hide everything, HET;\")
+	"cmd.do(\"show spheres, HET;\")
+	"cmd.do(\"set sphere_quality=3;\")
+	"cmd.do(\"show sticks, resi 1102;\")
+	"cmd.do(\"from pymol import stored;\")
+	"cmd.do(\"# set the stored array equal to the b−values or use your own values; \")
+	"cmd.do(\"stored.bb = [ ];\")
+	"cmd.do(\"iterate all, stored.bb.append(b);\")
+	"# scale the b−values;
+	"cmd.do(\"M = max(stored.bb);\")
+	"cmd.do(\"scaledBB = map(lambda x: float (x/M), stored.bb);\")
+	"count = 0;
+	"# set the sphere radii independently;
+	"for x in scaledBB:
+	"     cmd.set(\"sphere_scale\", x ,\"ID %s\"%count)
+	"     count = count + 1
+	"cmd.do(\"spectrum b, selection=4gdx;\")
+	"cmd.do(\"space cmyk;\")
+	"cmd.do(\"set specular_intensity , 0.25;\")"
+# Python block insert for scaleRadiusColorpy.
+snippet scaleRadiusColorPythonInsertpy
+	# scale the b−values;
+	"M = max(stored.bb);
+	"scaledBB = map(lambda x: float (x/M), stored.bb);
+	"count = 0;
+	"# set the sphere radii independently;
+	"#[(cmd.set(\"sphere_scale\", x ,\"ID %s\"%count); count = count + 1) for x in scaledBB]
+	"for x in scaledBB:
+	"  cmd.set(\"sphere_scale\", x ,\"ID %s\"%count)
+	"  count = count + 1"
+# Save png flle with timestamp.
+snippet spngpy
+	import datetime;
+	"from pymol import cmd; 
+	"DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");
+	"s = str(DT); 
+	"cmd.save(stemName+s+\".png\"); "
+# Print to the screen as labels the 21 font ids in their corresponding fonts in a grid. Each label is an object and appears in the internal gui. You can turn on and off the display of specific fonts.
+snippet displayFontspy
+	for i in range(1,21):
+	"     name = \"label%d\" % i;
+	"     cmd.pseudoatom(name, label=\"label font id %d\" % i, pos=(0,0,0));
+	"     cmd.set(\"label_font_id\", i, name);
+	"cmd.set(\"label_size\", 50);
+	"cmd.set(\"grid_mode\");"
+# AveBResiX, prints the residue number and the average bfactor. Uses reduce and lambda, builtin Python functional porgramming functions. Note that you need to convert the length of the list of Bfactors from an integer.
+snippet aveB4resiXpy
+	# AveBResiX, prints the residue number and the average bfactor.;
+	"# Uses reduce and lambda, builtin Python functional porgramming functions.;
+	"# Note that you need to convert the length of the list of Bfactors from an integer to a float before division into the sum.;
+	"Bfactors = [];
+	"# edit the selection below, which is a range of residue numbers here.;
+	"iterate (resi ${1:133}), Bfactors.append(b);
+	"print( \"Average B-factor of residue \", %{1:133} , \"   = \", \"%.2f\" %(reduce(lambda x, y: x + y, Bfactors) / float(len(Bfactors))) );"
+# Display all symmetry mates in four unit cells stacked long a-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc441
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 4, 4, 1, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 4 x 4 x4 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc444
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 4, 4, 4, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 4 x 1 x 4 array. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc414
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 4, 1, 4, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in in a 1 x 4 x 4 array. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc144
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 1, 4, 4, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Display all symmetry mates in a 4 x 4 x4 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.
+snippet sc444
+	cmd.do("run $HOME/${1:Scripts/PyMOLscripts/}supercell.py;")
+	cmd.do("supercell 4, 4, 4, ,  ${2:orange},  ${3:supercell1}, 1;")
+	${0}
+# Save dae flle with timestamp.
+snippet sdaepy
+	import datetime;
+	"DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");
+	"s = str(DT); 
+	"cmd.save(stemName+s+\".dae\"); "
+# Save electron density map flle with timestamp.
+snippet sccp4py
+	import datetime;
+	"from pymol import cmd; 
+	"DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");
+	"s = str(DT); 
+	"cmd.save(stemName+s+\".ccp4\"); "
+# Save an aln flle with a timestamp. Python version.
+snippet salnpy
+	import datetime;
+	"from pymol import cmd;
+	"DT =datetime.datetime.now().strftime(\"yr%Ymo%mday%dhr%Hmin%M\");
+	"s = str(DT);
+	"cmd.save(stemName+s+\".aln\");"
+# Print list of active pymolrc files.
+snippet lspymolrcpy
+	print(invocation.options.deferred);"
+# Print document string of a function.
+snippet printDocpy
+	print(${1:my_func}.__doc__);"
+# Print the path to the currently used PyMOL binary.
+snippet printPathpy
+	print(pymol.__path__)"
+# Return to the command history window the docstrings for all of the functions in a module.
+snippet pymoldocspy
+	[help(i) for i in dir(pymol)];"
+# Ambient occlussion in grayscale.
+snippet aobw
+	cmd.do("# Note: requires the gscale() function from pymolshortcuts.py.")
+	cmd.do("# Download this script from http://GitHub.com/MooersLab/pymolshortcuts.")
+	cmd.do("# Load the functions from this script with the command \"run pymolshortcuts.py\"")
+	cmd.do("set_color oxygen, [1.0,0.4,0.4];")
+	cmd.do("set_color nitrogen, [0.5,0.5,1.0];")
+	cmd.do("remove solvent;")
+	cmd.do("as spheres;")
+	cmd.do("util.cbaw;")
+	cmd.do("bg white;")
+	cmd.do("gscale();")
+	cmd.do("set light_count,10;")
+	cmd.do("set spec_count,1;")
+	cmd.do("set shininess, 10;")
+	cmd.do("set specular,0.25;")
+	cmd.do("set ambient,0;")
+	cmd.do("set direct,0;")
+	cmd.do("set reflect,1.5;")
+	cmd.do("set ray_shadow_decay_factor, 0.1;")
+	cmd.do("set ray_shadow_decay_range, 2;")
+	cmd.do("set depth_cue, 0;")
+	cmd.do("ray;")
+	${0}
+# Ambient occlussion with carbon atoms colored black.
+snippet aod
+	cmd.do("set_color oxygen, [1.0,0.4,0.4];")
+	cmd.do("set_color nitrogen, [0.5,0.5,1.0];")
+	cmd.do("remove solvent;")
+	cmd.do("as spheres;")
+	cmd.do("util.cbaw;")
+	cmd.do("bg white;")
+	cmd.do("set light_count,10;")
+	cmd.do("set spec_count,1;")
+	cmd.do("set shininess, 10;")
+	cmd.do("set specular,0.25;")
+	cmd.do("set ambient,0;")
+	cmd.do("set direct,0;")
+	cmd.do("set reflect,1.5;")
+	cmd.do("set ray_shadow_decay_factor, 0.1;")
+	cmd.do("set ray_shadow_decay_range, 2;")
+	cmd.do("color gray00, symbol c")
+	cmd.do("color gray90, symbol h")
+	cmd.do("set depth_cue, 0;")
+	cmd.do("ray;")
+	${0}
+# Ambient occlussion in grayscale with carbon atoms colored black. Note: requires the gscale() function from pymolshortcuts.py. Download this script from http://GitHub.com/MooersLab/pymolshortcuts. Load the functions from this script with the following command:  cmd.do('run pymolshortcuts.py').
+snippet aodbw
+	cmd.do("set_color oxygen, [1.0,0.4,0.4];")
+	cmd.do("set_color nitrogen, [0.5,0.5,1.0];")
+	cmd.do("remove solvent;")
+	cmd.do("as spheres;")
+	cmd.do("util.cbaw;")
+	cmd.do("bg white;")
+	cmd.do("gscale();")
+	cmd.do("set light_count,10;")
+	cmd.do("set spec_count,1;")
+	cmd.do("set shininess, 10;")
+	cmd.do("set specular,0.25;")
+	cmd.do("set ambient,0;")
+	cmd.do("set direct,0;")
+	cmd.do("set reflect,1.5;")
+	cmd.do("set ray_shadow_decay_factor, 0.1;")
+	cmd.do("set ray_shadow_decay_range, 2;")
+	cmd.do("set depth_cue, 0;")
+	cmd.do("ray;")
+	${0}
+# Adds the function draw_axis(). Could be useful for the adding a symmery axis, a ncs axis, or scale bar to a scene.
+snippet addAxispy
+	from pymol.cgo import *    # get constants
+	"from pymol import cmd
+	"
+	"import math
+	"
+	"class Counter:
+	"    \"\"\"
+	"    draw_line
+	"    source https://www.pymolwiki.org/index.php/Symmetry_Axis
+	"    
+	"    Pymol script copyright Matthew O\"Meara and Xavier Ambroggio 2007
+	"    
+	"    Under  GNU Free Documentation License 1.2
+	"    
+	"    Example:
+	"    
+	"    draw_axis(x=18.232, y=17.150, z=9.488,i=-.226639, j=0.708772, k=-.668039, r=1, b=0, g=0, width=1, length=100)
+	"    
+	"    Updated 15 June 2020 
+	"    Blaine Mooers
+	"    
+	"    Notes:
+	"    1) Could be useful for the adding a symmery axis, a ncs axis, or scale bar to a scene.
+	"    2) The postion (xyz) is the middle of the line, not one end as expected for a vector.
+	"    3) Another example: draw_axis(x=0, y=0, z=0,i=0, j=0, k=1, r=1, b=0, g=0, width=300, length=96) 
+	"    4) Changed print statement to Python3 print function.
+	"    5) Replaced cmd.extend() with function generator.
+	"    \"\"\"
+	"   def __init__(self):
+	"       self.state = 1
+	"counter = Counter()
+	"
+	"@cmd.extend
+	"def draw_axis(x=None, y=None, z=None, i=None, j=None, k=None, length=20.0, r=1.0, g=1.0, b=1.0, width=1.0 ):
+	"   if x == None or y == None or z == None or i == None or j == None or k== None :
+	"       print(\"Usage: draw_axis x,y,z, i,k,j, length, r,g,b, width\")
+	"       print(\"draw a line centered at (x,y,z) with the direction vector (i,j,k)\")
+	"       print(\"length, color (r,g,b), and width arguments are optional\")
+	"#        print \"For a fun example of the command, run draw_axis_example\"
+	"   else :
+	"       x,y,z = float(x), float(y), float(z)
+	"       i,j,k = float(i), float(j), float(k)
+	"       r,g,b = float(r), float(g), float(b)
+	"       width = float(width)
+	"       length = float(length) / 2.0
+	"
+	"       x1,y1,z1 = (x+i*length,y+j*length,z+k*length)
+	"       x2,y2,z2 = (x-i*length,y-j*length,z-k*length)
+	"
+	"       obj = [
+	"           LINEWIDTH, width,
+	"           BEGIN, LINES,
+	"
+	"           COLOR,   r,  g,  b,
+	"           VERTEX, x1, y1, z1,
+	"           VERTEX, x2, y2, z2,
+	"
+	"           END
+	"           ]
+	"
+	"       cmd.load_cgo(obj,\"axis\"+str(counter.state))
+	"       counter.state += 1"
+# Apply grayscale coloring using a grayscale version of the PyMOL colors for the elements. This is a Python function. It is invoked in a script file via gscale(). There is a corresponding gscale shortcut in pymolshortcuts.py that is invoked in a pml script by entering gsale if the functions in pymolshortcuts.py have been loaded with the run pymolshortcuts.py command.
+snippet grayscalepy
+	def grayscale(selection=\"all\"):
+	"    \"\"\"Apply by entering grayscale()\"\"\"
+	"    cmd.color(\"grey64\", \"elem Ac\")
+	"    cmd.color(\"grey67\", \"elem Al\")
+	"    cmd.color(\"grey39\", \"elem Am\")
+	"    cmd.color(\"grey46\", \"elem Sb\")
+	"    cmd.color(\"grey75\", \"elem Ar\")
+	"    cmd.color(\"grey58\", \"elem As\")
+	"    cmd.color(\"grey33\", \"elem At\")
+	"    cmd.color(\"grey56\", \"elem Ba\")
+	"    cmd.color(\"grey40\", \"elem Bk\")
+	"    cmd.color(\"grey87\", \"elem Be\")
+	"    cmd.color(\"grey40\", \"elem Bi\")
+	"    cmd.color(\"grey20\", \"elem Bh\")
+	"    cmd.color(\"grey77\", \"elem B\")
+	"    cmd.color(\"grey26\", \"elem Br\")
+	"    cmd.color(\"grey86\", \"elem Cd\")
+	"    cmd.color(\"grey76\", \"elem Ca\")
+	"    cmd.color(\"grey34\", \"elem Cf\")
+	"    cmd.color(\"grey77\", \"elem C\")
+	"    cmd.color(\"grey98\", \"elem Ce\")
+	"    cmd.color(\"grey17\", \"elem Cs\")
+	"    cmd.color(\"grey70\", \"elem Cl\")
+	"    cmd.color(\"grey60\", \"elem Cr\")
+	"    cmd.color(\"grey64\", \"elem Co\")
+	"    cmd.color(\"grey54\", \"elem Cu\")
+	"    cmd.color(\"grey42\", \"elem Cm\")
+	"    cmd.color(\"grey89\", \"elem D\")
+	"    cmd.color(\"grey19\", \"elem Db\")
+	"    cmd.color(\"grey79\", \"elem Dy\")
+	"    cmd.color(\"grey29\", \"elem Es\")
+	"    cmd.color(\"grey67\", \"elem Er\")
+	"    cmd.color(\"grey85\", \"elem Eu\")
+	"    cmd.color(\"grey28\", \"elem Fm\")
+	"    cmd.color(\"grey93\", \"elem F\")
+	"    cmd.color(\"grey8\", \"elem Fr\")
+	"    cmd.color(\"grey82\", \"elem Gd\")
+	"    cmd.color(\"grey60\", \"elem Ga\")
+	"    cmd.color(\"grey52\", \"elem Ge\")
+	"    cmd.color(\"grey80\", \"elem Au\")
+	"    cmd.color(\"grey68\", \"elem Hf\")
+	"    cmd.color(\"grey20\", \"elem Hs\")
+	"    cmd.color(\"grey96\", \"elem He\")
+	"    cmd.color(\"grey75\", \"elem Ho\")
+	"    cmd.color(\"grey89\", \"elem H\")
+	"    cmd.color(\"grey49\", \"elem In\")
+	"    cmd.color(\"grey16\", \"elem I\")
+	"    cmd.color(\"grey29\", \"elem Ir\")
+	"    cmd.color(\"grey48\", \"elem Fe\")
+	"    cmd.color(\"grey65\", \"elem Kr\")
+	"    cmd.color(\"grey76\", \"elem La\")
+	"    cmd.color(\"grey19\", \"elem Lr\")
+	"    cmd.color(\"grey34\", \"elem Pb\")
+	"    cmd.color(\"grey60\", \"elem Li\")
+	"    cmd.color(\"grey48\", \"elem Lu\")
+	"    cmd.color(\"grey83\", \"elem Mg\")
+	"    cmd.color(\"grey52\", \"elem Mn\")
+	"    cmd.color(\"grey20\", \"elem Mt\")
+	"    cmd.color(\"grey23\", \"elem Md\")
+	"    cmd.color(\"grey72\", \"elem Hg\")
+	"    cmd.color(\"grey62\", \"elem Mo\")
+	"    cmd.color(\"grey93\", \"elem Nd\")
+	"    cmd.color(\"grey85\", \"elem Ne\")
+	"    cmd.color(\"grey43\", \"elem Np\")
+	"    cmd.color(\"grey67\", \"elem Ni\")
+	"    cmd.color(\"grey69\", \"elem Nb\")
+	"    cmd.color(\"grey25\", \"elem N\")
+	"    cmd.color(\"grey23\", \"elem No\")
+	"    cmd.color(\"grey36\", \"elem Os\")
+	"    cmd.color(\"grey44\", \"elem O\")
+	"    cmd.color(\"grey33\", \"elem Pd\")
+	"    cmd.color(\"grey57\", \"elem P\")
+	"    cmd.color(\"grey82\", \"elem Pt\")
+	"    cmd.color(\"grey37\", \"elem Pu\")
+	"    cmd.color(\"grey40\", \"elem Po\")
+	"    cmd.color(\"grey35\", \"elem K\")
+	"    cmd.color(\"grey95\", \"elem Pr\")
+	"    cmd.color(\"grey90\", \"elem Pm\")
+	"    cmd.color(\"grey52\", \"elem Pa\")
+	"    cmd.color(\"grey35\", \"elem Ra\")
+	"    cmd.color(\"grey46\", \"elem Rn\")
+	"    cmd.color(\"grey43\", \"elem Re\")
+	"    cmd.color(\"grey39\", \"elem Rh\")
+	"    cmd.color(\"grey27\", \"elem Rb\")
+	"    cmd.color(\"grey47\", \"elem Ru\")
+	"    cmd.color(\"grey19\", \"elem Rf\")
+	"    cmd.color(\"grey89\", \"elem Sm\")
+	"    cmd.color(\"grey90\", \"elem Sc\")
+	"    cmd.color(\"grey20\", \"elem Sg\")
+	"    cmd.color(\"grey66\", \"elem Se\")
+	"    cmd.color(\"grey80\", \"elem Si\")
+	"    cmd.color(\"grey75\", \"elem Ag\")
+	"    cmd.color(\"grey46\", \"elem Na\")
+	"    cmd.color(\"grey71\", \"elem Sr\")
+	"    cmd.color(\"grey76\", \"elem S\")
+	"    cmd.color(\"grey60\", \"elem Ta\")
+	"    cmd.color(\"grey53\", \"elem Tc\")
+	"    cmd.color(\"grey51\", \"elem Te\")
+	"    cmd.color(\"grey81\", \"elem Tb\")
+	"    cmd.color(\"grey39\", \"elem Tl\")
+	"    cmd.color(\"grey59\", \"elem Th\")
+	"    cmd.color(\"grey61\", \"elem Tm\")
+	"    cmd.color(\"grey48\", \"elem Sn\")
+	"    cmd.color(\"grey75\", \"elem Ti\")
+	"    cmd.color(\"grey50\", \"elem W\")
+	"    cmd.color(\"grey47\", \"elem U\")
+	"    cmd.color(\"grey65\", \"elem V\")
+	"    cmd.color(\"grey54\", \"elem Xe\")
+	"    cmd.color(\"grey55\", \"elem Yb\")
+	"    cmd.color(\"grey91\", \"elem Y\")
+	"    cmd.color(\"grey51\", \"elem Zn\")
+	"    cmd.color(\"grey81\", \"elem Zr\")"
+# Import for loading the functions in the pymolshortcuts.py file. These functions can be run inside cmd.do() without the trailing (). For example, cmd.do('rv').
+snippet importShortcuts
+	cmd.do(\"run /Users/blaine/Scripts/PyMOLScripts/pymolshortcuts.py\")"
+# Run the AO function from the pymolshortcuts.py file to generate the photorealistic effect.
+snippet AO
+	cmd.do(\"AO\")"
+# Run the AOBW function from the pymolshortcuts.py file to generate photorealistic effect in grayscale.
+snippet AOBW
+	cmd.do(\"AOBW\")"
+# Run the AOD function from the pymolshortcuts.py file to generate photorealistic effect with carbons colored black.
+snippet AOD
+	cmd.do(\"AOD\")"
+# Run the AODBW function from the pymolshortcuts.py file to generate photorealistic effect with carbons colored black and all other atoms colored in grayscale.
+snippet AODBW
+	cmd.do(\"AODBW\")"
+# Color unit cell edges black. The settings for controlling the unit cell color are hard to find.
+snippet unitCellEdgesColorBlack
+	# show the unit cell;
+	"show cell;
+	"color black, ${1:1lw9};
+	"# color by atom with carbons colored green,
+	"util.${2:cbag};
+	"set cgo_line_width, 2.5;
+	"png  ${3:testCell3}.png, ${4:1600},${5:1600};${6:600};${7:0}"
+# Print the codes for color-by-atom (util.cba*) alternates.
+snippet printColorByAtomCodes
+	print(\"util.cbag, green carbons atoms\" + \"\n\" + \"util.cbac, cyan carbon atoms\" + \"\n\" + \"util.cbam, magenta carbon atoms\" + \"\n\" + \"util.cbay, yellow carbons atoms\" + \"\n\"+ \"util.cbas, salmon carbons atoms\" + \"\n\" + \"util.cbaw, white carbons atoms\" + \"\n\" + \"util.cbab, slate carbons atoms\" + \"\n\" + \"util.cbao, bright orange carbons atoms\" + \"\n\" + \"util.cbap, purple carbons atoms\" + \"\n\" +\"util.cbak, pink carbons atoms\")"
+# Apply grayscale coloring using a grayscale version of the PyMOL colors for the elements. This is a Python function. It is invoked in a script file via grayscale(). There is a corresponding gscale shortcut in pymolshortcuts.py that is invoked in a pml script by entering gsale if the functions in pymolshortcuts.py have been loaded with the run pymolshortcuts.py command.
+snippet grayscale
+	cmd.do("python")
+	cmd.do("def grayscale(selection=\"all\"):")
+	cmd.do("    \"\"\"Apply by entering grayscale\"\"\"")
+	cmd.do("    cmd.color(\"grey64\", \"elem Ac\")")
+	cmd.do("    cmd.color(\"grey67\", \"elem Al\")")
+	cmd.do("    cmd.color(\"grey39\", \"elem Am\")")
+	cmd.do("    cmd.color(\"grey46\", \"elem Sb\")")
+	cmd.do("    cmd.color(\"grey75\", \"elem Ar\")")
+	cmd.do("    cmd.color(\"grey58\", \"elem As\")")
+	cmd.do("    cmd.color(\"grey33\", \"elem At\")")
+	cmd.do("    cmd.color(\"grey56\", \"elem Ba\")")
+	cmd.do("    cmd.color(\"grey40\", \"elem Bk\")")
+	cmd.do("    cmd.color(\"grey87\", \"elem Be\")")
+	cmd.do("    cmd.color(\"grey40\", \"elem Bi\")")
+	cmd.do("    cmd.color(\"grey20\", \"elem Bh\")")
+	cmd.do("    cmd.color(\"grey77\", \"elem B\")")
+	cmd.do("    cmd.color(\"grey26\", \"elem Br\")")
+	cmd.do("    cmd.color(\"grey86\", \"elem Cd\")")
+	cmd.do("    cmd.color(\"grey76\", \"elem Ca\")")
+	cmd.do("    cmd.color(\"grey34\", \"elem Cf\")")
+	cmd.do("    cmd.color(\"grey77\", \"elem C\")")
+	cmd.do("    cmd.color(\"grey98\", \"elem Ce\")")
+	cmd.do("    cmd.color(\"grey17\", \"elem Cs\")")
+	cmd.do("    cmd.color(\"grey70\", \"elem Cl\")")
+	cmd.do("    cmd.color(\"grey60\", \"elem Cr\")")
+	cmd.do("    cmd.color(\"grey64\", \"elem Co\")")
+	cmd.do("    cmd.color(\"grey54\", \"elem Cu\")")
+	cmd.do("    cmd.color(\"grey42\", \"elem Cm\")")
+	cmd.do("    cmd.color(\"grey89\", \"elem D\")")
+	cmd.do("    cmd.color(\"grey19\", \"elem Db\")")
+	cmd.do("    cmd.color(\"grey79\", \"elem Dy\")")
+	cmd.do("    cmd.color(\"grey29\", \"elem Es\")")
+	cmd.do("    cmd.color(\"grey67\", \"elem Er\")")
+	cmd.do("    cmd.color(\"grey85\", \"elem Eu\")")
+	cmd.do("    cmd.color(\"grey28\", \"elem Fm\")")
+	cmd.do("    cmd.color(\"grey93\", \"elem F\")")
+	cmd.do("    cmd.color(\"grey8\", \"elem Fr\")")
+	cmd.do("    cmd.color(\"grey82\", \"elem Gd\")")
+	cmd.do("    cmd.color(\"grey60\", \"elem Ga\")")
+	cmd.do("    cmd.color(\"grey52\", \"elem Ge\")")
+	cmd.do("    cmd.color(\"grey80\", \"elem Au\")")
+	cmd.do("    cmd.color(\"grey68\", \"elem Hf\")")
+	cmd.do("    cmd.color(\"grey20\", \"elem Hs\")")
+	cmd.do("    cmd.color(\"grey96\", \"elem He\")")
+	cmd.do("    cmd.color(\"grey75\", \"elem Ho\")")
+	cmd.do("    cmd.color(\"grey89\", \"elem H\")")
+	cmd.do("    cmd.color(\"grey49\", \"elem In\")")
+	cmd.do("    cmd.color(\"grey16\", \"elem I\")")
+	cmd.do("    cmd.color(\"grey29\", \"elem Ir\")")
+	cmd.do("    cmd.color(\"grey48\", \"elem Fe\")")
+	cmd.do("    cmd.color(\"grey65\", \"elem Kr\")")
+	cmd.do("    cmd.color(\"grey76\", \"elem La\")")
+	cmd.do("    cmd.color(\"grey19\", \"elem Lr\")")
+	cmd.do("    cmd.color(\"grey34\", \"elem Pb\")")
+	cmd.do("    cmd.color(\"grey60\", \"elem Li\")")
+	cmd.do("    cmd.color(\"grey48\", \"elem Lu\")")
+	cmd.do("    cmd.color(\"grey83\", \"elem Mg\")")
+	cmd.do("    cmd.color(\"grey52\", \"elem Mn\")")
+	cmd.do("    cmd.color(\"grey20\", \"elem Mt\")")
+	cmd.do("    cmd.color(\"grey23\", \"elem Md\")")
+	cmd.do("    cmd.color(\"grey72\", \"elem Hg\")")
+	cmd.do("    cmd.color(\"grey62\", \"elem Mo\")")
+	cmd.do("    cmd.color(\"grey93\", \"elem Nd\")")
+	cmd.do("    cmd.color(\"grey85\", \"elem Ne\")")
+	cmd.do("    cmd.color(\"grey43\", \"elem Np\")")
+	cmd.do("    cmd.color(\"grey67\", \"elem Ni\")")
+	cmd.do("    cmd.color(\"grey69\", \"elem Nb\")")
+	cmd.do("    cmd.color(\"grey25\", \"elem N\")")
+	cmd.do("    cmd.color(\"grey23\", \"elem No\")")
+	cmd.do("    cmd.color(\"grey36\", \"elem Os\")")
+	cmd.do("    cmd.color(\"grey44\", \"elem O\")")
+	cmd.do("    cmd.color(\"grey33\", \"elem Pd\")")
+	cmd.do("    cmd.color(\"grey57\", \"elem P\")")
+	cmd.do("    cmd.color(\"grey82\", \"elem Pt\")")
+	cmd.do("    cmd.color(\"grey37\", \"elem Pu\")")
+	cmd.do("    cmd.color(\"grey40\", \"elem Po\")")
+	cmd.do("    cmd.color(\"grey35\", \"elem K\")")
+	cmd.do("    cmd.color(\"grey95\", \"elem Pr\")")
+	cmd.do("    cmd.color(\"grey90\", \"elem Pm\")")
+	cmd.do("    cmd.color(\"grey52\", \"elem Pa\")")
+	cmd.do("    cmd.color(\"grey35\", \"elem Ra\")")
+	cmd.do("    cmd.color(\"grey46\", \"elem Rn\")")
+	cmd.do("    cmd.color(\"grey43\", \"elem Re\")")
+	cmd.do("    cmd.color(\"grey39\", \"elem Rh\")")
+	cmd.do("    cmd.color(\"grey27\", \"elem Rb\")")
+	cmd.do("    cmd.color(\"grey47\", \"elem Ru\")")
+	cmd.do("    cmd.color(\"grey19\", \"elem Rf\")")
+	cmd.do("    cmd.color(\"grey89\", \"elem Sm\")")
+	cmd.do("    cmd.color(\"grey90\", \"elem Sc\")")
+	cmd.do("    cmd.color(\"grey20\", \"elem Sg\")")
+	cmd.do("    cmd.color(\"grey66\", \"elem Se\")")
+	cmd.do("    cmd.color(\"grey80\", \"elem Si\")")
+	cmd.do("    cmd.color(\"grey75\", \"elem Ag\")")
+	cmd.do("    cmd.color(\"grey46\", \"elem Na\")")
+	cmd.do("    cmd.color(\"grey71\", \"elem Sr\")")
+	cmd.do("    cmd.color(\"grey76\", \"elem S\")")
+	cmd.do("    cmd.color(\"grey60\", \"elem Ta\")")
+	cmd.do("    cmd.color(\"grey53\", \"elem Tc\")")
+	cmd.do("    cmd.color(\"grey51\", \"elem Te\")")
+	cmd.do("    cmd.color(\"grey81\", \"elem Tb\")")
+	cmd.do("    cmd.color(\"grey39\", \"elem Tl\")")
+	cmd.do("    cmd.color(\"grey59\", \"elem Th\")")
+	cmd.do("    cmd.color(\"grey61\", \"elem Tm\")")
+	cmd.do("    cmd.color(\"grey48\", \"elem Sn\")")
+	cmd.do("    cmd.color(\"grey75\", \"elem Ti\")")
+	cmd.do("    cmd.color(\"grey50\", \"elem W\")")
+	cmd.do("    cmd.color(\"grey47\", \"elem U\")")
+	cmd.do("    cmd.color(\"grey65\", \"elem V\")")
+	cmd.do("    cmd.color(\"grey54\", \"elem Xe\")")
+	cmd.do("    cmd.color(\"grey55\", \"elem Yb\")")
+	cmd.do("    cmd.color(\"grey91\", \"elem Y\")")
+	cmd.do("    cmd.color(\"grey51\", \"elem Zn\")")
+	cmd.do("    cmd.color(\"grey81\", \"elem Zr\")")
+	cmd.do("cmd.extend(\"grayscale\",grayscale)")
+	cmd.do("python end")
+	${0}
+# Run the yrb function from the pymolshortcuts.py file. 
+snippet yrb
+	cmd.do(\"yrb\")"
+# Run the timcolor function from the pymolshortcuts.py file to color atoms accordings to Tim Mather's biophysical coloring scheme for proteins.
+snippet timcolor
+	cmd.do(\"timcolor\")"
+# Run the colorh1 function from the pymolshortcuts.py file to color protein molecules according to the Eisenberg hydrophobicity scale, scheme 1.
+snippet colorh1
+	cmd.do(\"colorh1\")"
+# Run the colorh2 function from the pymolshortcuts.py file to color protein molecules according to the Eisenberg hydrophobicity scale, scheme 2.
+snippet colorh2
+	cmd.do(\"colorh2\")"
+# Run the cav function from the pymolshortcuts.py file to show buried cavities and pockets as molecular surfaces.
+snippet cav
+	cmd.do(\"cav\")"
+# Run the PE125 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.125 of the van der Waals surface.
+snippet PE125
+	cmd.do(\"PE125\")"
+# Run the PE25 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.25 of the van der Waals surface.
+snippet PE25
+	cmd.do(\"PE25\")"
+# Run the PE50 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.50 of the van der Waals surface.
+snippet PE50
+	cmd.do(\"PE50\")"
+# Run the PE75 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.75 of the van der Waals surface.
+snippet PE75
+	cmd.do(\"PE75\")"
+# Run the PE85 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.85 of the van der Waals surface.
+snippet PE85
+	cmd.do(\"PE85\")"
+# Run the PE66 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.66 of the van der Waals surface.
+snippet PE66
+	cmd.do(\"PE66\")"
+# Run the PE33 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.33 of the van der Waals surface.
+snippet PE33
+	cmd.do(\"PE33\")"
+# Count number of *.ccp4 (electron density map) files in current directory.
+snippet cntccp4emaps
+	print(\"Count the number of ccp4 electron density files in current directory.\");
+	"print(\"Usage: cntccp4s\");
+	"myPath = os.getcwd();
+	"ccp4Counter = len(glob.glob1(myPath,\"*.pse\"));
+	"print(\"Number of number of ccp4 electron density files in the current directory: \", ccp4Counter);"
+# Count number of files in current directory.
+snippet cntfiles
+	print(\"Count the files in the directory.\")
+	"print(\"Usage: cntfiles.\")
+	"# simple version for working with CWD
+	"print(\"Number of files in current working directory: \", len([name for name in os.listdir(\".\") if os.path.isfile(name)]))"
+# Count number of *.log files in current directory.
+snippet cntlogs
+	print(\"Count the number of log image files in current directory.\");
+	"print(\"Usage: cntlogs\");
+	"myPath = os.getcwd();
+	"logCounter = len(glob.glob1(myPath,\"*.log\"));
+	"print(\"Number of number of log image files in the current directory: \", logCounter);"
+# Count number of *.mtz files in current directory.
+snippet cntmtzs
+	print(\"Count the number of mtz structure factor files in current directory.\");
+	"print(\"Usage: cntmtzs\");
+	"myPath = os.getcwd();
+	"mtzCounter = len(glob.glob1(myPath,\"*.mtz\"));
+	"print(\"Number of number of mtz structure factor  files in the current directory: \", mtzCounter);"
+# Count number of *.pdb files in current directory.
+snippet cntpdbs
+	print(\"Count the number of pdb files in the current directory.\")
+	"print(\"Usage: cntpdb\")
+	"myPath = os.getcwd()
+	"pdbCounter = len(glob.glob1(myPath,\"*.pdb\"))
+	"print(\"Number of pdb files in the current directory: \", pdbCounter)"
+# Count number of *.pml files in current directory.
+snippet cntpmls
+	print(\"Count the number of pml (Pymol macro language) files in current directory.\");
+	"print(\"Usage: cntpmls\");
+	"myPath = os.getcwd();
+	"pmlCounter = len(glob.glob1(myPath,\"*.pml\"));
+	"print(\"Number of pml files in the current directory: \", pmlCounter);"
+# Count number of *.png files in current directory.
+snippet cntpngs
+	print(\"Count the number of png image files in current directory.\");
+	"print(\"Usage: cntpngs\");
+	"myPath = os.getcwd();
+	"pngCounter = len(glob.glob1(myPath,\"*.png\"));
+	"print(\"Number of number of png image files in the current directory: \", pngCounter);"
+# Count number of *.pse files in current directory.
+snippet cntpses
+	print(\"Count the number of *.pse (session) files in current directory.\");
+	"print(\"Usage: cntpses\");
+	"myPath = os.getcwd();
+	"pseCounter = len(glob.glob1(myPath,\"*.pse\"));
+	"print(\"Number of *.pse (session) files in the current directory: \", pseCounter);"
+# Delete all H-bonds in the selection, which is all by default.
+snippet rmhb
+	cmd.delete(\"hbonds\")"
+# Creates an object of all H-bonds found by PyMOL.
+snippet hb
+	cmd.distance(\"hbonds\", \"all\", \"all\", \"3.2\", mode=\"2\")
+	"cmd.set(\"dash_gap\",\"0.4\")
+	"cmd.set(\"dash_color\",\"grey30\")
+	"cmd.set(\"dash_width\",\"1.5\")
+	"cmd.set(\"dash_length\",\".25\")
+	"print(\"Enter rmhb to remove the hbonds.\")"
+# Remove all measurement objects in the interal GUI.
+snippet rmd
+	cmd.do(\"delete measure*\")
+	"cmd.do(\"delete m*_*\")
+	"cmd.do(\"delete dist*\")"
+# Show all models in a nmr structure.
+snippet nmr
+	cmd.do("set all_states, on")
+	${0}
+# Hide all but first model in a nmr structure.
+snippet nmroff
+	cmd.do("set all_states, off")
+	${0}
+# Hide all but the first model in a nmr structure.
+snippet nmroffpy
+	cmd.do(\"set all_states, off\")"
+# Show all models in a nmr structure.
+snippet nmrpy
+	cmd.do("cmd.do(\"set all_states, on\")")
+	${0}
+# These are the instructions for loading and aligning multiple files. To save multiple models in a file to separate pdb files.
+snippet loadAndAlignManyFiles1
+	# Copyright (c) 2004 Robert L. Campbell
+	"#
+	"# Modified for use with Python3.
+	"# Jan. 29, 2020 
+	"# Blaine Mooers, PhD
+	"# Univ. of Oklahoma Health Sciences Center
+	"#
+	"#
+	"from pymol import cmd
+	"import glob
+	"
+	"def loadFiles(files):
+	"  \"\"\"
+	"  load_files <files>
+	"
+	"  loads multiple files (using filename globbing)
+	"  into a multiple objects named as the files are (e.g. collection of
+	"  downloaded PDB files).
+	"
+	"  e.g. load_files prot_*.pdb
+	"  \"\"\"
+	"  file_list = glob.glob(files)
+	"  if file_list:
+	"    file_list.sort()
+	"    for i in file_list:
+	"      cmd.load(i)
+	"  else:
+	"    print(\"No files found for pattern %s\" % files)
+	""
+# To align all of the loaded RNA structures in all possible combinations by their C1' carbon atoms. Yes, this construct is a list comprehension inside a list comprehension!
+snippet loadAndAlignManyFiles2
+	cmd.do("run ${1:~/Scripts/}optAlignRNA.py;")
+	cmd.do("[[optAlignRNA(x, y) for x in cmd.get_names()] for y in cmd.get_names()];")
+	${0}
+# Apply the ambient occlussion effect to get the photorealistic effect.
+snippet ao
+	cmd.do("set_color oxygen, [1.0,0.4,0.4];")
+	cmd.do("set_color nitrogen, [0.5,0.5,1.0];")
+	cmd.do("remove solvent;")
+	cmd.do("as spheres;")
+	cmd.do("util.cbaw;")
+	cmd.do("bg white;")
+	cmd.do("set light_count,10;")
+	cmd.do("set spec_count,1;")
+	cmd.do("set shininess, 10;")
+	cmd.do("set specular,0.25;")
+	cmd.do("set ambient,0;")
+	cmd.do("set direct,0;")
+	cmd.do("set reflect,1.5;")
+	cmd.do("set ray_shadow_decay_factor, 0.1;")
+	cmd.do("set ray_shadow_decay_range, 2;")
+	cmd.do("set depth_cue, 0;")
+	cmd.do("ray;")
+	${0}
+# Ball-and-stick plus filled ring representation for ligands.
+snippet bsfr
+	cmd.do("# Edit the selection that is named ligand here.;")
+	cmd.do("create ligand, ${1:/bluComplex/C/A/1101};")
+	cmd.do("preset.ball_and_stick(selection=\"ligand\");")
+	cmd.do("util.cbaw ligand;")
+	cmd.do("set stick_color, white, ligand;")
+	cmd.do("set valence, off, ligand;")
+	cmd.do("unset valence;")
+	cmd.do("# above command is required after using preset;")
+	cmd.do("set sphere_color, black, elem C and ligand;")
+	cmd.do("set sphere_color, red, elem O and ligand;")
+	cmd.do("set sphere_color, blue, elem N and ligand;")
+	cmd.do("set sphere_color, lightblue, elem F and ligand;")
+	cmd.do("set stick_radius, 0.12;")
+	cmd.do("set sphere_quality, 4;")
+	cmd.do("set cartoon_ring_finder, 4, ligand;")
+	cmd.do("set cartoon_ring_mode, 3, ligand;")
+	cmd.do("set cartoon_ring_width, 0.12, ligand;")
+	cmd.do("set cartoon_ring_transparency, .0, ligand;")
+	cmd.do("show cartoon, ligand;")
+	${0}
+# Reset hash_max from 100 to 2000 to enable the saving of 28 inches by 28 inches.
+snippet wallart
+	cmd.do("# Reset hash_max from 100 to 2000 to enable the saving of images of large size for office wall hangings, eg. 30 x 30 inches. ")
+	cmd.do("hash_max=2000")
+	${0}
+# Reset hash_max from 100 to 2000 to enable the saving of 28 inches by 28 inches.
+snippet wallartpy
+	# Reset hash_max from 100 to 2000 to enable the saving of images of large size for office wall hangings, eg. 30 x 30 inches.;
+	"cmd.do(\"hash_max=2000\");"
+# Color cartoon with colorblind friendly colors. Requires that the pymolshortcuts.py file is loaded. This has been applied to PDB-ID 7JU6. The protein is human RET kinase, and the drug is selpercatinib, a FDA approved drug for treating several cancers.
+snippet cblindCartoon
+	cmd.do("CB;")
+	cmd.do("color cb_lightblue, ss h;")
+	cmd.do("color cb_vermillion, ss s;")
+	cmd.do("color lightorange, ss l+\"\";")
+	${0}
+# Imports needed for most users of PyMOL in Jupyter. Combination of importPyMOL and importPythonDisplay.
+snippet importPyMOLandShortcuts
+	from pymol import cmd
+	"from IPython.display import Image
+	"PATH = \"${1:/Users/blaine/}\"
+	"cmd.do(\"run ${2:/Users/blaine/Scripts/PyMOLScripts/pymolshortcuts.py\")"
+# List all snips by tab trigger and description.
+snippet lsSnipsPy
+	print(\"Name                                      Description                                                                                                                   \"),
+	"print(\"------------------------------------------------------------------------------------------------------------------------------------------------------------------------\"),
+	"print(\"AO                                        Run the AO function from the pymolshortcuts.py file to generate the photorealistic effect.\"),
+	"print(\"AOBW                                      Run the AOBW function from the pymolshortcuts.py file to generate photorealistic effect in grayscale.\"),
+	"print(\"AOD                                       Run the AOD function from the pymolshortcuts.py file to generate photorealistic effect with carbons colored black.\"),
+	"print(\"AODBW                                     Run the AODBW function from the pymolshortcuts.py file to generate photorealistic effect with carbons colored black and all other atoms colored in grayscale.\"),
+	"print(\"PE125                                     Run the PE125 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.125 of the van der Waals surface.\"),
+	"print(\"PE25                                      Run the PE25 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.25 of the van der Waals surface.\"),
+	"print(\"PE33                                      Run the PE33 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.33 of the van der Waals surface.\"),
+	"print(\"PE50                                      Run the PE50 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.50 of the van der Waals surface.\"),
+	"print(\"PE66                                      Run the PE66 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.66 of the van der Waals surface.\"),
+	"print(\"PE75                                      Run the PE75 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.75 of the van der Waals surface.\"),
+	"print(\"PE85                                      Run the PE85 function from the pymolshortcuts.py file to show the pearl effect with the inner sphere scaled by 0.85 of the van der Waals surface.\"),
+	"print(\"addAxis                                   Adds the function draw_axis(). Used to draw a symmetry axis, a ncs axis, or scale bar to a scene.\"),
+	"print(\"addAxispy                                 Adds the function draw_axis(). Could be useful for the adding a symmery axis, a ncs axis, or scale bar to a scene.\"),
+	"print(\"allPairs                                  This is a two-fold nested list comprehension for any all-parwise operation on the currently loaded objects. Replace optAlginRNA with object from any other function that operations on a pair of structrures.\"),
+	"print(\"antialias                                 Set antialias to on to get smoother edges.\"),
+	"print(\"ao                                        Apply the ambient occlussion effect to get the photorealistic effect.\"),
+	"print(\"ao                                        Apply the ambient occlussion effect to get the photorealistic effect.\"),
+	"print(\"aobw                                      Ambient occlussion in grayscale.\"),
+	"print(\"aod                                       Ambient occlussion with carbon atoms colored black.\"),
+	"print(\"aodbw                                     Ambient occlussion in grayscale with carbon atoms colored black. Note: requires the gscale() function from pymolshortcuts.py. Download this script from http://GitHub.com/MooersLab/pymolshortcuts. Load the functions from this script with the following command:  cmd.do('run pymolshortcuts.py').\"),
+	"print(\"aveB4resiX                                Prints the residue number and the average bfactor. Uses reduce and lambda, builtin Python functional porgramming functions. Note that you need to convert the length of the list of Bfactors from an integer to a float before division into the sum.\"),
+	"print(\"aveB4resiXpy                              AveBResiX, prints the residue number and the average bfactor. Uses reduce and lambda, builtin Python functional porgramming functions. Note that you need to convert the length of the list of Bfactors from an integer.\"),
+	"print(\"averageB                                  Average the B-factors by using a regular list as opposed to a stored list in PyMOL. Edit the selection as needed. \"),
+	"print(\"basePairStacking                          This code make as standard base stacking diagram with ball and stick representation.\"),
+	"print(\"brokenNucleicBackbone                     Create bonds between phosphorous and O3* atoms in a low-resolution DNA structure that is 80 base pairs long. Edit the selections below, which are ranges of residue numbers and edit the molecular object name (5fur).\"),
+	"print(\"bs                                        Ball and stick representation.\"),
+	"print(\"bsfr                                      Ball-and-stick plus filled ring representation for ligands.\"),
+	"print(\"bu                                        Generate the biological unit using the quat.py script. Edit the path to the file quat.py. You may have to download it from the PyMOL Wiki page.\"),
+	"print(\"carvedIsomesh                             Carved isomesh representation of electron density.\"),
+	"print(\"carvedIsosurface                          Carved isosurface representation of electron density.\"),
+	"print(\"carvedVolume                              Carved volume representation of electron density.\"),
+	"print(\"cav                                       Run the cav function from the pymolshortcuts.py file to show buried cavities and pockets as molecular surfaces.\"),
+	"print(\"cblind                                    Apply color blind friendly to ribbon diagrams. Edit the path to the Pymol-script-repo in your computer account. See PyMOL wiki for more information about the Pymol-script-reo.\"),
+	"print(\"cblindCartoon                             Color cartoon with colorblind friendly colors. Requires that the pymolshortcuts.py file is loaded. This has been applied to PDB-ID 7JU6. The protein is human RET kinase, and the drug is selpercatinib, a FDA approved drug for treating several cancers.\"),
+	"print(\"centerpi                                  Center pi. Edit the atoms selected for positioning the pseudoatom.\"),
+	"print(\"cmddocs                                   Print in the command history window the docstrings of all of the functions in the cmd module.\"),
+	"print(\"cntccp4emaps                              Count number of *.ccp4 (electron density map) files in current directory.\"),
+	"print(\"cntfiles                                  Count number of files in current directory.\"),
+	"print(\"cntlogs                                   Count number of *.log files in current directory.\"),
+	"print(\"cntmtzs                                   Count number of *.mtz files in current directory.\"),
+	"print(\"cntpdbs                                   Count number of *.pdb files in current directory.\"),
+	"print(\"cntpmls                                   Count number of *.pml files in current directory.\"),
+	"print(\"cntpngs                                   Count number of *.png files in current directory.\"),
+	"print(\"cntpses                                   Count number of *.pse files in current directory.\"),
+	"print(\"colorh1                                   Run the colorh1 function from the pymolshortcuts.py file to color protein molecules according to the Eisenberg hydrophobicity scale, scheme 1.\"),
+	"print(\"colorh2                                   Run the colorh2 function from the pymolshortcuts.py file to color protein molecules according to the Eisenberg hydrophobicity scale, scheme 2.\"),
+	"print(\"coordinate                                Coordinate covalent bonds to metals and H-bonds from RNA.\"),
+	"print(\"cribbon                                   Color ribbon H red, strand yellow, loop green.\"),
+	"print(\"cring                                     Colored ring.\"),
+	"print(\"cspheres                                  Colored spheres.\"),
+	"print(\"discreteCartoonColoring                   Turn on discrete colors between secondary structure elements.\"),
+	"print(\"displayFonts                              Print to the screen as labels the 21 font ids in their corresponding fonts in a grid. Each label is an object and appears in the internal gui. You can turn on and off the display of specific fonts.\"),
+	"print(\"displayFontspy                            Print to the screen as labels the 21 font ids in their corresponding fonts in a grid. Each label is an object and appears in the internal gui. You can turn on and off the display of specific fonts.\"),
+	"print(\"distance                                  H-bond distance between a H-bond donor and acceptor. Edit the name for the ditance, the selection criteria for atom 1, and the selection criteria for atom 2.\"),
+	"print(\"doubleBond                                Valence bond.\"),
+	"print(\"drawHbonds                                Display H-bonds as dashes colored black.\"),
+	"print(\"drawLinks                                 Connect the alpha carbons of residue 1 with 10, 6 with 16, 7  with 17 and 8 with 18. Note that this example requires the draw_links.py [http://pldserver1.biochem.queensu.ca/~rlc/work/pymol/draw_links.py] by Robert Campbell.\"),
+	"print(\"dssrBlock1                                Combining DSSR block representation with regular PyMOL cartoons after loading the dssr_block.py script by Thomas Holder.\"),
+	"print(\"dssrBlock2                                DSSR block representation with fused blocks after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH.\"),
+	"print(\"dssrBlock3                                DSSR block representation for a multi-state example after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH. Edit the path to Thomas Holder's block script.\"),
+	"print(\"dssrBlock4                                DSSR block representation with custom coloring after loading the dssr_block.py script by Thomas Holder. The x3dna-dssr executable needs to be in the PATH.\"),
+	"print(\"duplicateObject                           Duplicate object. Create an object with the first argument using the selection, which is the second argument.\"),
+	"print(\"ellipcol                                  Set color of thernal ellipsoids. The PDB must have anisotopic temperature factors. See https://pymolwiki.org/index.php/Color_Values for the PyMOL colors.\"),
+	"print(\"emacsjupyterSourceBlock                   Source block template in org-mode with emacs-jupyter package.\"),
+	"print(\"extractPartObj                            Create a new object from part of an existing object.\"),
+	"print(\"fasta                                     Print Fasta from PDB file.\"),
+	"print(\"fastapy                                   Python version of the command to print the sequence from a PDB file in the fasta format.\"),
+	"print(\"fetch2FoFcIsomesh                         Fetch 2FoFc map as an isomesh.\"),
+	"print(\"fetch2FoFcIsosurface                      Fetch 2FoFc map as an isosurface. Edit the PDB-ID code. Use lowercase letter for the fifth character to select a single chain. Render and display a contour of this map as a chicken wire representation.\"),
+	"print(\"fetch2FoFcVolume                          Fetch 2FoFc map as a volume.\"),
+	"print(\"fetchCIF                                  Fetch the atomic coordinates as a cif file from the PDB.\"),
+	"print(\"fetchFoFc                                 Fetch fofc map from the PDB.\"),
+	"print(\"fetchPath                                 Set path for location to save fetched pdb files.\"),
+	"print(\"fetchThreeMaps                            Display three electron density maps as isomesh.\"),
+	"print(\"filledRing                                Filled rings in nucleic acids.\"),
+	"print(\"findHbonds                                Find H-bonds around a residue.\"),
+	"print(\"fog                                       Blur the background atoms.\"),
+	"print(\"getCoordinates                            Get coordinates.\"),
+	"print(\"getCoordinatespy                          Python version of getCoordinates snippets. Note that the python2 print statement stills works  in pml scripts.\"),
+	"print(\"github                                    Print url of README.md file of the pymolsnips repository.\"),
+	"print(\"grayscale                                 Apply grayscale coloring using a grayscale version of the PyMOL colors for the elements. This is a Python function. It is invoked in a script file via grayscale(). There is a corresponding gscale shortcut in pymolshortcuts.py that is invoked in a pml script by entering gsale if the functions in pymolshortcuts.py have been loaded with the run pymolshortcuts.py command.\"),
+	"print(\"grayscalepy                               Apply grayscale coloring using a grayscale version of the PyMOL colors for the elements. This is a Python function. It is invoked in a script file via gscale(). There is a corresponding gscale shortcut in pymolshortcuts.py that is invoked in a pml script by entering gsale if the functions in pymolshortcuts.py have been loaded with the run pymolshortcuts.py command.\"),
+	"print(\"hb                                        Creates an object of all H-bonds found by PyMOL.\"),
+	"print(\"hbonddash                                 Set up H-bond dashes.\"),
+	"print(\"helpDocs                                  Return the docstring for the help submodule. This command is more concise:  help help.\"),
+	"print(\"hideSelection                             Turn off magenta squares on current selection.\"),
+	"print(\"hidealtloc                                Hide the partially occupied atoms with the part b alternate locator.\"),
+	"print(\"his31asp70                                Display the famous Asp70-His31 salt-bridge from T4 lysozyme that contributes3-5 kcal/mol to protein stability. \"),
+	"print(\"importIPythonDisplay                      Imports for using IPython to display images loaded from disk in notebook cells.\"),
+	"print(\"importPyMOLandShortcuts                   Imports needed for most users of PyMOL in Jupyter. Combination of importPyMOL and importPythonDisplay.\"),
+	"print(\"importPyMOLcmd                            Import the cmd class from the pymol api.\"),
+	"print(\"importShortcuts                           Import for loading the functions in the pymolshortcuts.py file. These functions can be run inside cmd.do() without the trailing (). For example, cmd.do('rv').\"),
+	"print(\"imports4PyMOLjupyter                      Imports needed for most uses of pymol in Jupyter. Combination of importPyMOL and importPythonDisplay.\"),
+	"print(\"internalGUImode2                          Make the background of the internal gui transparent to expand viewport.\"),
+	"print(\"internalGUIwidth                          Set the width of the internal gui. Set to 0 to make the internal gui vanish.\"),
+	"print(\"ipymolProtein                             Demo of the use of the RPC server with a protein via ipymol. Create a kernel for python interpreter from PyMOL inside Jupyter. See the kernel snippet for an example. See the README.md file on pymolsnips GItHub website or more details https://github.com/MooersLab/pymilsnips. Start pymol in terminal with pymol -R. Select pymol.python as kernel in Juptyer. The double parentheses are required when set_view is run this way.;\"),
+	"print(\"ipymolStart                               Code to start the RPC server with ipymol. Start pymol in terminal with pymol -R; select pymol.python as the kernel in juptyer. You may have to create this kernel for the Python interpreter that is inside PyMOL.\"),
+	"print(\"kernel                                    A kernel.json file for runnig PyMOL python interpreter in the Jupyter notebook. This code should reside in a folder named pymol.python in the ~/Library/Jupyter/kernels.\"),
+	"print(\"labelCAs                                  Label the CA atoms with the Ala333 style format.\"),
+	"print(\"labelMainChain                            Label the main chain atoms with the following: resn,resi,atom name.\"),
+	"print(\"labelResnResi                             Label CA atom with single-letter residue name and residue number.\"),
+	"print(\"labelSS                                   Label SS.\"),
+	"print(\"labelWatersHOH                            Label waters with HOH and their residue number.\"),
+	"print(\"labelWatersW                              Label waters with W and their reisude number.\"),
+	"print(\"ligandSelect                              Make selection of ligand atoms.\"),
+	"print(\"listLigandProteinDistances                Print a list of protein--ligand distances. Code by Dan Kulp. Updated for Python3.\"),
+	"print(\"listObjects                               Create a list of objects in the internal gui and print this list to the screen.\"),
+	"print(\"listSettings                              Print to the screen the settings and their current parameter values. This is the more compact version.\"),
+	"print(\"listSettings2                             Print to the screen the settings and their current parameter values.\"),
+	"print(\"loadAmberTrajs                            The amber trajectories have to be loaded into the same object.\"),
+	"print(\"loadAndAlignManyFiles1                    These are the instructions for loading and aligning multiple files. To save multiple models in a file to separate pdb files.\"),
+	"print(\"loadAndAlignManyFiles2                    To align all of the loaded RNA structures in all possible combinations by their C1' carbon atoms. Yes, this construct is a list comprehension inside a list comprehension!\"),
+	"print(\"loadAndAlignManyFiles3                    These are the instructions for loading and aligning multiple files.\"),
+	"print(\"loadImage                                 Load image.\"),
+	"print(\"loadManyFiles                             Load into PyMOL multiple files with a common file stem. The is a script by Robert Campbell that has been updated for Python3.\"),
+	"print(\"loadPDBbs                                 Load PDB ball-and-stick.\"),
+	"print(\"loadPDBfile                               Load a pdb file in the current directory.\"),
+	"print(\"loadPDBnb                                 Load PDB nb spheres.\"),
+	"print(\"loadThreeMaps                             Three electron density as Isomesh.\"),
+	"print(\"lsSnips                                   List all snips by tab trigger and description.\"),
+	"print(\"lsSnipsPy                                 List all snips by tab trigger and description.\"),
+	"print(\"lspymolrc                                 Print list of active pymolrc files.\"),
+	"print(\"lspymolrcpy                               Print list of active pymolrc files.\"),
+	"print(\"molscriptRibbon                           Show cartoon in the style of Molscript ribbons.\"),
+	"print(\"ms                                        Measure surface area of the selection with the msms_pymol.py script.\"),
+	"print(\"nmr                                       Show all models in a nmr structure.\"),
+	"print(\"nmroff                                    Hide all but first model in a nmr structure.\"),
+	"print(\"nmroffpy                                  Hide all but the first model in a nmr structure.\"),
+	"print(\"nmrpy                                     Show all models in a nmr structure.\"),
+	"print(\"nucleicAcidBackboneTubesSticks            This code shows the cartoon backbone tube as 65% transparent. It hides the rungs of the cartoon. It shows all of the non-H atoms are sticks. The motivation is to have the cartoon highlight the backbone without dominanting the scene.\"),
+	"print(\"nucleicAcidCartoon                        Settings for nucliec acid cartoon. The dark blue used for electron density maps is called `density`. The cartoon_ladder_radius should be renamed the cartoon_rung_radius. The dimensions are in Angstroms.\"),
+	"print(\"nucleicAcidCartoon2Strands                Coloring two strand differently of a double helix makes it easier to for the viewer to distinguish the two strands. The set command has the syntax of setting_name [, setting_value [, selection [,state ]]] . In this case, the selection has to be global, object, object-state, or per-atom settings. It cannot be a named selection. This is a weak spot in PyMOL. Coloring two strand differently of a double helix makes it easier to for the viewer to distinguish the two strands. Many double-stranded helices have one strand in the asymmetric unit. The second strand is in the biological unit. The coordinates for the second strand are in the pdb1 file type at the PDB. The second strand is in the second state, which is equivalent to the second model in the pdb file. The strands are labeled chain A and B (via the cartoon_nucliec_acid_color setting). The bases are colored differently too (via the cartoon_ladder_color setting).\"),
+	"print(\"nucleicAcidCartoonFilledRings             The code provides a cartoon of the loaded nucleic acid that has the ladder rungs replaced by filled rings that are colored by atom type. The code can be applied to any nucleic acid. It is derived from the FR shortuct in pymolshortcuts.py.\"),
+	"print(\"nucleicAcidColorbySequence                This code colors the nucleotides by base seqence. It can be applied to any nucleic acid.\"),
+	"print(\"nucleicAcidDumbellCartoonColorbySequence  This code colors by the nucleotides by base seqence. The backcone is shown as a flatten ribbon with rolled edges that give the dumbell effect. The code can be applied to any nucleic acid. The code is dervied from the CR and DU shortcuts.\"),
+	"print(\"nucleicAcidFlatRibbonColorbySequence      This code colors the nucleotides by base seqence. It can be applied to any nucleic acid. It is dervied from the CR shortcut. The backcone is shown as a flatten ribbon.\"),
+	"print(\"numResiNucleic                            Print the number of residues in a nulceic acid (all chains).\"),
+	"print(\"numResiNucleicChainA                      Print the number of residues in a nulceic acid chain.\"),
+	"print(\"numResiProtein                            Print the number of residues in a protein.\"),
+	"print(\"numResiProteinChainA                      Print the number of residues in chain A of a protein.\"),
+	"print(\"obipythonSourceBlock                      Source block template in org-mode with the ob-ipython package.\"),
+	"print(\"oneBondThicknessColor                     To change stick color and radius for the bond between atom 2 and 3, use the set_bond command.\"),
+	"print(\"oneLetter                                 Switch from three letter code to one-letter code for amino acids.\"),
+	"print(\"optAlignRNA                               OptiAlign.py by Jason Vertree modified for aligning multiple RNA structures.\"),
+	"print(\"pearl                                     The pearl effect is made with two spheres with the outer sphere being transparent.\"),
+	"print(\"presetDocs                                Return the docstring for the preset submodule. The command help preset fails to return anything. The command help(pymol.preset) has the same effect as help(preset).\"),
+	"print(\"printAtomNames                            Print the atom names of a residue.\"),
+	"print(\"printAtomNumbers                          Print the atom name and number of a residue.\"),
+	"print(\"printBfactors                             Print the bfactors of a residue.\"),
+	"print(\"printBs                                   Print the B-factors of a residue.\"),
+	"print(\"printBs2digits                            Print B--factors for a residue with the B-factors rounded off to two decimal places.\"),
+	"print(\"printBspartB                              Print B factors of part B of a residue.\"),
+	"print(\"printColorByAtomCodes                     Print the codes for color-by-atom (util.cba*) alternates.\"),
+	"print(\"printCoordinates                          Print the coordinates of the atoms in a residue.\"),
+	"print(\"printDoc                                  Print document string of a function.\"),
+	"print(\"printDocpy                                Print document string of a function.\"),
+	"print(\"printNameB4ResiX                          Print name and b-factor for a residue.\"),
+	"print(\"printNamesCoordinates                     Print the atom names and coordinates of the atoms in a residue.\"),
+	"print(\"printNamesCoordinates                     Print the atom names as tuples and coordinates of the atoms in a residue as a list.\"),
+	"print(\"printPath                                 Print the path to the currently used PyMOL binary.\"),
+	"print(\"printPathpy                               Print the path to the currently used PyMOL binary.\"),
+	"print(\"printResiResnNameB4ResiX                  Print resn, resi, atom name, and b-factor. \"),
+	"print(\"printResiResnNameB4ResiXNoH               Print name and b-factor for a residue or residue range (e.g. 81:120). The noH variant.\"),
+	"print(\"printVDWradii                             Print the van der Waals radii of the atoms in of a residue.\"),
+	"print(\"pseudolabel                               Position label with pseudoatom.\"),
+	"print(\"puttyCartoon                              Create a putty cartoon. The command may be needed if the above setting does not work. This can happen if using the presets. The command below may be needed if the above setting does not work.This can happen if using the presets. The command below may be needed if the above setting does not work. This can happen if using the presets.\"),
+	"print(\"pymoldocs                                 Return to the command history window the docstrings for all of the functions in a module.\"),
+	"print(\"pymoldocspy                               Return to the command history window the docstrings for all of the functions in a module.\"),
+	"print(\"rdkrpcChem                                Demo of the use of the RPC server with a drug compound via the rdkit python module.\"),
+	"print(\"rdkrpcProtein                             Demo of the use of the RPC server with a protein via rdkit.\"),
+	"print(\"renameChain                               Rename a chain. \"),
+	"print(\"renumAtoms                                Add or substract a atom number offset.\"),
+	"print(\"renumResi                                 Add or substract a residue number offset.\"),
+	"print(\"ringMode                                  Set the ring mode to a value between 0  and 6 in cartoons of nucleic acids.\"),
+	"print(\"rmd                                       Remove all measurement objects in the interal GUI.\"),
+	"print(\"rmhb                                      Delete all H-bonds in the selection, which is all by default.\"),
+	"print(\"rmwater                                   Remove waters from molecular object.\"),
+	"print(\"rotate                                    Rotate a selection about and axis by a given angle.\"),
+	"print(\"rv                                        Return settings in rounded format.\"),
+	"print(\"rvi                                       Return settings in rounded format while running PyMOL via the RCP server ipymol in a jupyter notebook. This is a modified version of the roundview.py script.\"),
+	"print(\"rvr                                       Return settings in rounded format while running PyMOL via the RCP server rdkit in a jupyter notebook. This is a modified version of the roundview.py script.\"),
+	"print(\"saln                                      Save an aln flle with a timestamp.\"),
+	"print(\"salnpy                                    Save an aln flle with a timestamp. Python version.\"),
+	"print(\"sas                                       Show the solvent excluded surface.\"),
+	"print(\"savePNG                                   Save a png file of current scene to the current directory. PyMOL writes out only png files. This file may need to be converted to a tiff file. See the png2tiff snippet for a bash script that converts all png files in a folder into tiff files. 1: png filename. 2: x-dimension in pixels. 3: y-dimension in pixels, 1600 x 1000 approximates the golden ratio. Usually want a square for multipanel figures..4: dots per inch. 5: ray tracing off, 0; ray tracing on, 1 should also consider image without ray tracing shadows. \"),
+	"print(\"saveSeppy                                 Saves multiple objects into multiple files using an optional prefix name.\"),
+	"print(\"saxsEnvelope                              Display SAXS envelope. Edit to enter the name of the bead model object.\"),
+	"print(\"sc111                                     Display all symmetry mates in one unit cell. Uses supercell.py in $HOME/Scripts/PyMOLscripts/. Change to your path to supercell.py.\"),
+	"print(\"sc112                                     Display all symmetry mates in two unit cells along the c axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc113                                     Display all symmetry mates in three unit cels along c. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc114                                     Display all symmetry mates in four unit cells stacked long c-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc121                                     Display all symmetry mates in two unit cells along the b axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc122                                     Display all symmetry mates in a 1 x 2 x 2 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc131                                     Display all symmetry mates in three unit cells along b. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc133                                     Display all symmetry mates in 1 x 3 x 3 array of unit cell. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc141                                     Display all symmetry mates in four unit cells stacked long b-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc144                                     Display all symmetry mates in in a 1 x 4 x 4 array. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc211                                     Display all symmetry mates in two unit cell along a. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc212                                     Display all symmetry mates in a 2 x 1 x 2 arrays of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc221                                     Display all symmetry mates in 2 x 2 x 1 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc222                                     Run supercell script to generate three cells in all directions. This script was written by Thomas Holder.\"),
+	"print(\"sc233                                     Display all symmetry mates in a 2 x 3 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc311                                     Display all symmetry mates three three unit cells along a. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc313                                     Display all symmetry mates in a 3 x 1 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc323                                     Display all symmetry mates in a 3 x 2 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc331                                     Display all symmetry mates in 3 x 3 x 1 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc332                                     Display all symmetry mates in 3 x 3 x 2 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc333                                     Display all symmetry mates in 3 x 3 x 3 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc411                                     Display all symmetry mates in four unit cells stacked long a-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc414                                     Display all symmetry mates in a 4 x 1 x 4 array. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc441                                     Display all symmetry mates in four unit cells stacked long a-axis. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc444                                     Display all symmetry mates in a 4 x 4 x4 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"sc444                                     Display all symmetry mates in a 4 x 4 x4 array of unit cells. Uses supercell.py in $HOME/Scripts/PyMOLscripts/.\"),
+	"print(\"scaleRadiusColor                          Scale the radius and color of atoms as spheres by property in the B-value column.\"),
+	"print(\"scaleRadiusColorPythonInsertpy            Python block insert for scaleRadiusColorpy.\"),
+	"print(\"scaleRadiusColorpy                        Scale the radius and color of atoms as spheres by property in the B-value column.\"),
+	"print(\"sccp4                                     Save electron density map flle with timestamp.\"),
+	"print(\"sccp4py                                   Save electron density map flle with timestamp.\"),
+	"print(\"sdae                                      Save dae flle with timestamp.\"),
+	"print(\"sdaepy                                    Save dae flle with timestamp.\"),
+	"print(\"selectAllBut                              Select all nitrogen atom in a selelction except from lysine.\"),
+	"print(\"selectAtomsAround                         Select atoms within a radius around a ligand.\"),
+	"print(\"selectChain                               Select a chain.\"),
+	"print(\"selectElement                             Select atoms by element.\"),
+	"print(\"selectHelices                             Select atoms by alpha helices.\"),
+	"print(\"selectLoops                               Select atoms by beta loops.\"),
+	"print(\"selectName                                Select atoms by name.\"),
+	"print(\"selectResi                                Select residues by a range of numbers.\"),
+	"print(\"selectResidues                            Select residues by name.\"),
+	"print(\"selectResiduesAround                      Select residues within a radius around a ligand.\"),
+	"print(\"selectStrands                             Select atoms by beta strands.\"),
+	"print(\"setLigandValenceOn                        Display the bond valence of ligands only.\"),
+	"print(\"setcolor                                  Set color name to a RGB code.\"),
+	"print(\"setpath                                   Set additional path for PyMOL to search on startup.\"),
+	"print(\"sidehChainHelper                          In cartoons, hide the backbone atoms of selected residues when showing then as sticks.\"),
+	"print(\"sigDigits                                 Set number of decimals places to show in distance labels.\"),
+	"print(\"sigang                                    Set angle labels to display 2 decimals places.\"),
+	"print(\"sigdihedral                               Set dihedral labels to display 2 decimals places to the right of the decimal point.\"),
+	"print(\"sigdist                                   Set distance labels to display 2 decimals.\"),
+	"print(\"solventRadius                             Set radius of ball used to make solvent accessible surface.\"),
+	"print(\"spng                                      Save png flle with timestamp.\"),
+	"print(\"spngpy                                    Save png flle with timestamp.\"),
+	"print(\"spse                                      Save pse flle with timestamp\"),
+	"print(\"stack                                     Base-stacking figure.\"),
+	"print(\"stateOne                                  Select state 1 from a model with multiple states.\"),
+	"print(\"stereoDraw                                Stereo draw.\"),
+	"print(\"stereoRay                                 Stereo ray.\"),
+	"print(\"stereokb                                  Set keyboard shortcut by mapping F1 to stereo.\"),
+	"print(\"symexp                                    The code expands the asymmetric unit. It like the generate symmetry mates command but it provides more control over the prefix name of the symmetry mates and the addition of unique segment identifiers for each symmetry mate. The usage: symexp prefix, object, (selection), cutoff, segidFlag. The cutoff is in Angstroms. The segidFlag set to 1 will add unique segids. For related functions, see SC***.\"),
+	"print(\"synch                                     Wait until all current commands have been executed. A timeout ensures that that command ecentually returns.\"),
+	"print(\"threeMapsIsosurface                       Display three electron density maps as isosurfaces.\"),
+	"print(\"threeMapsVolume                           Three electron density as volumes. Make sure to rename map file so that the root filename differs from pdb root filename.\"),
+	"print(\"timcolor                                  Run the timcolor function from the pymolshortcuts.py file to color atoms accordings to Tim Mather's biophysical coloring scheme for proteins.\"),
+	"print(\"turnAboutAxis                             Turn about axis.\"),
+	"print(\"undoSelection                             Undo a selection.\"),
+	"print(\"unitCellEdgesColorBlack                   Color unit cell edges black. The settings for controlling the unit cell color are hard to find.\"),
+	"print(\"volumeRamp                                Volume ramp.\"),
+	"print(\"wallart                                   Reset hash_max from 100 to 2000 to enable the saving of 28 inches by 28 inches.\"),
+	"print(\"wallartpy                                 Reset hash_max from 100 to 2000 to enable the saving of 28 inches by 28 inches.\"),
+	"print(\"waterTriple                               Examples of a triple water pentagon. Zoom in on the selection. Edit by changing the residue number.\"),
+	"print(\"writeCommandReference2HTML                Write the command reference to html file in the present working directory. \"),
+	"print(\"yrb                                       Run the yrb function from the pymolshortcuts.py file. \"),
+	"print(\"------------------------------------------------------------------------------------------------------------------------------------------------------------------------\")"
