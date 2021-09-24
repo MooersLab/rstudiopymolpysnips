@@ -243,5 +243,10 @@ I can be reached via the Issue tab above or via e-mail: `blaine-mooers at ouhsc.
 If you use this library to make figures for publication, please see the *Citation.md* file above.
 
 
+<a id="citation"><h2>Poster</h2></a>
+
+Mooers2021MGMS.pdf above is a poster presented at the 40th Anniversary Meeting of the [Molecular Graphics and Modelling Society(https://www.mgms.org/WordPress/) held virtually on 24 September 2021.
+
+
 [Return to Table of Contents](#table-of-contents)
 
