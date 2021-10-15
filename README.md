@@ -61,7 +61,7 @@ The syntax for R Markdown is small and fast to master.
 #### 2. Illustrate Rmarkdown with molecular images
 
 You can illustrate your R Markdown documents with images created in **PyMOL**.
-You can also adjust molecular images from within **Rstudio** without opening **PyMOL**, thereby saving time.
+You can also adjust molecular images from within **RStudio** without opening **PyMOL**, thereby saving time.
 
 
 #### 3. R Markdown are easy to edit in RStudio
@@ -95,7 +95,7 @@ If the collaborators are not **PyMOL** or **RStudio** users, the notebook file c
 #### 7. Facilitates combining PyMOL with other software in molecular structure analysis
 
 Other software can be run from the same notebook during a molecular structure analysis project provided that this is R software or software with Python APIs.
-This can improve the reproducibility of the computational aspects of your research.
+This capability can improve the reproducibility of the computational aspects of your structural biology research.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -104,7 +104,7 @@ This can improve the reproducibility of the computational aspects of your resear
 
 1. You can run the PyMOL GUI next to your **RStudio** session.
 You can adjust the molecule's orientation manually, run the **get_view** command, and copy the output in the command history window from PyMOL and paste it into a cell in the **RStudio**. 
-The one line of settings returned by the **rv** shortcut are easier to copy and paste. 
+The one line of settings returned by the **rv** shortcut is easier to copy and paste. 
 
 2. You do not need the viewport. With 10-15 minutes of practice, you can master the rapid iterating of **rotate** and **translate** commands to adjust the molecule's orientation with greater precision than via manipulation of the mouse.
 
@@ -123,7 +123,7 @@ The **rstudiopymolpysnips** library contains 260 code fragments (i.e, templates 
 This API is only available for recent versions of **PyMOL** that depend on Python3 from Anaconda.
 This API is available for both the incentive and open-source versions of **PyMOL**.
 A conda env with Python 3.6 or later as the default Python interpreter is required.
-**PyMOL** must be installed in this env.
+**PyMOL** must be installed in this conda env.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -135,7 +135,7 @@ A conda env with Python 3.6 or later as the default Python interpreter is requir
 | [PyMOL](https://pymol.org/2/)                                                              | 2.5.1    | Molecular graphics program                                                                         |
 | Python from Anaconda                                                                       | 3.6-3.9  | Programming language                                                                               |
 | conda from Anaconda                                                                        | 4.10.1   | Program used to create Python environments.                                                        |
-| R                                                                                          | 4.0.5    | R is required to host Rstudio.                                                                     |
+| R                                                                                          | 4.0.5    | R is required to host RStudio.                                                                     |
 | RStudio                                                                                    | 1.4.1717 | The Integrated Development Environment for R.                                                      |
 | [reticulate](https://github.com/rstudio/reticulate/)                                       | 1.20     | Provides the interface between Python and R.                                                       |
 | git                                                                                        | 2.25.1   | Eases the downloading and updating of the libraries.                                               |
@@ -231,7 +231,7 @@ I plan to expand the library to cover with examples the 500 commands and 600 set
 <a id="license"><h2>License</h2></a>
 
 We use the permissive MIT license.
-The license information for this project is found in the *License.txt* file above. 
+The license information for this project is found in the *LICENSE* file above. 
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -250,7 +250,7 @@ If you use this library to make figures for publication, please see the *Citatio
 
 <a id="citation"><h2>Poster</h2></a>
 
-Mooers2021MGMS.pdf above is a poster presented at the 40th Anniversary Meeting of the [Molecular Graphics and Modelling Society(https://www.mgms.org/WordPress/) held virtually on 24 September 2021.
+Mooers2021MGMS.pdf above is a poster presented at the 40th Anniversary Meeting of the [Molecular Graphics and Modelling Society](https://www.mgms.org/WordPress/) held virtually on 24 September 2021.
 
 
 [Return to Table of Contents](#table-of-contents)
